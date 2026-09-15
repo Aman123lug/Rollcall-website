@@ -566,32 +566,71 @@
     .how-height { height: 420vh; }
   }
 
-  /* ---------- Commands playground ---------- */
-  .play { background: var(--ink); color: #fff; padding: 96px 0 72px; overflow: hidden; }
+  /* ---------- Talk while it plays ---------- */
+  .play { background: var(--ink); color: #fff; padding: 96px 0 80px; overflow: hidden; }
   .sec-head.light h2 { color: #fff; } .sec-head.light p { color: #b9bec6; }
-  .chips { display: flex; flex-direction: column; gap: 10px; margin: 8px 0 28px; mask: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
-  .chiprow { overflow: hidden; }
-  .chiptrack { display: flex; gap: 10px; width: max-content; animation: chipmove 46s linear infinite; }
-  .chiprow[data-dir="r"] .chiptrack { animation-direction: reverse; }
-  .chips:hover .chiptrack { animation-play-state: paused; }
-  @keyframes chipmove { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-  .chips .chip {
-    opacity: 1; transform: none; font: inherit; font-size: 15px; font-weight: 500; color: #d7dae0; background: #1f2226; border: 1px solid #30353c; border-radius: 999px; padding: 10px 16px 10px 14px;
-    cursor: pointer; white-space: nowrap; display: inline-flex; align-items: center; gap: 8px; transition: background .25s, color .25s, transform .3s cubic-bezier(.2,.8,.2,1), border-color .25s;
-  }
-  .chips .chip::before { content: "\201C"; font-size: 20px; line-height: 0; color: var(--voice); font-weight: 700; transition: color .25s; }
-  .chips .chip:hover { background: #2a2e34; color: #fff; }
-  .chips .chip.hot { background: var(--voice); border-color: var(--voice); color: #fff; transform: scale(1.06); }
-  .chips .chip.hot::before { color: #fff; }
-  .pg { border: 1px solid #2f333a; border-radius: 18px; background: #1b1d21; overflow: hidden; display: grid; grid-template-columns: 1fr 300px; }
-  @media (max-width: 860px) { .pg { grid-template-columns: 1fr; } }
-  .pg-preview { position: relative; aspect-ratio: 16/9; max-height: 400px; width: 100%; overflow: hidden; background: #0e1013; transition: filter .8s; }
-  .pg-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s cubic-bezier(.2,.7,.2,1); }
-  .pg-preview.zoom .pg-video { transform: scale(1.15); }
-  .pg-preview.fading .pg-video { animation: pgfade 2.2s ease-in forwards; }
-  @keyframes pgfade { to { filter: brightness(0); } }
-  .pg-preview.cutflash::after { content: ""; position: absolute; inset: 0; background: #fff; z-index: 4; animation: phflash .25s ease-out forwards; pointer-events: none; }
-  .pg-form { display: flex; gap: 8px; align-items: center; margin-top: auto; }
+  .sec-head.light .eyebrow { display: block; font-size: 13px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: #c3beff; margin-bottom: 14px; }
+  .tw { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(280px, .85fr); gap: 18px; align-items: stretch; }
+  @media (max-width: 900px) { .tw { grid-template-columns: 1fr; } }
+  .tw-stage { border: 1px solid #2f333a; border-radius: 18px; background: #1b1d21; overflow: hidden; display: flex; flex-direction: column; }
+  .tw-preview { position: relative; width: 100%; aspect-ratio: 16 / 9; max-height: 420px; background: #000; overflow: hidden; transition: filter .8s; }
+  .tw-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 1.4s cubic-bezier(.2,.7,.2,1); }
+  .tw-preview.zoom .tw-video { transform: scale(1.16); }
+  .tw-preview.warm { filter: sepia(.22) saturate(1.2) contrast(1.05); }
+  .tw-preview.lut { filter: contrast(1.18) saturate(.85) sepia(.12); }
+  .tw-preview.cutflash::after { content: ""; position: absolute; inset: 0; background: #fff; z-index: 6; animation: phflash .25s ease-out forwards; pointer-events: none; }
+  .tw-bars { position: absolute; inset: 0; z-index: 2; pointer-events: none; }
+  .tw-bars::before, .tw-bars::after { content: ""; position: absolute; left: 0; right: 0; height: 0; background: #000; transition: height .6s cubic-bezier(.2,.7,.2,1); }
+  .tw-bars::before { top: 0; } .tw-bars::after { bottom: 0; }
+  .tw-bars.on::before, .tw-bars.on::after { height: 11%; }
+  .tw-vig { position: absolute; inset: 0; z-index: 2; background: radial-gradient(ellipse at center, transparent 50%, rgba(0,0,0,.75) 100%); opacity: 0; transition: opacity .7s; }
+  .tw-vig.on { opacity: 1; }
+  .tw-fade { position: absolute; inset: 0; z-index: 5; background: #000; opacity: 0; transition: opacity 2s ease-in; pointer-events: none; }
+  .tw-fade.on { opacity: 1; }
+  .tw-title { position: absolute; left: 0; right: 0; top: 38%; z-index: 3; text-align: center; font-weight: 700; font-size: clamp(22px, 4vw, 44px); letter-spacing: -0.03em; color: #fff; text-shadow: 0 4px 24px rgba(0,0,0,.5); opacity: 0; transform: translateY(10px) scale(.92); transition: opacity .4s, transform .6s cubic-bezier(.2,.8,.2,1); }
+  .tw-title.on { opacity: 1; transform: none; }
+  .tw-lower { position: absolute; left: 5%; bottom: 16%; z-index: 3; display: flex; flex-direction: column; gap: 2px; padding: 9px 14px 9px 12px; border-left: 4px solid #fff; background: rgba(10,12,16,.82); color: #fff; border-radius: 0 8px 8px 0; transform: translateX(-120%); opacity: 0; transition: transform .55s cubic-bezier(.2,.8,.2,1), opacity .3s; }
+  .tw-lower.on { transform: none; opacity: 1; }
+  .tw-lower b { font-size: clamp(13px, 1.6vw, 18px); } .tw-lower span { font-size: clamp(10px, 1.1vw, 12px); color: #b9bec6; }
+  .tw-cap { position: absolute; left: 10%; right: 10%; bottom: 14%; z-index: 3; text-align: center; font-weight: 700; font-size: clamp(14px, 1.9vw, 24px); color: var(--clip-text); text-shadow: 0 2px 10px rgba(0,0,0,.7); opacity: 0; transform: translateY(8px); transition: opacity .35s, transform .35s; }
+  .tw-cap.on { opacity: 1; transform: none; }
+  .tw-tc { position: absolute; left: 12px; top: 10px; z-index: 3; font-size: 12px; color: #d7dae0; font-variant-numeric: tabular-nums; letter-spacing: .04em; text-shadow: 0 1px 2px rgba(0,0,0,.6); }
+  .tw-badge { position: absolute; right: 12px; top: 10px; z-index: 3; font-size: 12px; color: #fff; background: rgba(91,76,255,.92); padding: 3px 8px; border-radius: 4px; opacity: 0; transition: opacity .3s; }
+  .tw-badge.on { opacity: 1; }
+  .tw-pin { position: absolute; left: 12px; top: 34px; z-index: 3; font-size: 12px; font-weight: 600; color: #241a00; background: var(--clip-text); padding: 5px 9px; border-radius: 6px; opacity: 0; transform: translateY(-6px); transition: opacity .3s, transform .3s; }
+  .tw-pin.on { opacity: 1; transform: none; }
+  .tw-scrub { position: relative; padding: 42px 18px 4px; }
+  .tw-bubbles { position: absolute; left: 18px; right: 18px; top: 6px; height: 34px; }
+  .tw-bub { position: absolute; left: var(--x); bottom: 0; transform: translateX(-50%); width: 28px; height: 28px; border-radius: 50% 50% 50% 4px; background: #2a2e34; border: 1px solid #3a3f47; display: grid; place-items: center; color: #9aa0a8; cursor: pointer; transition: transform .3s cubic-bezier(.2,.8,.2,1), background .3s, color .3s; }
+  .tw-bub svg { width: 14px; height: 14px; fill: currentColor; }
+  .tw-bub::after { content: ""; position: absolute; left: 50%; bottom: -9px; width: 1px; height: 9px; background: #3a3f47; }
+  .tw-bub.hot { background: var(--voice); color: #fff; transform: translateX(-50%) scale(1.2) translateY(-3px); box-shadow: 0 0 0 6px rgba(91,76,255,.22); }
+  .tw-bub.done { background: #2fb7a0; color: #08201c; }
+  .tw-bub.later { background: var(--clip-text); color: #241a00; }
+  .tw-bub.mine { outline: 2px solid #fff; outline-offset: -1px; }
+  .tw-track { position: relative; height: 6px; border-radius: 3px; background: #2a2e34; cursor: pointer; }
+  .tw-track::before { content: ""; position: absolute; inset: -14px 0; }
+  .tw-prog { position: absolute; left: 0; top: 0; bottom: 0; width: var(--p, 0%); background: var(--voice); border-radius: 3px; }
+  .tw-ph { position: absolute; top: -7px; left: var(--p, 0%); width: 2px; height: 20px; background: #fff; border-radius: 1px; box-shadow: 0 0 0 1px rgba(0,0,0,.4); }
+  .tw-range { position: absolute; top: -4px; bottom: -4px; left: var(--in, 0%); right: calc(100% - var(--out, 100%)); border: 1.5px solid var(--clip-text); border-radius: 4px; opacity: 0; transition: opacity .3s; pointer-events: none; }
+  .tw-range.on { opacity: 1; }
+  .tw-range i { position: absolute; top: -18px; font-size: 9px; font-weight: 700; letter-spacing: .08em; color: var(--clip-text); font-style: normal; opacity: 0; }
+  .tw-range i.in { left: -1px; } .tw-range i.out { right: -1px; }
+  .tw-range.has-in i.in, .tw-range.has-out i.out { opacity: 1; }
+  .tw-ticks { display: flex; justify-content: space-between; margin-top: 8px; font-size: 11px; color: #7b818a; font-variant-numeric: tabular-nums; }
+  .tw-now { display: flex; gap: 12px; align-items: flex-start; padding: 14px 18px 12px; min-height: 92px; }
+  .tw-now .pg-wave { margin-top: 4px; flex: none; }
+  .tw-now .q { font-size: clamp(16px, 1.5vw, 21px); line-height: 1.3; letter-spacing: -0.01em; color: #fff; }
+  .tw-now .q.dim { color: #8a9099; }
+  .tw-now .r { font-size: 13px; color: #9aa0a8; margin-top: 6px; min-height: 18px; }
+  .tw-now .r.ok::before { content: "\2713 "; color: var(--clip-audio); font-weight: 700; }
+  .tw-now .r.later::before { content: "\1F4CC "; }
+  .tw-form { display: flex; gap: 8px; align-items: center; padding: 0 18px 18px; }
+  .tw-at { font-size: 12px; color: #c3beff; font-variant-numeric: tabular-nums; white-space: nowrap; font-weight: 600; }
+  .pg-wave { display: inline-flex; align-items: center; gap: 3px; height: 24px; }
+  .pg-wave i { display: block; width: 3px; height: 6px; border-radius: 2px; background: var(--voice); }
+  .pg-wave.live i { animation: wave .9s ease-in-out infinite; }
+  .pg-wave i:nth-child(2) { animation-delay: .1s } .pg-wave i:nth-child(3) { animation-delay: .2s } .pg-wave i:nth-child(4) { animation-delay: .3s } .pg-wave i:nth-child(5) { animation-delay: .15s } .pg-wave i:nth-child(6) { animation-delay: .05s } .pg-wave i:nth-child(7) { animation-delay: .25s }
   .pg-mic { flex: none; width: 40px; height: 40px; border-radius: 50%; border: 0; background: var(--voice); color: #fff; display: grid; place-items: center; cursor: pointer; transition: transform .15s, box-shadow .2s, background .2s; }
   .pg-mic:hover { transform: scale(1.05); }
   .pg-mic.rec { background: #e0557a; box-shadow: 0 0 0 6px rgba(224,85,122,.25); animation: micpulse 1s ease-in-out infinite; }
@@ -601,50 +640,26 @@
   .pg-input:focus { outline: 2px solid var(--voice); outline-offset: 1px; border-color: transparent; }
   .pg-send { flex: none; width: 40px; height: 40px; border-radius: 50%; border: 1px solid #353a41; background: #24282d; color: #fff; font: inherit; font-size: 16px; cursor: pointer; }
   .pg-send:hover { background: #2e333a; }
-  .pg-hint { font-size: 12px; color: #6f757e; line-height: 1.4; }
-  .pg-preview.warm { filter: sepia(.25) saturate(1.2) contrast(1.05); }
-  .pg-preview.match { filter: hue-rotate(-12deg) saturate(1.1) brightness(1.04); }
-  .pg-preview.lut { filter: contrast(1.18) saturate(.85) sepia(.12); }
-  .pg-vig { position: absolute; inset: 0; background: radial-gradient(ellipse at center, transparent 50%, rgba(0,0,0,.75) 100%); opacity: 0; transition: opacity .7s; z-index: 2; }
-  .pg-vig.on { opacity: 1; }
-  .pg-title { position: absolute; left: 0; right: 0; top: 40%; text-align: center; font-weight: 700; font-size: clamp(22px, 4vw, 44px); letter-spacing: -0.03em; color: #fff; text-shadow: 0 4px 24px rgba(0,0,0,.5); opacity: 0; transform: translateY(10px) scale(.9); transition: opacity .4s, transform .6s cubic-bezier(.2,.8,.2,1); z-index: 3; }
-  .pg-title.on { opacity: 1; transform: none; }
-  .pg-title.big { transform: translateY(-38px) scale(1.3); }
-  .pg-lower { position: absolute; left: 5%; bottom: 14%; z-index: 3; display: flex; flex-direction: column; gap: 2px; padding: 9px 14px 9px 12px; border-left: 4px solid #fff; background: rgba(10,12,16,.82); color: #fff; border-radius: 0 8px 8px 0; transform: translateX(-120%); opacity: 0; transition: transform .55s cubic-bezier(.2,.8,.2,1), opacity .3s; }
-  .pg-lower.on { transform: none; opacity: 1; }
-  .pg-lower b { font-size: clamp(13px, 1.6vw, 18px); } .pg-lower span { font-size: clamp(10px, 1.1vw, 12px); color: #b9bec6; }
-  .pg-cap { position: absolute; left: 10%; right: 10%; bottom: 9%; z-index: 3; text-align: center; font-weight: 700; font-size: clamp(12px, 1.7vw, 20px); color: var(--clip-text); text-shadow: 0 2px 10px rgba(0,0,0,.7); opacity: 0; transform: translateY(8px); transition: opacity .35s, transform .35s, font-family .1s; }
-  .pg-cap.on { opacity: 1; transform: none; }
-  .pg-cap.brand { font-family: var(--font); font-style: italic; font-weight: 600; letter-spacing: -0.01em; color: #fff; background: rgba(91,76,255,.85); display: inline-block; left: 50%; right: auto; transform: translateX(-50%); padding: 4px 12px; border-radius: 6px; }
-  .pg-tc { position: absolute; left: 12px; top: 10px; z-index: 3; font-size: 12px; color: #d7dae0; font-variant-numeric: tabular-nums; letter-spacing: .04em; text-shadow: 0 1px 2px rgba(0,0,0,.6); }
-  .pg-badge { position: absolute; right: 12px; top: 10px; z-index: 3; font-size: 12px; color: #fff; background: rgba(91,76,255,.92); padding: 3px 8px; border-radius: 4px; opacity: 0; transition: opacity .3s; }
-  .pg-badge.on { opacity: 1; }
-  .pg-side { border-left: 1px solid #2f333a; background: #1f2226; padding: 18px; display: flex; flex-direction: column; gap: 12px; }
-  @media (max-width: 860px) { .pg-side { border-left: 0; border-top: 1px solid #2f333a; } }
-  .pg-listen { display: flex; align-items: center; gap: 10px; font-size: 13px; color: #9aa0a8; }
-  .pg-wave { display: inline-flex; align-items: center; gap: 3px; height: 24px; }
-  .pg-wave i { display: block; width: 3px; height: 6px; border-radius: 2px; background: var(--voice); }
-  .pg-wave.live i { animation: wave .9s ease-in-out infinite; }
-  .pg-wave i:nth-child(2) { animation-delay: .1s } .pg-wave i:nth-child(3) { animation-delay: .2s } .pg-wave i:nth-child(4) { animation-delay: .3s } .pg-wave i:nth-child(5) { animation-delay: .15s } .pg-wave i:nth-child(6) { animation-delay: .05s } .pg-wave i:nth-child(7) { animation-delay: .25s }
-  .pg-said { min-height: 70px; font-size: 17px; line-height: 1.4; color: #fff; padding: 12px 14px; background: #2a2e34; border-radius: 10px; border: 1px solid #353a41; }
-  .pg-said.dim { color: #8a9099; }
-  .pg-result { font-size: 13px; color: #c8ccd3; display: flex; gap: 8px; align-items: flex-start; opacity: 0; transform: translateY(6px); transition: opacity .3s, transform .3s; min-height: 20px; }
-  .pg-result.on { opacity: 1; transform: none; }
-  .pg-result::before { content: "\2713"; color: var(--clip-audio); font-weight: 700; }
-  .pg-tl { grid-column: 1 / -1; border-top: 1px solid #2f333a; background: #16181b; padding: 10px 0 14px; position: relative; }
-  .pg-ruler { display: flex; margin-left: 50px; height: 16px; font-size: 11px; color: #7b818a; font-variant-numeric: tabular-nums; }
-  .pg-ruler span { flex: 1; border-left: 1px solid #2f333a; padding-left: 4px; }
-  .pg-track { display: flex; align-items: center; height: 30px; margin-top: 5px; }
-  .pg-track b { width: 50px; flex: none; font-size: 11px; color: #7b818a; text-align: center; font-weight: 600; }
-  .pg-lane { position: relative; flex: 1; height: 100%; background: #1d2024; border-radius: 4px; }
-  .pc { position: absolute; top: 3px; bottom: 3px; border-radius: 4px; font-size: 11px; font-weight: 600; padding: 0 8px; line-height: 24px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: #08201c; background: var(--clip-video); left: var(--l); width: var(--w); transition: left .5s cubic-bezier(.2,.8,.2,1), width .5s cubic-bezier(.2,.8,.2,1), opacity .4s, height .4s, top .4s; }
-  .pc.t { background: var(--clip-text); color: #241a00; } .pc.a { background: var(--clip-audio); color: #0d2306; }
-  .pc.b { background: #7fd6c4; } .pc.muted { background: #3a4a35; color: #96a690; } .pc.ducked { top: 12px; background: #4f8a3d; }
-  .pc.fx { background: repeating-linear-gradient(135deg, rgba(91,76,255,.85) 0 6px, rgba(91,76,255,.55) 6px 12px); color: #fff; }
-  .pc.fadeout::after { content: ""; position: absolute; right: 0; top: 0; bottom: 0; width: 18%; background: linear-gradient(90deg, transparent, rgba(0,0,0,.55)); }
-  .pc .cutline { position: absolute; top: 0; bottom: 0; width: 2px; background: #16181b; left: var(--x); }
-  .pg-play { position: absolute; top: 10px; bottom: 14px; width: 2px; background: var(--voice); left: calc(50px + var(--ph, 42%)); transition: left .5s cubic-bezier(.2,.8,.2,1); z-index: 2; }
-  .pg-play::before { content: ""; position: absolute; top: -1px; left: -5px; border: 6px solid transparent; border-top: 8px solid var(--voice); }
+  .tw-notes { border: 1px solid #2f333a; border-radius: 18px; background: #1f2226; padding: 18px; display: flex; flex-direction: column; gap: 12px; }
+  .tw-noteshead { display: flex; align-items: center; gap: 10px; font-weight: 600; font-size: 15px; }
+  .tw-noteshead .rec { width: 9px; height: 9px; border-radius: 50%; background: #e0557a; box-shadow: 0 0 0 3px rgba(224,85,122,.25); animation: micpulse 1.4s ease-in-out infinite; }
+  .tw-src { margin-left: auto; font-size: 12px; font-weight: 500; color: #8a9099; font-variant-numeric: tabular-nums; }
+  .tw-tabs { display: flex; gap: 6px; flex-wrap: wrap; }
+  .tw-tab { font-size: 12px; padding: 5px 10px; border-radius: 999px; background: #2a2e34; color: #c8ccd3; }
+  .tw-tab b { color: #fff; font-variant-numeric: tabular-nums; }
+  .tw-list { display: flex; flex-direction: column; gap: 8px; flex: 1; }
+  .tw-empty { font-size: 13px; color: #6f757e; margin: 0; }
+  .tw-note { display: grid; grid-template-columns: 38px 1fr; gap: 10px; font-size: 13.5px; line-height: 1.4; color: #d7dae0; padding: 9px 10px; border-radius: 10px; background: #24282d; border: 1px solid #30353c; opacity: 0; transform: translateY(6px); transition: opacity .3s, transform .35s cubic-bezier(.2,.8,.2,1); }
+  .tw-note.show { opacity: 1; transform: none; }
+  .tw-note.mine { border-color: rgba(255,255,255,.35); }
+  .tw-note .t { font-size: 11px; color: #8a9099; font-variant-numeric: tabular-nums; padding-top: 3px; }
+  .tw-note .k { display: inline-block; font-size: 9.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; padding: 2px 6px; border-radius: 4px; margin-right: 6px; vertical-align: 1px; }
+  .k.edit { background: rgba(47,183,160,.2); color: #7fe0cf; } .k.dec { background: rgba(91,76,255,.28); color: #c3beff; } .k.later { background: rgba(245,184,65,.22); color: #f5b841; }
+  .tw-sum { border-top: 1px solid #30353c; padding-top: 12px; display: flex; justify-content: space-between; align-items: center; gap: 10px; font-size: 13px; color: #9aa0a8; opacity: 0; transition: opacity .3s; }
+  .tw-sum.on { opacity: 1; }
+  .tw-copy { font: inherit; font-size: 12.5px; font-weight: 600; color: var(--ink); background: #fff; border: 0; border-radius: 999px; padding: 7px 12px; cursor: pointer; white-space: nowrap; }
+  .tw-copy:hover { background: #e9ebee; }
+  .tw-foot { margin-top: 16px; font-size: 13px; color: #6f757e; text-align: center; }
 
   /* ---------- Shorts: one prompt, a finished vertical short ---------- */
   .shorts { background: var(--panel); }
@@ -1000,43 +1015,52 @@
   <section id="commands" class="play" aria-labelledby="commands-h">
     <div class="wrap">
       <div class="sec-head light">
-        <h2 id="commands-h">Things you can just say.</h2>
-        <p>No fixed phrases to memorise. Click a line, tap the mic and say your own, or type it. The edit lands on the footage below.</p>
+        <span class="eyebrow">Talk while it plays</span>
+        <h2 id="commands-h">Say it when you see it.</h2>
+        <p>Every command lands at the timecode you spoke it. Rollcall keeps the session notes: what changed, what you decided, and what you said you’d do later.</p>
       </div>
-    </div>
-    <div class="chips" id="chips" aria-label="Example commands"><div class="chiprow" data-dir="l"><div class="chiptrack"><button class="chip" type="button" data-act="cut">Cut here and delete the pause before it.</button><button class="chip" type="button" data-act="trim">Trim the last two seconds off this clip.</button><button class="chip" type="button" data-act="move">Move the B-roll to start at 0:38.</button><button class="chip" type="button" data-act="speed">Speed up everything between 1:10 and 1:30 by 1.5x.</button><button class="chip" type="button" data-act="lower">Add a lower third with my name, white on dark.</button><button class="chip" type="button" data-act="caps">Auto-caption this section in the yellow style I used earlier.</button></div></div><div class="chiprow" data-dir="r"><div class="chiptrack"><button class="chip" type="button" data-act="bigger">Make that title bigger and move it up a bit.</button><button class="chip" type="button" data-act="font">Change every caption to the brand font.</button><button class="chip" type="button" data-act="warm">Warm this shot up slightly.</button><button class="chip" type="button" data-act="match">Match the colour of this clip to the previous one.</button><button class="chip" type="button" data-act="lut">Apply the LUT from the intro to the whole V1 track.</button></div></div><div class="chiprow" data-dir="l"><div class="chiptrack"><button class="chip" type="button" data-act="vig">Add a soft vignette from 0:20 to 0:45.</button><button class="chip" type="button" data-act="duck">Duck the music under the voiceover.</button><button class="chip" type="button" data-act="mute">Mute the music from 0:14 until the next cut.</button><button class="chip" type="button" data-act="noise">Remove background noise on A1.</button><button class="chip" type="button" data-act="fade">Fade the last clip out over two seconds.</button></div></div></div>
-    <div class="wrap">
-      <div class="pg" id="pg" aria-live="polite">
-        <div class="pg-preview" id="pgPreview">
-          <video class="pg-video" id="pgVideo" muted loop playsinline preload="metadata" poster="videos/347325-poster.jpg" src="videos/347325.mp4" aria-hidden="true"></video>
-          <div class="pg-vig" id="pgVig"></div>
-          <div class="pg-title" id="pgTitle">Welcome back</div>
-          <div class="pg-lower" id="pgLower"><b>Aman Kumar</b><span>Rollcall · Founder</span></div>
-          <div class="pg-cap" id="pgCap">so the first thing we changed was the intro</div>
-          <span class="pg-tc" id="pgTc">00:00:42:00</span>
-          <span class="pg-badge" id="pgBadge"></span>
-        </div>
-        <aside class="pg-side">
-          <div class="pg-listen"><span class="pg-wave" id="pgWave"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><span id="pgState">Listening…</span></div>
-          <div class="pg-said" id="pgSaid">Click a line above, or say your own.</div>
-          <div class="pg-result" id="pgResult"></div>
-          <form class="pg-form" id="pgForm" autocomplete="off">
-            <button class="pg-mic" type="button" id="pgMic" aria-label="Tap to speak" title="Tap to speak"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3" fill="currentColor"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
-            <input class="pg-input" id="pgInput" type="text" placeholder="or type what you’d say…" aria-label="Type a command">
-            <button class="pg-send" type="submit" aria-label="Do it">→</button>
+      <div class="tw" id="tw">
+        <div class="tw-stage">
+          <div class="tw-preview" id="twPreview">
+            <video class="tw-video" id="twVideo" muted loop playsinline preload="metadata" poster="videos/347325-poster.jpg" src="videos/347325.mp4" aria-hidden="true"></video>
+            <div class="tw-bars" id="twBars"></div>
+            <div class="tw-vig" id="twVig"></div>
+            <div class="tw-fade" id="twFade"></div>
+            <div class="tw-title" id="twTitle"></div>
+            <div class="tw-lower" id="twLower"><b>Aman Kumar</b><span>Rollcall · Founder</span></div>
+            <div class="tw-cap" id="twCap"></div>
+            <span class="tw-tc" id="twTc">00:00:00:00</span>
+            <span class="tw-badge" id="twBadge"></span>
+            <span class="tw-pin" id="twPin"></span>
+          </div>
+          <div class="tw-scrub" id="twScrub">
+            <div class="tw-bubbles" id="twBubbles"></div>
+            <div class="tw-track" id="twTrack">
+              <span class="tw-range" id="twRange"><i class="in">IN</i><i class="out">OUT</i></span>
+              <span class="tw-prog" id="twProg"></span>
+              <span class="tw-ph" id="twPh"></span>
+            </div>
+            <div class="tw-ticks"><span>0:00</span><span>0:05</span><span>0:10</span><span>0:15</span><span>0:20</span></div>
+          </div>
+          <div class="tw-now">
+            <span class="pg-wave" id="twWave"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
+            <div><div class="q" id="twQ">Listening while it plays…</div><div class="r" id="twR"></div></div>
+          </div>
+          <form class="tw-form" id="twForm" autocomplete="off">
+            <button class="pg-mic" type="button" id="twMic" aria-label="Tap to speak" title="Tap to speak"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3" fill="currentColor"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+            <span class="tw-at" id="twAt">at 0:00</span>
+            <input class="pg-input" id="twInput" type="text" placeholder="say something here… “caption this”, “warm it up”, “music later”" aria-label="Type a command at this timecode">
+            <button class="pg-send" type="submit" aria-label="Say it">→</button>
           </form>
-          <p class="pg-hint" id="pgHint">Try: “add captions”, “warm it up”, “mute the music”, “undo”.</p>
-        </aside>
-        <div class="pg-tl">
-          <div class="pg-ruler"><span>0:00</span><span>0:20</span><span>0:40</span><span>1:00</span><span>1:20</span></div>
-          <div class="pg-track"><b>V3</b><div class="pg-lane" id="pgV3"></div></div>
-          <div class="pg-track"><b>V2</b><div class="pg-lane" id="pgV2"></div></div>
-          <div class="pg-track"><b>V1</b><div class="pg-lane" id="pgV1"></div></div>
-          <div class="pg-track"><b>A1</b><div class="pg-lane" id="pgA1"></div></div>
-          <div class="pg-track"><b>A2</b><div class="pg-lane" id="pgA2"></div></div>
-          <div class="pg-play" id="pgPlay"></div>
         </div>
+        <aside class="tw-notes" aria-live="polite">
+          <div class="tw-noteshead"><span class="rec"></span>Session notes<span class="tw-src">347325.mov · 0:20</span></div>
+          <div class="tw-tabs"><span class="tw-tab"><b id="twNE">0</b> edits</span><span class="tw-tab"><b id="twND">0</b> decisions</span><span class="tw-tab"><b id="twNL">0</b> for later</span></div>
+          <div class="tw-list" id="twList"><p class="tw-empty" id="twEmpty">Nothing yet. Notes appear as you talk.</p></div>
+          <div class="tw-sum" id="twSum"><span id="twSumText"></span><button class="tw-copy" type="button" id="twCopy">Copy notes</button></div>
+        </aside>
       </div>
+      <p class="tw-foot">Click the bar to jump anywhere, then say or type a command. It sticks to that timecode and replays with the session.</p>
     </div>
   </section>
 
@@ -1673,123 +1697,153 @@
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { measure(); onScroll(); });
   })();
 
-  // ---- Commands playground: spoken lines stream past; firing one makes the mini timeline do it.
+  // ---- Talk while it plays: commands pinned to timecodes, plus session notes.
   (function () {
-    const chips = $('chips'), pv = $('pgPreview'), tl = { V3: $('pgV3'), V2: $('pgV2'), V1: $('pgV1'), A1: $('pgA1'), A2: $('pgA2') };
-    if (!chips || !pv) return;
-    const video = $('pgVideo'), input = $('pgInput'), form = $('pgForm'), mic = $('pgMic'), hint = $('pgHint');
-    // Only pull the footage when the section is near the screen.
-    if (video && 'IntersectionObserver' in window) {
-      const vio = new IntersectionObserver(es => { es.forEach(e => { if (e.isIntersecting) { video.play().catch(() => {}); } else { video.pause(); } }); }, { rootMargin: '200px' });
-      vio.observe(video);
-    } else if (video) { video.play().catch(() => {}); }
-    chips.querySelectorAll('.chiptrack').forEach(t => { t.innerHTML += t.innerHTML; });
-    const title = $('pgTitle'), lower = $('pgLower'), cap = $('pgCap'), vig = $('pgVig'), badge = $('pgBadge'), play = $('pgPlay'), tc = $('pgTc');
-    const said = $('pgSaid'), result = $('pgResult'), state = $('pgState'), wave = $('pgWave');
-    const clip = (track, l, w, cls, label) => { const el = document.createElement('div'); el.className = 'pc ' + cls; el.style.setProperty('--l', l + '%'); el.style.setProperty('--w', w + '%'); el.textContent = label; tl[track].appendChild(el); return el; };
-    const badgeOn = t => { badge.textContent = t; badge.classList.add('on'); };
-    const tcOf = s => '00:' + String(Math.floor(s / 60)).padStart(2, '0') + ':' + String(Math.floor(s % 60)).padStart(2, '0') + ':00';
-    const ph = s => { play.style.setProperty('--ph', s + '%'); tc.textContent = tcOf(s); };
-    let C = {};
-    function reset() {
-      Object.values(tl).forEach(l => l.innerHTML = '');
-      C = {};
-      C.intro = clip('V1', 0, 22, '', 'intro.mov'); C.a = clip('V1', 22, 38, '', 'interview_A.mov'); C.b = clip('V1', 60, 40, '', 'interview_B.mov');
-      C.broll = clip('V2', 30, 16, 'b', 'broll_city.mov'); C.vo = clip('A1', 0, 100, 'a', 'voiceover.wav'); C.music = clip('A2', 0, 100, 'a', 'music_bed.mp3');
-      pv.className = 'pg-preview'; [title, lower, cap, vig, badge].forEach(e => e.className = e.className.split(' ')[0]);
-      if (video) video.playbackRate = 1;
-      ph(42);
+    const root = $('tw'); if (!root) return;
+    const video = $('twVideo'), pv = $('twPreview'), bars = $('twBars'), vig = $('twVig'), fade = $('twFade'), title = $('twTitle'), lower = $('twLower'), cap = $('twCap'), tc = $('twTc'), badge = $('twBadge'), pin = $('twPin');
+    const bubbles = $('twBubbles'), track = $('twTrack'), prog = $('twProg'), phEl = $('twPh'), range = $('twRange'), wave = $('twWave'), q = $('twQ'), r = $('twR'), at = $('twAt');
+    const form = $('twForm'), input = $('twInput'), mic = $('twMic'), list = $('twList'), empty = $('twEmpty'), sum = $('twSum'), sumText = $('twSumText'), copyBtn = $('twCopy');
+    const NE = $('twNE'), ND = $('twND'), NL = $('twNL');
+    const DUR = 20.3;
+    const MIC = '<svg viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M6 11a6 6 0 0 0 12 0h-2a4 4 0 0 1-8 0zM11 18h2v3h-2z"/></svg>';
+    const fmt = t => '0:' + String(Math.floor(Math.max(0, t))).padStart(2, '0');
+    const tcOf = t => '00:00:' + String(Math.floor(t)).padStart(2, '0') + ':' + String(Math.floor((t % 1) * 25)).padStart(2, '0');
+    const badgeOn = txt => { badge.textContent = txt; badge.classList.add('on'); };
+    const inout = { in: null, out: null };
+    function setRange() {
+      range.classList.toggle('on', inout.in != null || inout.out != null);
+      range.classList.toggle('has-in', inout.in != null); range.classList.toggle('has-out', inout.out != null);
+      range.style.setProperty('--in', ((inout.in || 0) / DUR * 100) + '%'); range.style.setProperty('--out', ((inout.out == null ? DUR : inout.out) / DUR * 100) + '%');
     }
-    const ACT = {
-      cut()   { C.a.style.setProperty('--w', '18%'); const a2 = clip('V1', 42, 18, '', 'interview_A.mov'); ph(42); pv.classList.add('cutflash'); return 'Cut at 0:42 · removed 2.0s of silence before it'; },
-      trim()  { ph(98); C.b.style.setProperty('--w', '38%'); C.b.textContent = 'interview_B.mov · −2s'; return 'Trimmed 2.0s from the end of interview_B.mov'; },
-      move()  { C.broll.style.setProperty('--l', '38%'); ph(38); return 'Moved broll_city.mov to start at 0:38'; },
-      speed() { ph(70); clip('V1', 70, 20, 'fx', '1.5×'); badgeOn('Speed 150% · 1:10–1:30'); if (video) video.playbackRate = 1.5; return 'Retimed 1:10–1:30 at 1.5×, ripple on'; },
-      lower() { lower.classList.add('on'); clip('V3', 42, 8, 't', 'Lower third'); return 'Added lower third on V3 at 0:42, white on dark'; },
-      caps()  { cap.classList.add('on'); [42, 47, 52, 56].forEach((l, i) => clip('V3', l, 4, 't', i === 0 ? 'Captions' : '')); return 'Auto-captioned 0:42–1:00 in the saved yellow style'; },
-      bigger(){ title.classList.add('on'); clip('V3', 42, 7, 't', 'Title'); setTimeout(() => title.classList.add('big'), 350); badgeOn('Size 64 → 84 · Y −38'); return 'Scaled the title to 130% and nudged it up 38px'; },
-      zoom()  { pv.classList.add('zoom'); badgeOn('Scale 100% → 115%'); return 'Punched in 15% on this shot'; },
-      undo()  { return 'Reverted the last change'; },
-      font()  { cap.classList.add('on'); [42, 47, 52, 56].forEach((l, i) => clip('V3', l, 4, 't', i === 0 ? 'Captions' : '')); setTimeout(() => cap.classList.add('brand'), 400); return 'Changed 4 captions to Bricolage Grotesque'; },
-      warm()  { pv.classList.add('warm'); badgeOn('Temp +400K · Sat +12'); return 'Warmed interview_A.mov: temperature +400, saturation +12'; },
-      match() { pv.classList.add('match'); badgeOn('Matched → intro.mov'); return 'Matched colour of interview_A.mov to intro.mov'; },
-      lut()   { pv.classList.add('lut'); [C.intro, C.a, C.b].forEach(c => c.textContent += ' · LUT'); badgeOn('LUT: intro_look.cube'); return 'Applied intro_look.cube to all 3 clips on V1'; },
-      vig()   { vig.classList.add('on'); clip('V3', 20, 25, 'fx', 'Vignette'); ph(30); return 'Added a soft vignette from 0:20 to 0:45'; },
-      duck()  { C.music.style.setProperty('--w', '22%'); const d = clip('A2', 22, 78, 'a ducked', 'music_bed.mp3 · −12 dB'); return 'Ducked music −12 dB under the voiceover, 0:22 onward'; },
-      mute()  { C.music.style.setProperty('--w', '14%'); clip('A2', 14, 8, 'a muted', 'muted'); clip('A2', 22, 78, 'a', 'music_bed.mp3'); ph(14); return 'Muted music_bed.mp3 from 0:14 to the next cut at 0:22'; },
-      noise() { C.vo.textContent = 'voiceover.wav · denoised'; C.vo.classList.add('fx'); badgeOn('Voice isolation on A1'); return 'Applied noise reduction to A1'; },
-      fade()  { C.b.classList.add('fadeout'); C.vo.classList.add('fadeout'); C.music.classList.add('fadeout'); ph(98); pv.classList.add('fading'); return 'Faded interview_B.mov and both audio tracks out over 2.0s'; }
+    // What each kind of command does to the picture, and the note it leaves behind.
+    const KIND = {
+      in:      (ev) => { inout.in = ev.t; setRange(); return ['edit', 'In point at ' + fmt(ev.t)]; },
+      out:     (ev) => { inout.out = ev.t; setRange(); return ['edit', 'Out point at ' + fmt(ev.t)]; },
+      zoom:    (ev) => { pv.classList.add('zoom'); badgeOn('Scale 100% → 116%'); return ['edit', 'Slow punch-in from ' + fmt(ev.t) + ', 100 → 116%']; },
+      caps:    (ev) => { cap.textContent = ev.arg || 'captions on'; cap.classList.add('on'); return ['edit', 'Caption at ' + fmt(ev.t) + ': “' + (ev.arg || 'captions on') + '”']; },
+      title:   (ev) => { title.textContent = ev.arg || 'Above the clouds'; title.classList.add('on'); return ['edit', 'Title at ' + fmt(ev.t) + ': “' + (ev.arg || 'Above the clouds') + '”']; },
+      lower:   (ev) => { lower.classList.add('on'); return ['edit', 'Lower third at ' + fmt(ev.t) + ', white on dark']; },
+      warm:    (ev) => { pv.classList.add('warm'); badgeOn('Temp +400K · Sat +12'); return ['edit', 'Warm grade from ' + fmt(ev.t)]; },
+      lut:     (ev) => { pv.classList.add('lut'); badgeOn('LUT: intro_look.cube'); return ['edit', 'LUT applied from ' + fmt(ev.t)]; },
+      bars:    (ev) => { bars.classList.add('on'); return ['edit', 'Letterbox 2.39:1 from ' + fmt(ev.t)]; },
+      warmbars:(ev) => { pv.classList.add('warm'); bars.classList.add('on'); badgeOn('Temp +400K · 2.39:1'); return ['edit', 'Warm grade + letterbox from ' + fmt(ev.t)]; },
+      vig:     (ev) => { vig.classList.add('on'); return ['edit', 'Soft vignette from ' + fmt(ev.t)]; },
+      mute:    (ev) => { badgeOn('Music muted'); return ['edit', 'Music muted from ' + fmt(ev.t)]; },
+      duck:    (ev) => { badgeOn('Music −12 dB'); return ['edit', 'Music ducked under voice from ' + fmt(ev.t)]; },
+      speed:   (ev) => { if (video) video.playbackRate = 1.5; badgeOn('Speed 150%'); return ['edit', 'Speed 1.5× from ' + fmt(ev.t)]; },
+      cut:     (ev) => { pv.classList.add('cutflash'); setTimeout(() => pv.classList.remove('cutflash'), 300); return ['edit', 'Cut at ' + fmt(ev.t)]; },
+      fade:    (ev) => { fade.classList.add('on'); inout.out = DUR; setRange(); return ['edit', 'Fade out over 2s to ' + fmt(DUR)]; },
+      later:   (ev) => { pin.textContent = 'Saved for later: ' + (ev.arg || ev.say); pin.classList.add('on'); setTimeout(() => pin.classList.remove('on'), 2600); return ['later', (ev.arg || ev.say) + ' · said at ' + fmt(ev.t)]; },
+      undo:    (ev) => { const had = pv.classList.contains('zoom'); pv.classList.remove('zoom'); badge.classList.remove('on'); return ['dec', had ? 'Kept the wide framing · undid the punch-in at ' + fmt(ev.t) : 'Reverted the last change at ' + fmt(ev.t)]; }
     };
-    // Map free speech to an edit by keyword. First match wins.
-    const RULES = [
-      [/undo|revert|go back/, 'undo'], [/caption|subtitle/, 'caps'], [/font|brand/, 'font'], [/lower.?third|my name|name plate/, 'lower'],
-      [/title|bigger|larger/, 'bigger'], [/punch|zoom|closer|push in/, 'zoom'], [/warm/, 'warm'], [/match/, 'match'], [/lut|grade|look/, 'lut'], [/vignette/, 'vig'],
-      [/duck|under the voice|quieter|turn.*down/, 'duck'], [/mute|silence/, 'mute'], [/noise|denoise|clean.*audio|hiss/, 'noise'], [/fade/, 'fade'],
-      [/speed|faster|slow|1\.5|retime/, 'speed'], [/trim|shorten|last .* seconds/, 'trim'], [/move|b.?roll|shift/, 'move'], [/cut|split|delete|pause|gap/, 'cut']
+    const SCRIPT = [
+      { t: 1.4, say: 'Start the short here.', kind: 'in' },
+      { t: 4.2, say: 'Punch in slowly on the peak.', kind: 'zoom' },
+      { t: 7.4, say: 'Caption this: the view from four thousand metres.', kind: 'caps', arg: 'the view from 4,000 metres' },
+      { t: 10.4, say: 'Hmm, I’ll pick the music later.', kind: 'later', arg: 'Pick the music' },
+      { t: 12.6, say: 'Warm it up a touch and add letterbox bars.', kind: 'warmbars' },
+      { t: 15.4, say: 'Actually, undo the punch in.', kind: 'undo' },
+      { t: 17.6, say: 'Fade out at the end.', kind: 'fade' }
     ];
-    const match = text => { const t = text.toLowerCase(); for (const [re, act] of RULES) if (re.test(t)) return act; return null; };
-    const sleep = ms => new Promise(r => setTimeout(r, reduce ? 0 : ms));
-    let token = 0, busy = false, holdUntil = 0, order = Object.keys(ACT).filter(k => k !== 'undo' && k !== 'zoom'), idx = 0;
-    // A new command interrupts whatever is running, like talking over an assistant.
-    async function fire(act, text, instant) {
-      const my = ++token; busy = true;
-      chips.querySelectorAll('.chip.hot').forEach(c => c.classList.remove('hot'));
-      chips.querySelectorAll('.chip[data-act="' + act + '"]').forEach(c => c.classList.add('hot'));
-      reset(); result.classList.remove('on'); said.classList.remove('dim'); said.textContent = instant ? text : ''; state.textContent = 'Listening…'; wave.classList.add('live');
-      if (!instant) { const words = text.split(' '); for (let i = 0; i < words.length; i++) { said.textContent += (i ? ' ' : '') + words[i]; await sleep(90); if (my !== token) return; } }
-      else await sleep(250);
-      if (my !== token) return;
-      wave.classList.remove('live'); state.textContent = 'Working…'; await sleep(350); if (my !== token) return;
-      const msg = ACT[act](); state.textContent = 'Done. Say “undo” to revert.';
-      result.textContent = msg; result.classList.add('on');
-      busy = false;
+    const RULES = [
+      [/undo|revert|go back/, 'undo'], [/later|remind|todo|to-do|note that|come back/, 'later'], [/start here|in point|begin here|start the short/, 'in'], [/end here|out point|stop here/, 'out'],
+      [/caption|subtitle/, 'caps'], [/lower.?third|my name|name plate/, 'lower'], [/title/, 'title'], [/punch|zoom|closer|push in/, 'zoom'],
+      [/warm/, 'warm'], [/letterbox|bars|cinematic/, 'bars'], [/lut|grade|look/, 'lut'], [/vignette/, 'vig'], [/duck|under the voice|quieter/, 'duck'], [/mute|silence/, 'mute'],
+      [/speed|faster|slow|retime/, 'speed'], [/fade/, 'fade'], [/cut|split/, 'cut']
+    ];
+    const argOf = (text, kind) => { const m = text.match(/(?:caption|title)(?: this| it)?(?: that says| saying)?\s*[:\-]?\s*["“]?(.+?)["”]?\.?$/i); return (kind === 'caps' || kind === 'title') && m && m[1] && !/^(this|it)$/i.test(m[1]) ? m[1] : (kind === 'later' ? text.replace(/^(hmm,?\s*)?(i’ll|i'll|i will|let's|lets)?\s*/i, '').replace(/\s*later\.?$/i, '') : undefined); };
+    const match = text => { const t = text.toLowerCase(); for (const [re, k] of RULES) if (re.test(t)) return k; return null; };
+
+    const events = SCRIPT.map(e => Object.assign({ mine: false }, e));
+    let notes = [], t0 = performance.now(), clock = 0, lastT = -1, running = false;
+    function bubble(ev) {
+      const b = document.createElement('span'); b.className = 'tw-bub' + (ev.mine ? ' mine' : '') + (ev.kind === 'later' ? ' later' : '');
+      b.style.setProperty('--x', (ev.t / DUR * 100) + '%'); b.innerHTML = MIC; b.title = fmt(ev.t) + ' · ' + ev.say; ev.el = b;
+      b.addEventListener('click', e => { e.stopPropagation(); seek(ev.t - 0.15); });
+      bubbles.appendChild(b);
     }
-    function miss(text) {
-      token++; busy = false; chips.querySelectorAll('.chip.hot').forEach(c => c.classList.remove('hot'));
-      said.textContent = text; wave.classList.remove('live'); state.textContent = 'Heard you, but that is not an edit this demo knows.';
-      result.textContent = ''; result.classList.remove('on');
-      hint.textContent = 'This demo knows: captions, lower third, title, font, warm, match, LUT, vignette, zoom, cut, trim, move, speed, duck, mute, noise, fade, undo.';
+    events.forEach(bubble);
+    function addNote(type, text, ev) {
+      notes.push({ type, text, t: ev.t });
+      if (empty) empty.remove();
+      const n = document.createElement('div'); n.className = 'tw-note' + (ev.mine ? ' mine' : '');
+      n.innerHTML = '<span class="t">' + fmt(ev.t) + '</span><span><span class="k ' + type + '">' + (type === 'edit' ? 'edit' : type === 'dec' ? 'decision' : 'later') + '</span>' + text + '</span>';
+      list.appendChild(n); requestAnimationFrame(() => n.classList.add('show')); list.scrollTop = list.scrollHeight;
+      NE.textContent = notes.filter(x => x.type === 'edit').length; ND.textContent = notes.filter(x => x.type === 'dec').length; NL.textContent = notes.filter(x => x.type === 'later').length;
     }
+    function resetVisuals() {
+      pv.className = 'tw-preview'; [bars, vig, fade, title, lower, cap, badge, pin].forEach(e => e.classList.remove('on'));
+      inout.in = null; inout.out = null; setRange(); if (video) video.playbackRate = 1;
+      events.forEach(ev => { ev.fired = false; ev.el.classList.remove('hot', 'done'); });
+      notes = []; list.innerHTML = ''; list.appendChild(empty); NE.textContent = ND.textContent = NL.textContent = '0'; sum.classList.remove('on');
+      q.textContent = 'Listening while it plays…'; q.classList.add('dim'); r.textContent = ''; r.className = 'r'; wave.classList.add('live');
+    }
+    async function fire(ev, quiet) {
+      ev.fired = true; ev.el.classList.add('hot');
+      if (!quiet) { q.textContent = '“' + ev.say + '”'; q.classList.remove('dim'); r.textContent = ''; r.className = 'r'; }
+      const [type, text] = KIND[ev.kind](ev);
+      addNote(type, text, ev);
+      if (!quiet) { setTimeout(() => { r.textContent = text; r.className = 'r ' + (type === 'later' ? 'later' : 'ok'); }, 500); }
+      setTimeout(() => { ev.el.classList.remove('hot'); ev.el.classList.add('done'); }, 1400);
+    }
+    function seek(t) {
+      t = Math.min(DUR - 0.05, Math.max(0, t)); resetVisuals();
+      events.filter(ev => ev.t <= t).sort((a, b) => a.t - b.t).forEach(ev => { fire(ev, true); ev.el.classList.remove('hot'); ev.el.classList.add('done'); });
+      t0 = performance.now() - t * 1000; clock = t; lastT = t;
+      if (video && video.readyState >= 1) { try { video.currentTime = t; } catch (e) {} }
+    }
+    function summary() {
+      const e = notes.filter(x => x.type === 'edit').length, d = notes.filter(x => x.type === 'dec').length, l = notes.filter(x => x.type === 'later').length;
+      sumText.textContent = events.filter(x => x.fired).length + ' things said · ' + e + ' edits · ' + d + ' decision' + (d === 1 ? '' : 's') + ' · ' + l + ' for later';
+      sum.classList.add('on');
+    }
+    function frame(now) {
+      if (!running) return;
+      clock = ((now - t0) / 1000) % DUR;
+      if (clock < lastT - 1) { resetVisuals(); if (video) { try { video.currentTime = 0; video.play().catch(() => {}); } catch (e) {} } }
+      lastT = clock;
+      prog.style.setProperty('--p', (clock / DUR * 100) + '%'); phEl.style.setProperty('--p', (clock / DUR * 100) + '%');
+      tc.textContent = tcOf(clock); at.textContent = 'at ' + fmt(clock);
+      events.forEach(ev => { if (!ev.fired && clock >= ev.t) fire(ev); });
+      if (clock > DUR - 1.2 && !sum.classList.contains('on') && notes.length) summary();
+      requestAnimationFrame(frame);
+    }
+    function start() { if (running) return; running = true; t0 = performance.now(); lastT = 0; resetVisuals(); if (video) video.play().catch(() => {}); requestAnimationFrame(frame); }
+    function stop() { running = false; if (video) video.pause(); }
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(es => es.forEach(e => e.isIntersecting ? start() : stop()), { rootMargin: '120px' }).observe(root);
+    } else start();
+
+    // Your own commands: pinned to the current timecode, applied now, replayed every loop.
     function say(text) {
       text = (text || '').trim(); if (!text) return;
-      holdUntil = Date.now() + 12000;
-      const act = match(text); if (act) fire(act, text, true); else miss(text);
+      const kind = match(text);
+      if (!kind) { q.textContent = '“' + text + '”'; q.classList.remove('dim'); r.textContent = 'Heard you, but not an edit this demo knows. Try caption, title, warm, letterbox, zoom, mute, fade, cut, undo, or “later”.'; r.className = 'r'; return; }
+      const ev = { t: Math.max(0.2, clock), say: text, kind, arg: argOf(text, kind), mine: true, fired: false };
+      events.push(ev); bubble(ev); fire(ev);
     }
-    chips.addEventListener('click', e => {
-      const c = e.target.closest('.chip'); if (!c) return;
-      holdUntil = Date.now() + 9000; fire(c.dataset.act, c.textContent);
-    });
+    track.addEventListener('click', e => { const rect = track.getBoundingClientRect(); seek((e.clientX - rect.left) / rect.width * DUR); input.focus(); });
     form.addEventListener('submit', e => { e.preventDefault(); say(input.value); input.value = ''; });
-    // Real voice input where the browser offers it (Chrome, Edge, Safari); otherwise the mic plays an example.
+    copyBtn.addEventListener('click', () => {
+      const txt = 'Rollcall session notes · 347325.mov\n' + notes.map(n => fmt(n.t) + '  [' + n.type + ']  ' + n.text).join('\n');
+      if (navigator.clipboard) navigator.clipboard.writeText(txt).then(() => { copyBtn.textContent = 'Copied'; setTimeout(() => copyBtn.textContent = 'Copy notes', 1600); });
+    });
     const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
     if (SR) {
       let rec = null;
-      const stop = () => { if (rec) { try { rec.stop(); } catch (e) {} } mic.classList.remove('rec'); };
-      const start = () => {
-        if (rec) stop();
-        rec = new SR(); rec.lang = 'en-GB'; rec.interimResults = true; rec.maxAlternatives = 1;
-        mic.classList.add('rec'); token++; busy = false; wave.classList.add('live'); state.textContent = 'Listening…'; said.textContent = ''; result.classList.remove('on'); holdUntil = Date.now() + 15000;
-        rec.onresult = ev => { let t = ''; for (const r of ev.results) t += r[0].transcript; said.textContent = t; if (ev.results[ev.results.length - 1].isFinal) { stop(); say(t); } };
-        rec.onerror = () => { stop(); wave.classList.remove('live'); state.textContent = 'Mic blocked or unavailable. Type it instead.'; };
-        rec.onend = () => { mic.classList.remove('rec'); };
+      const stopRec = () => { if (rec) { try { rec.stop(); } catch (e) {} } mic.classList.remove('rec'); };
+      mic.addEventListener('click', () => {
+        if (mic.classList.contains('rec')) return stopRec();
+        rec = new SR(); rec.lang = 'en-GB'; rec.interimResults = true; mic.classList.add('rec');
+        q.textContent = ''; q.classList.remove('dim'); r.textContent = 'Listening at ' + fmt(clock) + '…'; r.className = 'r';
+        rec.onresult = ev => { let t = ''; for (const x of ev.results) t += x[0].transcript; q.textContent = '“' + t + '”'; if (ev.results[ev.results.length - 1].isFinal) { stopRec(); say(t); } };
+        rec.onerror = () => { stopRec(); r.textContent = 'Mic blocked or unavailable. Type it instead.'; };
+        rec.onend = () => mic.classList.remove('rec');
         try { rec.start(); } catch (e) { rec.onerror(); }
-      };
-      mic.addEventListener('click', () => { if (mic.classList.contains('rec')) stop(); else start(); });
+      });
     } else {
-      mic.addEventListener('click', () => { const c = chips.querySelectorAll('.chip'); const pick = c[Math.floor(Math.random() * c.length)]; holdUntil = Date.now() + 9000; fire(pick.dataset.act, pick.textContent); });
-      mic.title = 'Voice input needs Chrome, Edge or Safari; this plays an example instead.';
+      mic.addEventListener('click', () => { input.focus(); r.textContent = 'Voice input needs Chrome, Edge or Safari here. Type it instead.'; });
     }
-    reset();
-    (async function loop() {
-      await sleep(1500);
-      while (true) {
-        if (Date.now() < holdUntil || busy) { await sleep(400); continue; }
-        const act = order[idx % order.length]; idx++;
-        const c = chips.querySelector('.chip[data-act="' + act + '"]');
-        await fire(act, c.textContent);
-        await sleep(reduce ? 5000 : 3200);
-      }
-    })();
   })();
 
   // ---- Shorts: one prompt is typed, then the phone assembles the short as each step completes.
