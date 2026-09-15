@@ -471,6 +471,101 @@
     .stories-height { min-height: 260vh; }
   }
 
+  /* ---------- How it works: pinned, scroll-driven chapters ---------- */
+  .how { padding: 0; }
+  .how-height { height: 500vh; position: relative; }
+  .how-stage { position: sticky; top: 0; height: 100vh; overflow: hidden; display: grid; grid-template-rows: auto 1fr; padding: 84px 24px 24px; box-sizing: border-box; }
+  .how-head { text-align: center; max-width: 900px; margin: 0 auto; }
+  .how-head .eyebrow { display: block; font-size: 13px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 14px; }
+  .how-head h2 { font-size: clamp(28px, 4.2vw, 52px); line-height: 1.04; letter-spacing: -0.03em; font-weight: 600; text-wrap: balance; }
+  .how-head h2 em { font-style: normal; color: var(--ink-3); }
+  .how-body { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); gap: 40px; align-items: center; max-width: var(--max); width: 100%; margin: 0 auto; min-height: 0; }
+  .how-tabs { position: relative; padding-left: 24px; display: flex; flex-direction: column; gap: 22px; }
+  .how-ind { position: absolute; left: 0; top: 0; width: 3px; height: 40px; border-radius: 2px; background: var(--voice); transition: transform .5s cubic-bezier(.4,0,.2,1), height .5s cubic-bezier(.4,0,.2,1); }
+  .how-tab h3 { font-size: 22px; font-weight: 600; letter-spacing: -0.015em; color: var(--ink-3); transition: color .35s; }
+  .how-tab p { color: var(--ink-2); font-size: 16px; line-height: 1.5; max-width: 40ch; max-height: 0; opacity: 0; overflow: hidden; margin-top: 0; transition: max-height .5s cubic-bezier(.4,0,.2,1), opacity .4s, margin-top .5s; }
+  .how-tab.is-on h3 { color: var(--ink); }
+  .how-tab.is-on p { max-height: 140px; opacity: 1; margin-top: 10px; }
+  .how-visual { position: relative; display: grid; place-items: center; min-height: 0; height: 100%; }
+  .how-card {
+    position: relative; z-index: 3; width: 400px; max-width: 86vw; height: min(500px, 70vh); border-radius: 28px; background: #fff; color: var(--ink);
+    border: 1px solid var(--line); box-shadow: 0 40px 90px -40px rgba(20, 20, 60, .45); padding: 18px 20px 16px; display: flex; flex-direction: column; gap: 12px; overflow: hidden;
+    will-change: transform, opacity;
+  }
+  .how-cardhead { display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--ink-3); font-variant-numeric: tabular-nums; }
+  .how-cardhead .mark { width: 22px; height: 22px; border-radius: 50%; background: var(--ink); display: grid; place-items: center; flex: none; }
+  .how-cardhead .mark i { display: block; width: 2.5px; height: 10px; background: #fff; border-radius: 2px; box-shadow: -5px 0 0 0 #fff, 5px 0 0 0 #fff; transform: scaleY(.6); }
+  .how-app { display: inline-flex; align-items: center; gap: 7px; font-size: 12.5px; font-weight: 600; color: var(--ink); background: var(--panel); border: 1px solid var(--line); padding: 5px 10px 5px 7px; border-radius: 999px; white-space: nowrap; }
+  .how-app i { width: 12px; height: 12px; border-radius: 4px; display: inline-block; }
+  .how-app.main { margin-left: auto; opacity: 0; transform: translateY(6px); transition: opacity .35s, transform .35s; }
+  .how-card.ch3 .how-app.main { opacity: 1; transform: none; }
+  .how-raw { font-size: 17px; line-height: 1.5; letter-spacing: -0.005em; color: var(--ink); flex: none; min-height: 0; will-change: transform, opacity; }
+  .how-raw .hw { display: inline; opacity: .08; transition: opacity .18s linear; }
+  .how-raw .hw.on { opacity: 1; }
+  .how-raw .hw.filler.on { color: var(--ink-3); }
+  .how-raw .hw.rep.on { color: #e0557a; text-decoration: line-through; text-decoration-color: rgba(224,85,122,.5); }
+  .how-raw .hw.fix.on { color: #ff7a1a; }
+  .how-raw .hw.time.on { color: var(--voice); font-weight: 600; }
+  .how-raw.polish { background: linear-gradient(100deg, #F0D7FF 0%, #FFA946 23%, #FF6C4C 39%, #FFBCF2 67%, #7232A6 91%, #F0D7FF 100%); background-size: 300% 100%; background-position: calc(var(--sw, 0) * 100%) 0; -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .how-raw.polish .hw { color: inherit !important; text-decoration: none; }
+  .how-planbox { height: 0; opacity: 0; overflow: hidden; flex: none; will-change: height; }
+  .how-plan { background: var(--panel); border: 1px solid var(--line); border-radius: 16px; padding: 12px 14px 10px; display: flex; flex-direction: column; gap: 8px; }
+  .how-planhead { display: flex; align-items: center; justify-content: space-between; font-size: 13px; margin-bottom: 2px; }
+  .how-pillstate { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; color: var(--ink-2); background: #fff; border: 1px solid var(--line); padding: 4px 9px; border-radius: 999px; transition: color .3s, background .3s; }
+  .how-pillstate.ready { color: #fff; background: var(--clip-audio); border-color: transparent; }
+  .how-pillstate .spin { width: 10px; height: 10px; border: 2px solid var(--line); border-top-color: var(--voice); border-radius: 50%; animation: spin 1s linear infinite; }
+  .how-pillstate.ready .spin { display: none; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .how-row { display: flex; gap: 9px; align-items: flex-start; font-size: 13.5px; line-height: 1.4; color: var(--ink-2); opacity: 0; transform: translateY(10px); transition: opacity .35s, transform .45s cubic-bezier(.2,.8,.2,1); }
+  .how-row.on { opacity: 1; transform: none; }
+  .how-row .ok { color: var(--clip-audio); font-weight: 700; flex: none; }
+  .how-row b { color: var(--ink); font-weight: 600; }
+  .how-row code { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 12px; background: #fff; padding: 1px 5px; border-radius: 4px; border: 1px solid var(--line); }
+  .how-applied { margin-top: auto; opacity: 0; transform: translateY(12px); transition: opacity .4s, transform .5s cubic-bezier(.2,.8,.2,1); display: flex; flex-direction: column; gap: 8px; }
+  .how-applied.on { opacity: 1; transform: none; }
+  .mini { background: #16181b; border-radius: 12px; padding: 8px 8px 8px 0; display: flex; flex-direction: column; gap: 4px; }
+  .mrow { position: relative; height: 18px; display: flex; align-items: center; }
+  .mrow b { width: 28px; flex: none; font-size: 9px; color: #7b818a; text-align: center; font-weight: 600; }
+  .mrow .mc { position: absolute; top: 2px; bottom: 2px; border-radius: 3px; font-size: 9px; line-height: 14px; padding: 0 5px; white-space: nowrap; overflow: hidden; font-weight: 600; margin-left: 28px; max-width: calc(100% - 28px); box-sizing: border-box; }
+  .mrow .mc { left: calc(28px + var(--l, 0%)); }
+  .mrow .mc.v { background: var(--clip-video); color: #08201c; }
+  .mrow .mc.t { background: var(--clip-text); color: #241a00; }
+  .mrow .mc.a { background: var(--clip-audio); color: #0d2306; }
+  .how-done { font-size: 12px; font-weight: 600; color: var(--clip-audio); }
+  .how-foot { display: flex; align-items: center; gap: 10px; margin-top: 4px; min-height: 40px; transition: opacity .3s; }
+  .how-mic { display: inline-flex; align-items: center; gap: 3px; height: 36px; padding: 0 16px; border-radius: 999px; background: var(--ink); }
+  .how-mic i { display: block; width: 3px; height: 4px; border-radius: 2px; background: #fffef0; transition: height .2s; }
+  .how-mic.live i { animation: wave .9s ease-in-out infinite; }
+  .how-mic i:nth-child(2) { animation-delay: .1s } .how-mic i:nth-child(3) { animation-delay: .2s } .how-mic i:nth-child(4) { animation-delay: .3s } .how-mic i:nth-child(5) { animation-delay: .15s } .how-mic i:nth-child(6) { animation-delay: .05s } .how-mic i:nth-child(7) { animation-delay: .25s } .how-mic i:nth-child(8) { animation-delay: .35s } .how-mic i:nth-child(9) { animation-delay: .12s } .how-mic i:nth-child(10) { animation-delay: .22s }
+  .how-ident { font-size: 12px; font-weight: 600; padding: 6px 11px; border-radius: 999px; background: var(--voice-soft); color: var(--voice); transform: scaleX(0); opacity: 0; transform-origin: left center; transition: transform .3s cubic-bezier(.34,1.56,.64,1), opacity .18s; white-space: nowrap; }
+  .how-ident.on { transform: scaleX(1); opacity: 1; }
+  .how-ident[data-t="rep"] { background: #fde6ec; color: #c8355c; }
+  .how-ident[data-t="fix"] { background: #ffe9d9; color: #d1600c; }
+  .how-ident[data-t="filler"] { background: var(--panel); color: var(--ink-2); }
+  .how-side {
+    position: absolute; left: 50%; top: 50%; z-index: 1; width: 400px; max-width: 86vw; height: min(500px, 70vh); border-radius: 28px; background: #fff; border: 1px solid var(--line);
+    box-shadow: 0 30px 70px -40px rgba(20, 20, 60, .4); padding: 18px 20px; display: flex; flex-direction: column; gap: 12px; opacity: 0;
+    transform: translate(-50%, -50%); transform-origin: 50% 100%; will-change: transform, opacity;
+  }
+  .how-side .mini { margin-top: auto; }
+  .how-side .how-done { color: var(--clip-audio); }
+  .how-side[data-side="r"] .how-app, .how-side[data-side="r"] .how-done { align-self: flex-end; }
+  .how-side[data-side="l"] .how-app, .how-side[data-side="l"] .how-done { align-self: flex-start; }
+  @media (max-width: 860px) {
+    .how-stage { padding-top: 76px; }
+    .how-body { grid-template-columns: 1fr; gap: 14px; align-content: start; }
+    .how-tabs { order: 2; padding-left: 0; gap: 0; }
+    .how-ind { display: none; }
+    .how-tab { display: none; text-align: center; }
+    .how-tab.is-on { display: block; }
+    .how-tab h3 { font-size: 19px; }
+    .how-tab p { margin: 6px auto 0; }
+    .how-visual { order: 1; height: auto; }
+    .how-card, .how-side { height: min(480px, 56vh); padding: 14px 16px; }
+    .how-raw { font-size: 15px; }
+    .how-height { height: 420vh; }
+  }
+
   /* Waitlist */
   .waitlist { background: var(--ink); color: #fff; text-align: center; }
   .waitlist h2 { font-size: clamp(32px, 5vw, 56px); letter-spacing: -0.03em; line-height: 1.05; font-weight: 600; max-width: 18ch; margin: 0 auto 16px; }
@@ -591,31 +686,55 @@
     </div>
   </div>
 
-  <section id="how" aria-labelledby="how-h">
-    <div class="wrap">
-      <div class="sec-head">
-        <h2 id="how-h">Three steps between your idea and the cut.</h2>
-        <p>You keep your editor, your project files and your shortcuts. Rollcall sits alongside and takes the tedious part.</p>
-      </div>
-      <div class="steps">
-        <article class="step">
-          <span class="num">1</span>
-          <h3>Speak</h3>
-          <p>Hold a key and describe the change the way you'd tell a colleague. Timestamps, colours, clip names and rough directions all work.</p>
-          <div class="ex">“At fourteen seconds, add a caption that says welcome back, yellow, bold, bottom centre.”</div>
-        </article>
-        <article class="step">
-          <span class="num">2</span>
-          <h3>Understand</h3>
-          <p>The agent reads your open project: timeline, clip names, markers and the current playhead. It resolves “this clip” and “here” to real positions.</p>
-          <div class="ex">Resolved: <code>t=14.0s · track V2 · style: bold · color #F5B841 · anchor bottom-center</code></div>
-        </article>
-        <article class="step">
-          <span class="num">3</span>
-          <h3>Act inside the editor</h3>
-          <p>Each step becomes a tool call into the editor's own scripting layer, so the result is a normal, undoable edit in your project file.</p>
-          <div class="ex"><code>addTextLayer({ track: "V2", start: 14.0, text: "Welcome back", … })</code></div>
-        </article>
+  <section id="how" class="how" aria-labelledby="how-h">
+    <div class="how-height" id="howHeight">
+      <div class="how-stage" id="howStage">
+        <div class="how-head">
+          <span class="eyebrow">How it works</span>
+          <h2 id="how-h">Talk at the speed you think. <em>Your editor keeps up.</em></h2>
+        </div>
+        <div class="how-body">
+          <div class="how-tabs" id="howTabs">
+            <span class="how-ind" id="howInd"></span>
+            <div class="how-tab is-on" data-i="0">
+              <h3>Say it how you’d say it</h3>
+              <p>Ramble, pause, correct yourself mid-sentence. Rollcall hears timestamps, clip names and rough directions, and understands what you meant.</p>
+            </div>
+            <div class="how-tab" data-i="1">
+              <h3>It becomes an edit plan</h3>
+              <p>Fillers and repeats go. What’s left is a short list of concrete edits at real timecodes, checked against your open project before anything moves.</p>
+            </div>
+            <div class="how-tab" data-i="2">
+              <h3>Applied inside your editor</h3>
+              <p>Each edit runs through the editor’s own scripting layer, so it lands as a normal, undoable change in DaVinci Resolve, Premiere Pro or CapCut.</p>
+            </div>
+          </div>
+          <div class="how-visual" id="howVisual">
+            <div class="how-side" data-side="l"><span class="how-app"><i style="background:#2d8cff"></i>Premiere Pro</span><div class="mini"><div class="mrow"><b>V2</b><span class="mc t" style="left:22%;width:12%"></span><span class="mc t" style="left:36%;width:44%"></span></div><div class="mrow"><b>V1</b><span class="mc v" style="left:0;width:48%"></span><span class="mc v" style="left:49%;width:51%"></span></div><div class="mrow"><b>A1</b><span class="mc a" style="left:0;width:100%"></span></div></div><span class="how-done">Applied · undoable</span></div>
+            <div class="how-side" data-side="r"><span class="how-app"><i style="background:#0fd3c4"></i>CapCut</span><div class="mini"><div class="mrow"><b>V2</b><span class="mc t" style="left:22%;width:12%"></span><span class="mc t" style="left:36%;width:44%"></span></div><div class="mrow"><b>V1</b><span class="mc v" style="left:0;width:48%"></span><span class="mc v" style="left:49%;width:51%"></span></div><div class="mrow"><b>A1</b><span class="mc a" style="left:0;width:100%"></span></div></div><span class="how-done">Applied · undoable</span></div>
+            <div class="how-card" id="howCard">
+              <div class="how-cardhead"><span class="mark"><i></i></span><span id="howState">Listening · 00:00:14:00</span><span class="how-app main" id="howMainApp"><i style="background:#ff7a1a"></i>DaVinci Resolve</span></div>
+              <div class="how-raw" id="howRaw">Okay so <i data-t="filler">um</i> <i data-t="time">at fourteen seconds</i> put a big bold title that says start before you’re ready, centre it, <i data-t="rep">centre it,</i> and make the word ready <i data-t="fix">yellow, no,</i> gold. Then <i data-t="filler">uh</i> slow punch in, <i data-t="filler">like</i> twelve percent, and give it a warm grade with the <i data-t="rep">the</i> letterbox bars.</div>
+              <div class="how-planbox" id="howPlanBox">
+                <div class="how-plan" id="howPlan">
+                  <div class="how-planhead"><b>Edit plan</b><span class="how-pillstate" id="howPlanState"><i class="spin"></i>Planning…</span></div>
+                  <div class="how-row"><span class="ok">✓</span><span><b>00:14</b> Title “Start before you’re ready.” · centred, bold</span></div>
+                  <div class="how-row"><span class="ok">✓</span><span>Highlight “ready” in gold <code>#F5B841</code></span></div>
+                  <div class="how-row"><span class="ok">✓</span><span>Punch in <b>100 → 112%</b> across the shot</span></div>
+                  <div class="how-row"><span class="ok">✓</span><span>Warm grade + <b>2.39:1</b> letterbox bars</span></div>
+                </div>
+              </div>
+              <div class="how-applied" id="howApplied">
+                <div class="mini"><div class="mrow"><b>V2</b><span class="mc t" style="left:22%;width:12%">Title</span><span class="mc t" style="left:36%;width:44%">Letterbox</span></div><div class="mrow"><b>V1</b><span class="mc v" style="left:0;width:48%">forest_walk_A · 112%</span><span class="mc v" style="left:49%;width:51%">forest_walk_B</span></div><div class="mrow"><b>A1</b><span class="mc a" style="left:0;width:100%">voiceover.wav</span></div></div>
+                <span class="how-done">Applied · undoable · ⌘Z works</span>
+              </div>
+              <div class="how-foot">
+                <span class="how-mic" id="howMic"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
+                <span class="how-ident" id="howIdent"></span>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -1138,6 +1257,110 @@
     build();
     window.addEventListener('load', build);
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(build);
+  })();
+
+  // ---- How it works: a pinned stage scrubbed by scroll through three chapters.
+  (function () {
+    const wrapH = $('howHeight'), stage = $('howStage'), card = $('howCard'), raw = $('howRaw');
+    if (!wrapH || !card) return;
+    const planBox = $('howPlanBox'), plan = $('howPlan'), planState = $('howPlanState'), rows = [...plan.querySelectorAll('.how-row')];
+    const tabs = [...stage.querySelectorAll('.how-tab')], ind = $('howInd'), sides = [...stage.querySelectorAll('.how-side')];
+    const applied = $('howApplied'), ident = $('howIdent'), mic = $('howMic'), state = $('howState'), foot = card.querySelector('.how-foot');
+    const LABEL = { filler: 'Filler', rep: 'Repetition', fix: 'Correction', time: 'Timecode' };
+
+    // Split the transcript into words, keeping the authored type on each one.
+    const words = [];
+    [...raw.childNodes].forEach(n => {
+      const type = n.nodeType === 1 ? n.dataset.t : '';
+      const text = n.textContent; const frag = document.createDocumentFragment();
+      text.split(/(\s+)/).forEach(part => {
+        if (!part) return;
+        if (/^\s+$/.test(part)) { frag.appendChild(document.createTextNode(part)); return; }
+        const el = document.createElement('span'); el.className = 'hw' + (type ? ' ' + type : ''); el.textContent = part; el.dataset.t = type || '';
+        words.push(el); frag.appendChild(el);
+      });
+      raw.replaceChild(frag, n);
+    });
+    const N = words.length;
+
+    const smooth = t => t <= 0 ? 0 : t >= 1 ? 1 : t * t * (3 - 2 * t);
+    const phase = (p, a, b) => smooth((p - a) / (b - a));
+    // Chapter weights in viewports: intro, say, plan, apply, hold.
+    const W = [0.5, 1, 1, 1, 0.5], total = W.reduce((a, b) => a + b, 0);
+    const edges = []; let acc = 0; W.forEach(w => { edges.push(acc / total); acc += w; }); edges.push(1);
+    const local = (p, i) => Math.min(1, Math.max(0, (p - edges[i]) / (edges[i + 1] - edges[i])));
+
+    let planH = 0, sideTx = 160, head = 0, target = 0, ticking = false, curTab = -1;
+    function measure() {
+      planH = plan.offsetHeight + 2;
+      const vis = $('howVisual').getBoundingClientRect(); sideTx = Math.min(card.offsetWidth * 0.42, Math.max(80, (vis.width - card.offsetWidth) / 2 + card.offsetWidth * 0.14));
+      setTab(curTab < 0 ? 0 : curTab, true);
+    }
+    function setTab(i, force) {
+      if (i === curTab && !force) return; curTab = i;
+      tabs.forEach((t, j) => t.classList.toggle('is-on', j === i));
+      const t = tabs[i]; if (t && ind) { ind.style.transform = 'translateY(' + t.offsetTop + 'px)'; ind.style.height = t.offsetHeight + 'px'; }
+    }
+
+    function render(p) {
+      const intro = local(p, 0), c1 = local(p, 1), c2 = local(p, 2), c3 = local(p, 3);
+      const chapter = p < edges[2] ? 0 : p < edges[3] ? 1 : 2;
+      setTab(chapter);
+      // Intro: card settles in.
+      const e = smooth(intro);
+      card.style.opacity = (0.15 + 0.85 * e).toFixed(3);
+      // Chapter 1: words land as spoken; a pill names what was just heard.
+      const n = p < edges[1] ? 0 : Math.min(N, Math.floor((c1 / 0.9) * N + 0.0001));
+      words.forEach((w, i) => w.classList.toggle('on', i < n));
+      let found = '';
+      for (let i = n - 1; i >= Math.max(0, n - 4); i--) { if (words[i].dataset.t) { found = words[i].dataset.t; break; } }
+      const listening = chapter === 0 && c1 < 0.97;
+      ident.textContent = found ? LABEL[found] : ''; ident.dataset.t = found; ident.classList.toggle('on', !!found && listening);
+      mic.classList.toggle('live', listening);
+      state.textContent = chapter === 0 ? 'Listening · 00:00:14:00' : chapter === 1 ? 'Planning edits' : 'Applied in DaVinci Resolve';
+      // Chapter 2: shimmer over the raw words, lift them away, grow the plan.
+      const sw = phase(c2, 0, 0.46), out = phase(c2, 0.44, 0.6);
+      raw.classList.toggle('polish', chapter === 1 && c2 > 0.01 && out < 1);
+      raw.style.setProperty('--sw', (sw * 1).toFixed(3));
+      raw.style.opacity = chapter >= 1 ? (1 - out).toFixed(3) : 1;
+      raw.style.transform = chapter >= 1 ? 'translateY(' + (-26 * out).toFixed(1) + 'px)' : '';
+      raw.style.height = chapter >= 1 && out >= 1 ? '0px' : '';
+      raw.style.marginTop = chapter >= 1 && out >= 1 ? '-12px' : '';
+      const g = chapter >= 2 ? 1 : phase(c2, 0.5, 0.72);
+      planBox.style.height = (g * planH).toFixed(1) + 'px'; planBox.style.opacity = g.toFixed(3);
+      rows.forEach((r, i) => r.classList.toggle('on', chapter >= 2 || phase(c2, 0.56 + i * 0.06, 0.64 + i * 0.06) > 0.5));
+      planState.classList.toggle('ready', chapter >= 2 || c2 > 0.86);
+      planState.lastChild.textContent = (chapter >= 2 || c2 > 0.86) ? '4 edits ready' : 'Planning…';
+      foot.style.opacity = chapter === 0 ? 1 : (1 - phase(c2, 0.3, 0.5)).toFixed(3);
+      foot.style.display = chapter >= 1 && c2 > 0.5 ? 'none' : '';
+      // Chapter 3: the plan fans out into the three editors.
+      const f = smooth(c3 / 0.6), small = window.innerWidth < 860;
+      card.classList.toggle('ch3', chapter === 2);
+      applied.classList.toggle('on', chapter === 2 && c3 > 0.3);
+      sides.forEach(sd => {
+        const dir = sd.dataset.side === 'l' ? -1 : 1;
+        sd.style.opacity = (f * 1).toFixed(3);
+        sd.style.transform = 'translate(-50%, -50%) translateX(' + (dir * sideTx * f).toFixed(1) + 'px) translateY(' + ((small ? -6 : 22) * f).toFixed(1) + 'px) rotate(' + (dir * (small ? 6 : 9) * f).toFixed(2) + 'deg) scale(' + (1 - 0.06 * f).toFixed(3) + ')';
+      });
+      card.style.transform = 'translateY(' + ((1 - e) * 40).toFixed(1) + 'px) scale(' + (0.86 + 0.14 * e - 0.02 * f).toFixed(3) + ')';
+    }
+
+    function onScroll() {
+      const r = wrapH.getBoundingClientRect(), total = Math.max(1, wrapH.offsetHeight - window.innerHeight);
+      target = Math.min(1, Math.max(0, -r.top / total));
+      if (!ticking) { ticking = true; requestAnimationFrame(tick); }
+    }
+    function tick() {
+      head += (target - head) * (reduce ? 1 : 0.18);
+      if (Math.abs(target - head) < 0.0005) { head = target; render(head); ticking = false; return; }
+      render(head); requestAnimationFrame(tick);
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    let lastW = window.innerWidth, rt = null;
+    window.addEventListener('resize', () => { if (window.innerWidth === lastW) return; lastW = window.innerWidth; clearTimeout(rt); rt = setTimeout(() => { measure(); onScroll(); }, 150); });
+    measure(); onScroll(); render(target);
+    window.addEventListener('load', () => { measure(); onScroll(); });
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { measure(); onScroll(); });
   })();
 
   // Waitlist (no backend yet — replace with your form endpoint)
