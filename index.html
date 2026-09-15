@@ -567,15 +567,15 @@
   }
 
   /* ---------- Talk while it plays ---------- */
-  .play { background: var(--ink); color: #fff; padding: 96px 0 80px; overflow: hidden; }
+  .play { background: var(--ink); color: #fff; padding: 96px 0 88px; overflow: hidden; }
+  .play .wrap.wide { max-width: 1360px; }
   .sec-head.light h2 { color: #fff; } .sec-head.light p { color: #b9bec6; }
   .sec-head.light .eyebrow { display: block; font-size: 13px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: #c3beff; margin-bottom: 14px; }
-  .tw { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(280px, .85fr); gap: 18px; align-items: stretch; }
-  @media (max-width: 900px) { .tw { grid-template-columns: 1fr; } }
+  .tw { display: grid; grid-template-columns: minmax(0, 1.9fr) minmax(300px, .8fr); gap: 20px; align-items: stretch; }
+  @media (max-width: 1000px) { .tw { grid-template-columns: 1fr; } }
   .tw-stage { border: 1px solid #2f333a; border-radius: 18px; background: #1b1d21; overflow: hidden; display: flex; flex-direction: column; }
-  .tw-preview { position: relative; width: 100%; aspect-ratio: 16 / 9; max-height: 420px; background: #000; overflow: hidden; transition: filter .8s; }
+  .tw-preview { position: relative; width: 100%; aspect-ratio: 16 / 9; max-height: 560px; background: #000; overflow: hidden; transition: filter .8s; }
   .tw-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 1.4s cubic-bezier(.2,.7,.2,1); }
-  .tw-preview.zoom .tw-video { transform: scale(1.16); }
   .tw-preview.warm { filter: sepia(.22) saturate(1.2) contrast(1.05); }
   .tw-preview.lut { filter: contrast(1.18) saturate(.85) sepia(.12); }
   .tw-preview.cutflash::after { content: ""; position: absolute; inset: 0; background: #fff; z-index: 6; animation: phflash .25s ease-out forwards; pointer-events: none; }
@@ -587,8 +587,11 @@
   .tw-vig.on { opacity: 1; }
   .tw-fade { position: absolute; inset: 0; z-index: 5; background: #000; opacity: 0; transition: opacity 2s ease-in; pointer-events: none; }
   .tw-fade.on { opacity: 1; }
-  .tw-title { position: absolute; left: 0; right: 0; top: 38%; z-index: 3; text-align: center; font-weight: 700; font-size: clamp(22px, 4vw, 44px); letter-spacing: -0.03em; color: #fff; text-shadow: 0 4px 24px rgba(0,0,0,.5); opacity: 0; transform: translateY(10px) scale(.92); transition: opacity .4s, transform .6s cubic-bezier(.2,.8,.2,1); }
-  .tw-title.on { opacity: 1; transform: none; }
+  .tw-title { position: absolute; left: 8%; right: 8%; top: 40%; z-index: 3; text-align: center; font-weight: 500; font-size: clamp(18px, 3.2vw, 40px); letter-spacing: .32em; text-transform: uppercase; color: #fff; text-shadow: 0 4px 30px rgba(0,0,0,.6); opacity: 0; transition: opacity 1.1s ease, letter-spacing 1.6s cubic-bezier(.2,.7,.2,1); padding: 14px 0; }
+  .tw-title::before, .tw-title::after { content: ""; position: absolute; left: 30%; right: 30%; height: 1px; background: rgba(255,255,255,.7); transform: scaleX(0); transition: transform 1.2s cubic-bezier(.2,.8,.2,1) .2s; }
+  .tw-title::before { top: 0; } .tw-title::after { bottom: 0; }
+  .tw-title.on { opacity: 1; letter-spacing: .18em; }
+  .tw-title.on::before, .tw-title.on::after { transform: scaleX(1); }
   .tw-lower { position: absolute; left: 5%; bottom: 16%; z-index: 3; display: flex; flex-direction: column; gap: 2px; padding: 9px 14px 9px 12px; border-left: 4px solid #fff; background: rgba(10,12,16,.82); color: #fff; border-radius: 0 8px 8px 0; transform: translateX(-120%); opacity: 0; transition: transform .55s cubic-bezier(.2,.8,.2,1), opacity .3s; }
   .tw-lower.on { transform: none; opacity: 1; }
   .tw-lower b { font-size: clamp(13px, 1.6vw, 18px); } .tw-lower span { font-size: clamp(10px, 1.1vw, 12px); color: #b9bec6; }
@@ -599,11 +602,13 @@
   .tw-badge.on { opacity: 1; }
   .tw-pin { position: absolute; left: 12px; top: 34px; z-index: 3; font-size: 12px; font-weight: 600; color: #241a00; background: var(--clip-text); padding: 5px 9px; border-radius: 6px; opacity: 0; transform: translateY(-6px); transition: opacity .3s, transform .3s; }
   .tw-pin.on { opacity: 1; transform: none; }
-  .tw-scrub { position: relative; padding: 42px 18px 4px; }
-  .tw-bubbles { position: absolute; left: 18px; right: 18px; top: 6px; height: 34px; }
-  .tw-bub { position: absolute; left: var(--x); bottom: 0; transform: translateX(-50%); width: 28px; height: 28px; border-radius: 50% 50% 50% 4px; background: #2a2e34; border: 1px solid #3a3f47; display: grid; place-items: center; color: #9aa0a8; cursor: pointer; transition: transform .3s cubic-bezier(.2,.8,.2,1), background .3s, color .3s; }
+  .tw-scrub { position: relative; padding: 92px 22px 6px; border-top: 1px solid #2f333a; }
+  .tw-bubbles { position: absolute; left: 22px; right: 22px; top: 14px; height: 68px; }
+  .tw-bub { position: absolute; left: var(--x); bottom: 0; transform: translateX(-50%); width: 30px; height: 30px; border-radius: 50% 50% 50% 4px; background: #2a2e34; border: 1px solid #3a3f47; display: grid; place-items: center; color: #9aa0a8; cursor: pointer; transition: transform .3s cubic-bezier(.2,.8,.2,1), background .3s, color .3s; }
   .tw-bub svg { width: 14px; height: 14px; fill: currentColor; }
-  .tw-bub::after { content: ""; position: absolute; left: 50%; bottom: -9px; width: 1px; height: 9px; background: #3a3f47; }
+  .tw-bub::after { content: ""; position: absolute; left: 50%; bottom: -10px; width: 1px; height: 10px; background: #3a3f47; }
+  .tw-bub.up { bottom: 38px; }
+  .tw-bub.up::after { height: 48px; bottom: -48px; }
   .tw-bub.hot { background: var(--voice); color: #fff; transform: translateX(-50%) scale(1.2) translateY(-3px); box-shadow: 0 0 0 6px rgba(91,76,255,.22); }
   .tw-bub.done { background: #2fb7a0; color: #08201c; }
   .tw-bub.later { background: var(--clip-text); color: #241a00; }
@@ -614,18 +619,18 @@
   .tw-ph { position: absolute; top: -7px; left: var(--p, 0%); width: 2px; height: 20px; background: #fff; border-radius: 1px; box-shadow: 0 0 0 1px rgba(0,0,0,.4); }
   .tw-range { position: absolute; top: -4px; bottom: -4px; left: var(--in, 0%); right: calc(100% - var(--out, 100%)); border: 1.5px solid var(--clip-text); border-radius: 4px; opacity: 0; transition: opacity .3s; pointer-events: none; }
   .tw-range.on { opacity: 1; }
-  .tw-range i { position: absolute; top: -18px; font-size: 9px; font-weight: 700; letter-spacing: .08em; color: var(--clip-text); font-style: normal; opacity: 0; }
+  .tw-range i { position: absolute; top: 12px; font-size: 9px; font-weight: 700; letter-spacing: .08em; color: var(--clip-text); font-style: normal; opacity: 0; }
   .tw-range i.in { left: -1px; } .tw-range i.out { right: -1px; }
   .tw-range.has-in i.in, .tw-range.has-out i.out { opacity: 1; }
-  .tw-ticks { display: flex; justify-content: space-between; margin-top: 8px; font-size: 11px; color: #7b818a; font-variant-numeric: tabular-nums; }
-  .tw-now { display: flex; gap: 12px; align-items: flex-start; padding: 14px 18px 12px; min-height: 92px; }
+  .tw-ticks { display: flex; justify-content: space-between; margin-top: 26px; font-size: 11px; color: #7b818a; font-variant-numeric: tabular-nums; }
+  .tw-now { display: flex; gap: 14px; align-items: flex-start; padding: 18px 22px 12px; min-height: 96px; border-top: 1px solid #2f333a; margin-top: 12px; }
   .tw-now .pg-wave { margin-top: 4px; flex: none; }
   .tw-now .q { font-size: clamp(16px, 1.5vw, 21px); line-height: 1.3; letter-spacing: -0.01em; color: #fff; }
   .tw-now .q.dim { color: #8a9099; }
   .tw-now .r { font-size: 13px; color: #9aa0a8; margin-top: 6px; min-height: 18px; }
   .tw-now .r.ok::before { content: "\2713 "; color: var(--clip-audio); font-weight: 700; }
   .tw-now .r.later::before { content: "\1F4CC "; }
-  .tw-form { display: flex; gap: 8px; align-items: center; padding: 0 18px 18px; }
+  .tw-form { display: flex; gap: 10px; align-items: center; padding: 4px 22px 22px; }
   .tw-at { font-size: 12px; color: #c3beff; font-variant-numeric: tabular-nums; white-space: nowrap; font-weight: 600; }
   .pg-wave { display: inline-flex; align-items: center; gap: 3px; height: 24px; }
   .pg-wave i { display: block; width: 3px; height: 6px; border-radius: 2px; background: var(--voice); }
@@ -1019,6 +1024,8 @@
         <h2 id="commands-h">Say it when you see it.</h2>
         <p>Every command lands at the timecode you spoke it. Rollcall keeps the session notes: what changed, what you decided, and what you said you’d do later.</p>
       </div>
+    </div>
+    <div class="wrap wide">
       <div class="tw" id="tw">
         <div class="tw-stage">
           <div class="tw-preview" id="twPreview">
@@ -1049,7 +1056,7 @@
           <form class="tw-form" id="twForm" autocomplete="off">
             <button class="pg-mic" type="button" id="twMic" aria-label="Tap to speak" title="Tap to speak"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3" fill="currentColor"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
             <span class="tw-at" id="twAt">at 0:00</span>
-            <input class="pg-input" id="twInput" type="text" placeholder="say something here… “caption this”, “warm it up”, “music later”" aria-label="Type a command at this timecode">
+            <input class="pg-input" id="twInput" type="text" placeholder="say something here… “caption this”, “add a vignette”, “music later”" aria-label="Type a command at this timecode">
             <button class="pg-send" type="submit" aria-label="Say it">→</button>
           </form>
         </div>
@@ -1719,9 +1726,8 @@
     const KIND = {
       in:      (ev) => { inout.in = ev.t; setRange(); return ['edit', 'In point at ' + fmt(ev.t)]; },
       out:     (ev) => { inout.out = ev.t; setRange(); return ['edit', 'Out point at ' + fmt(ev.t)]; },
-      zoom:    (ev) => { pv.classList.add('zoom'); badgeOn('Scale 100% → 116%'); return ['edit', 'Slow punch-in from ' + fmt(ev.t) + ', 100 → 116%']; },
       caps:    (ev) => { cap.textContent = ev.arg || 'captions on'; cap.classList.add('on'); return ['edit', 'Caption at ' + fmt(ev.t) + ': “' + (ev.arg || 'captions on') + '”']; },
-      title:   (ev) => { title.textContent = ev.arg || 'Above the clouds'; title.classList.add('on'); return ['edit', 'Title at ' + fmt(ev.t) + ': “' + (ev.arg || 'Above the clouds') + '”']; },
+      title:   (ev) => { title.textContent = ev.arg || 'Above the Clouds'; title.classList.add('on'); return ['edit', 'Cinematic title at ' + fmt(ev.t) + ': “' + (ev.arg || 'Above the Clouds') + '”']; },
       lower:   (ev) => { lower.classList.add('on'); return ['edit', 'Lower third at ' + fmt(ev.t) + ', white on dark']; },
       warm:    (ev) => { pv.classList.add('warm'); badgeOn('Temp +400K · Sat +12'); return ['edit', 'Warm grade from ' + fmt(ev.t)]; },
       lut:     (ev) => { pv.classList.add('lut'); badgeOn('LUT: intro_look.cube'); return ['edit', 'LUT applied from ' + fmt(ev.t)]; },
@@ -1734,20 +1740,20 @@
       cut:     (ev) => { pv.classList.add('cutflash'); setTimeout(() => pv.classList.remove('cutflash'), 300); return ['edit', 'Cut at ' + fmt(ev.t)]; },
       fade:    (ev) => { fade.classList.add('on'); inout.out = DUR; setRange(); return ['edit', 'Fade out over 2s to ' + fmt(DUR)]; },
       later:   (ev) => { pin.textContent = 'Saved for later: ' + (ev.arg || ev.say); pin.classList.add('on'); setTimeout(() => pin.classList.remove('on'), 2600); return ['later', (ev.arg || ev.say) + ' · said at ' + fmt(ev.t)]; },
-      undo:    (ev) => { const had = pv.classList.contains('zoom'); pv.classList.remove('zoom'); badge.classList.remove('on'); return ['dec', had ? 'Kept the wide framing · undid the punch-in at ' + fmt(ev.t) : 'Reverted the last change at ' + fmt(ev.t)]; }
+      undo:    (ev) => { const had = title.classList.contains('on'); title.classList.remove('on'); return ['dec', had ? 'Dropped the title, kept the caption · ' + fmt(ev.t) : 'Reverted the last change at ' + fmt(ev.t)]; }
     };
     const SCRIPT = [
       { t: 1.4, say: 'Start the short here.', kind: 'in' },
-      { t: 4.2, say: 'Punch in slowly on the peak.', kind: 'zoom' },
+      { t: 4.2, say: 'Give it a cinematic title: Above the Clouds.', kind: 'title', arg: 'Above the Clouds' },
       { t: 7.4, say: 'Caption this: the view from four thousand metres.', kind: 'caps', arg: 'the view from 4,000 metres' },
       { t: 10.4, say: 'Hmm, I’ll pick the music later.', kind: 'later', arg: 'Pick the music' },
       { t: 12.6, say: 'Warm it up a touch and add letterbox bars.', kind: 'warmbars' },
-      { t: 15.4, say: 'Actually, undo the punch in.', kind: 'undo' },
+      { t: 15.4, say: 'Actually, lose the title. Keep the caption.', kind: 'undo' },
       { t: 17.6, say: 'Fade out at the end.', kind: 'fade' }
     ];
     const RULES = [
       [/undo|revert|go back/, 'undo'], [/later|remind|todo|to-do|note that|come back/, 'later'], [/start here|in point|begin here|start the short/, 'in'], [/end here|out point|stop here/, 'out'],
-      [/caption|subtitle/, 'caps'], [/lower.?third|my name|name plate/, 'lower'], [/title/, 'title'], [/punch|zoom|closer|push in/, 'zoom'],
+      [/caption|subtitle/, 'caps'], [/lower.?third|my name|name plate/, 'lower'], [/title|cinematic/, 'title'],
       [/warm/, 'warm'], [/letterbox|bars|cinematic/, 'bars'], [/lut|grade|look/, 'lut'], [/vignette/, 'vig'], [/duck|under the voice|quieter/, 'duck'], [/mute|silence/, 'mute'],
       [/speed|faster|slow|retime/, 'speed'], [/fade/, 'fade'], [/cut|split/, 'cut']
     ];
@@ -1760,7 +1766,11 @@
       const b = document.createElement('span'); b.className = 'tw-bub' + (ev.mine ? ' mine' : '') + (ev.kind === 'later' ? ' later' : '');
       b.style.setProperty('--x', (ev.t / DUR * 100) + '%'); b.innerHTML = MIC; b.title = fmt(ev.t) + ' · ' + ev.say; ev.el = b;
       b.addEventListener('click', e => { e.stopPropagation(); seek(ev.t - 0.15); });
-      bubbles.appendChild(b);
+      bubbles.appendChild(b); stagger();
+    }
+    function stagger() {
+      const all = events.filter(e => e.el).sort((a, b) => a.t - b.t); let lastX = -99, lastUp = true;
+      all.forEach(e => { const x = e.t / DUR * 100; const close = x - lastX < 5.5; const up = close ? !lastUp : false; e.el.classList.toggle('up', up); lastUp = up; lastX = x; });
     }
     events.forEach(bubble);
     function addNote(type, text, ev) {
@@ -1818,7 +1828,7 @@
     function say(text) {
       text = (text || '').trim(); if (!text) return;
       const kind = match(text);
-      if (!kind) { q.textContent = '“' + text + '”'; q.classList.remove('dim'); r.textContent = 'Heard you, but not an edit this demo knows. Try caption, title, warm, letterbox, zoom, mute, fade, cut, undo, or “later”.'; r.className = 'r'; return; }
+      if (!kind) { q.textContent = '“' + text + '”'; q.classList.remove('dim'); r.textContent = 'Heard you, but not an edit this demo knows. Try caption, title, warm, letterbox, vignette, mute, fade, cut, undo, or “later”.'; r.className = 'r'; return; }
       const ev = { t: Math.max(0.2, clock), say: text, kind, arg: argOf(text, kind), mine: true, fired: false };
       events.push(ev); bubble(ev); fire(ev);
     }
