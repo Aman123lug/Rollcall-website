@@ -371,7 +371,7 @@
   .step .ex code { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 13px; color: var(--ink); }
 
   /* Editors */
-  .editors { background: var(--panel); }
+  .editors { background: var(--bg); }
   .editor-list { display: flex; flex-wrap: wrap; gap: 10px; }
   .editor-list li {
     padding: 12px 18px; border-radius: 999px; background: #fff; border: 1px solid var(--line);
@@ -910,8 +910,8 @@
     <nav class="nav-links" aria-label="Primary">
       <a href="#shorts">Shorts</a>
       <a href="#how">How it works</a>
-      <a href="#editors">Editors</a>
       <a href="#commands">Commands</a>
+      <a href="#editors">Editors</a>
       <a href="#stories">Stories</a>
       <a href="#pricing">Pricing</a>
     </nav>
@@ -1110,24 +1110,6 @@
     </div>
   </section>
 
-  <section id="editors" class="editors" aria-labelledby="editors-h">
-    <div class="wrap">
-      <div class="sec-head">
-        <h2 id="editors-h">Built for the editors people already use.</h2>
-        <p>Rollcall drives each editor through its own scripting interface. Nothing is re-rendered or exported behind your back.</p>
-      </div>
-      <ul class="editor-list">
-        <li>DaVinci Resolve</li>
-        <li>CapCut Pro</li>
-        <li>Adobe Premiere Pro</li>
-        <li class="soon">Final Cut Pro <small>next</small></li>
-        <li class="soon">After Effects <small>next</small></li>
-        <li class="soon">Descript <small>next</small></li>
-      </ul>
-      <p class="fine">Missing yours? Tell us on the waitlist form. Editor support is prioritised by requests.</p>
-    </div>
-  </section>
-
   <section id="commands" class="play" aria-labelledby="commands-h">
     <div class="wrap">
       <div class="sec-head light">
@@ -1222,6 +1204,24 @@
           <div class="cloud">Model<small>text only</small></div>
         </div>
       </article>
+    </div>
+  </section>
+
+  <section id="editors" class="editors" aria-labelledby="editors-h">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 id="editors-h">Built for the editors people already use.</h2>
+        <p>Rollcall drives each editor through its own scripting interface. Nothing is re-rendered or exported behind your back.</p>
+      </div>
+      <ul class="editor-list">
+        <li>DaVinci Resolve</li>
+        <li>CapCut Pro</li>
+        <li>Adobe Premiere Pro</li>
+        <li class="soon">Final Cut Pro <small>next</small></li>
+        <li class="soon">After Effects <small>next</small></li>
+        <li class="soon">Descript <small>next</small></li>
+      </ul>
+      <p class="fine">Missing yours? Tell us on the waitlist form. Editor support is prioritised by requests.</p>
     </div>
   </section>
 
