@@ -702,6 +702,28 @@
   .phone { position: relative; width: min(300px, 78vw); aspect-ratio: 9 / 17; border-radius: 34px; background: #0b0d10; border: 6px solid #15171b; overflow: hidden; box-shadow: 0 40px 90px -40px rgba(0,0,0,.6), 0 0 0 1px rgba(0,0,0,.15); }
   .ph-bar { position: absolute; z-index: 6; left: 14px; right: 14px; top: 12px; height: 3px; border-radius: 2px; background: rgba(255,255,255,.25); }
   .ph-bar i { display: block; height: 100%; width: 0; border-radius: 2px; background: #fff; transition: width .4s linear; }
+  .ph-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transform-origin: 50% 60%; transition: filter 1.2s ease, transform 1.4s cubic-bezier(.2,.7,.2,1); }
+  .phone.dim .ph-video { filter: brightness(.72) contrast(1.08) saturate(.9); }
+  .phone.dim2 .ph-video { filter: brightness(.55) contrast(1.1) saturate(.8); }
+  .phone.dimless .ph-video { filter: brightness(.86) contrast(1.05) saturate(.95); }
+  .phone.cool .ph-video { filter: brightness(.9) contrast(1.12) saturate(1.05) hue-rotate(-8deg) sepia(.08); }
+  .phone.cool.dim .ph-video { filter: brightness(.72) contrast(1.14) saturate(1) hue-rotate(-8deg); }
+  .phone.pan .ph-video { animation: phtrack 9s ease-in-out infinite alternate; }
+  @keyframes phtrack { from { transform: scale(1.14) translate(4%, 2%); } to { transform: scale(1.14) translate(-4%, -1%); } }
+  .ph-grain { position: absolute; inset: -20%; z-index: 2; pointer-events: none; opacity: 0; mix-blend-mode: overlay; transition: opacity .8s;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); background-size: 180px 180px; }
+  .phone.grain .ph-grain { opacity: .5; animation: grainjit .5s steps(3) infinite; }
+  @keyframes grainjit { 0% { transform: translate(0, 0); } 33% { transform: translate(-3%, 2%); } 66% { transform: translate(2%, -3%); } 100% { transform: translate(0, 0); } }
+  .ph-title { position: absolute; z-index: 5; left: 8%; right: 8%; top: 24%; text-align: center; color: #fff; text-shadow: 0 4px 24px rgba(0,0,0,.6); opacity: 0; transition: opacity 1s, letter-spacing 1.6s cubic-bezier(.2,.7,.2,1); font-weight: 500; font-size: clamp(14px, 4.6vw, 20px); letter-spacing: .34em; text-transform: uppercase; padding: 12px 0; }
+  .ph-title::before, .ph-title::after { content: ""; position: absolute; left: 28%; right: 28%; height: 1px; background: rgba(255,255,255,.75); transform: scaleX(0); transition: transform 1.1s cubic-bezier(.2,.8,.2,1) .2s; }
+  .ph-title::before { top: 0; } .ph-title::after { bottom: 0; }
+  .ph-title.on { opacity: 1; letter-spacing: .2em; }
+  .ph-title.on::before, .ph-title.on::after { transform: scaleX(1); }
+  .ph-title.quote { text-transform: none; letter-spacing: 0; font-family: Georgia, "Times New Roman", serif; font-style: italic; font-weight: 400; font-size: clamp(22px, 7vw, 32px); line-height: 1.2; top: 38%; }
+  .ph-title.quote::before, .ph-title.quote::after { display: none; }
+  .ph-title.quote.on { letter-spacing: 0; }
+  .ph-title.quote small { display: block; font-family: var(--font); font-style: normal; font-size: 11px; letter-spacing: .16em; text-transform: uppercase; margin-top: 12px; opacity: .8; }
+  .phone.bright .ph-title { color: #fff; text-shadow: 0 2px 12px rgba(0,0,0,.9); }
   .ph-scene { position: absolute; inset: 0; background:
     radial-gradient(ellipse at 65% 35%, rgba(255,205,140,.55), transparent 45%),
     radial-gradient(ellipse at 25% 70%, rgba(70,120,150,.65), transparent 55%),
@@ -709,10 +731,9 @@
     transform: scale(1); transition: transform 1.1s cubic-bezier(.2,.8,.2,1), filter .8s; }
   .ph-scene::before { content: ""; position: absolute; left: 50%; bottom: 0; width: 46%; height: 58%; transform: translateX(-50%); border-radius: 46% 46% 10px 10px / 34% 34% 10px 10px; background: linear-gradient(180deg, #1b222b, #0a0d11); }
   .ph-scene::after { content: ""; position: absolute; left: 50%; bottom: 46%; width: 22%; aspect-ratio: 1; transform: translateX(-50%); border-radius: 50%; background: linear-gradient(180deg, #3a2f2a, #1c1614); }
-  .ph-letter { position: absolute; left: 0; right: 0; height: 24%; background: #000; transition: height .9s cubic-bezier(.2,.8,.2,1); }
+  .ph-letter { position: absolute; left: 0; right: 0; z-index: 3; height: 0; background: #000; transition: height .9s cubic-bezier(.2,.8,.2,1); }
+  .phone.letter .ph-letter { height: 7%; }
   .ph-letter.t { top: 0; } .ph-letter.b { bottom: 0; }
-  .phone.framed .ph-letter { height: 0; }
-  .phone.framed .ph-scene { transform: scale(1.06); }
   .phone.demo .ph-scene { background: linear-gradient(180deg, #f4f6f8, #e6e9ee); }
   .phone.demo .ph-scene::before, .phone.demo .ph-scene::after { display: none; }
   .phone.demo .ph-scene { background-image: linear-gradient(#fff 0 8%, transparent 8%), repeating-linear-gradient(180deg, transparent 0 26px, rgba(0,0,0,.06) 26px 27px), linear-gradient(90deg, #f6f7f9, #eceff3); }
@@ -724,7 +745,7 @@
   .ph-hook.on { opacity: 1; transform: none; }
   .ph-cuts { position: absolute; z-index: 5; right: 14px; top: 26px; font-size: 11px; font-weight: 600; color: #fff; background: rgba(0,0,0,.55); padding: 4px 8px; border-radius: 6px; opacity: 0; transition: opacity .3s; font-variant-numeric: tabular-nums; }
   .ph-cuts.on { opacity: 1; }
-  .ph-cap { position: absolute; z-index: 5; left: 8%; right: 8%; top: 58%; text-align: center; font-weight: 800; font-size: clamp(20px, 6.5vw, 28px); line-height: 1.05; letter-spacing: -0.02em; color: #fff; text-shadow: 0 3px 14px rgba(0,0,0,.7); text-transform: uppercase; }
+  .ph-cap { position: absolute; z-index: 5; left: 8%; right: 8%; top: 60%; text-align: center; font-weight: 800; font-size: clamp(20px, 6.5vw, 28px); line-height: 1.05; letter-spacing: -0.02em; color: #fff; text-shadow: 0 3px 14px rgba(0,0,0,.7); text-transform: uppercase; }
   .ph-cap .w { display: inline-block; margin: 0 .12em; opacity: .35; transform: translateY(4px); transition: opacity .12s, transform .12s, color .12s; }
   .ph-cap .w.on { opacity: 1; transform: none; }
   .ph-cap .w.now { color: var(--clip-text); transform: scale(1.08); }
@@ -1006,17 +1027,17 @@
       <div class="sec-head">
         <span class="eyebrow">Short-form</span>
         <h2 id="shorts-h">Describe the whole edit. <em>Get a short back.</em></h2>
-        <p>One prompt, not one command at a time. Rollcall finds the hook, cuts the dead air, reframes to 9:16, captions it and hands you a finished short you can still tweak by voice.</p>
+        <p>One prompt, not one command at a time. Rollcall finds the moment, grades it, retimes it, captions it and hands you a finished short for every platform, still yours to tweak by voice.</p>
       </div>
       <div class="sh-grid">
         <div class="sh-left">
           <div class="sh-presets" id="shPresets" role="tablist" aria-label="Example prompts">
-            <button class="sh-preset is-on" type="button" data-i="0">Podcast clip</button>
-            <button class="sh-preset" type="button" data-i="1">Product demo</button>
-            <button class="sh-preset" type="button" data-i="2">Talking head</button>
+            <button class="sh-preset is-on" type="button" data-i="0">Nature reel</button>
+            <button class="sh-preset" type="button" data-i="1">Travel teaser</button>
+            <button class="sh-preset" type="button" data-i="2">Quote post</button>
           </div>
           <div class="sh-prompt">
-            <div class="sh-prompthead"><span class="mark"><i></i></span><span>Describe the edit</span><span class="sh-src" id="shSrc">episode_12_full.mov · 41:20</span></div>
+            <div class="sh-prompthead"><span class="mark"><i></i></span><span>Describe the edit</span><span class="sh-src" id="shSrc">horses_altai_drone.mp4 · 0:15</span></div>
             <p class="sh-text" id="shText"><span class="cur"></span></p>
             <div class="sh-actions"><span class="sh-attach">▶ source clip attached</span><span class="sh-go" id="shGo">Make it</span></div>
           </div>
@@ -1025,7 +1046,10 @@
         <div class="sh-right">
           <div class="phone" id="phone">
             <div class="ph-bar"><i id="phProg"></i></div>
-            <div class="ph-scene" id="phScene"><div class="ph-letter t"></div><div class="ph-letter b"></div></div>
+            <video class="ph-video" id="phVideo" muted loop playsinline preload="metadata" poster="videos/206294-poster.jpg" src="videos/206294.mp4" aria-hidden="true"></video>
+            <div class="ph-grain"></div>
+            <div class="ph-letter t"></div><div class="ph-letter b"></div>
+            <div class="ph-title" id="phTitle"></div>
             <div class="ph-flash" id="phFlash"></div>
             <span class="ph-hook" id="phHook">HOOK</span>
             <span class="ph-cuts" id="phCuts"></span>
@@ -1917,28 +1941,33 @@
     if (!text || !phone) return;
     const prog = $('phProg'), flash = $('phFlash'), hook = $('phHook'), cuts = $('phCuts'), capEl = $('phCap'), music = $('phMusic'), ready = $('phReady'), meta = $('phMeta'), cta = $('phCta'), note = $('shNote'), src = $('shSrc');
     const safe = $('phSafe'), pfLabel = $('phPf'), desc = $('phDesc'), voice = $('phVoice'), voiceText = $('phVoiceText');
+    const pvid = $('phVideo'), ptitle = $('phTitle');
+    if (pvid && 'IntersectionObserver' in window) {
+      new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) pvid.play().catch(() => {}); else pvid.pause(); }), { rootMargin: '200px' }).observe(pvid);
+    } else if (pvid) pvid.play().catch(() => {});
     const PF = [['pf-reels', 'Reels'], ['pf-shorts', 'Shorts'], ['pf-tiktok', 'For You']];
     let pfTimer = null;
     function setPf(k) { PF.forEach(([c]) => phone.classList.remove(c)); if (k != null) { phone.classList.add(PF[k][0]); pfLabel.textContent = PF[k][1]; } }
     const P = [
-      { name: 'Podcast clip', src: 'episode_12_full.mov · 41:20', cls: '', meta: '0:29 · 3 versions', desc: 'we almost shipped the wrong thing · full episode in bio #editing #podcast', tweak: 'make the captions bigger',
-        prompt: 'Cut a 30-second short from this episode. Open on the strongest line, jump-cut the pauses, bold word-by-word captions, keep it 9:16 and add a subtle music bed.',
-        cap: 'we almost shipped the wrong thing',
-        steps: [['Found the hook at <b>17:42</b> · “we almost shipped the wrong thing”', '0.8s', 'hook'], ['Cut <b>14 pauses</b> · 3:10 → 0:29', '1.1s', 'cuts'], ['Reframed to <b>9:16</b>, tracking the speaker', '0.6s', 'frame'], ['Captions · bold, word by word', '0.9s', 'cap'], ['Music bed · ducked <b>−14 dB</b> under voice', '0.4s', 'music'], ['Fitted captions to <b>Reels</b>, <b>Shorts</b> and <b>TikTok</b> safe zones', '0.7s', 'platforms'], ['Exported <b>3 versions</b> · 0:29 · 1080×1920', '2.3s', 'ready'], ['You, on the phone: “make the captions bigger” · <b>done</b>', '0.3s', 'tweak']] },
-      { name: 'Product demo', src: 'screen_rec_onboarding.mov · 4:06', cls: 'demo', meta: '0:20 · 3 versions', desc: 'Onboarding in 20 seconds · link in bio #saas #tutorial', tweak: 'slow the zooms down a bit',
-        prompt: 'Turn this 4-minute screen recording into a 20-second short. Zoom into the cursor on every click, captions that read like a tutorial, upbeat music, end on the pricing page.',
-        cap: 'Step 2: pick a plan that fits',
-        steps: [['Detected <b>9 clicks</b> · zoom keyframes added', '1.2s', 'cuts'], ['Trimmed idle time · 4:06 → 0:20', '0.7s', 'hook'], ['Reframed to <b>9:16</b>, following the cursor', '0.6s', 'frame'], ['Tutorial captions · <b>3 steps</b>', '0.8s', 'cap'], ['Upbeat bed · <b>124 bpm</b>, cuts on beat', '0.5s', 'music'], ['Fitted to <b>Reels</b>, <b>Shorts</b> and <b>TikTok</b> safe zones', '0.6s', 'platforms'], ['Ends on pricing · exported <b>3 versions</b>', '1.9s', 'ready'], ['You: “slow the zooms down a bit” · <b>done</b>', '0.4s', 'tweak']] },
-      { name: 'Talking head', src: 'take_03_talking_head.mov · 6:48', cls: '', meta: '3 × 0:15 · 3 platforms', desc: 'stop editing with your hands · part 1 of 3 #creator #editing', tweak: 'swap the hook to the second idea',
-        prompt: 'Make three 15-second shorts from this take. One idea each, hook first, remove every um, captions in my yellow style, and a follow CTA at the end.',
-        cap: 'stop editing with your hands',
-        steps: [['Split into <b>3 ideas</b> · 0:12, 2:40, 5:05', '1.0s', 'hook'], ['Removed <b>31 ums</b> and 22 pauses', '0.9s', 'cuts'], ['Reframed to <b>9:16</b>, centred on face', '0.5s', 'frame'], ['Captions · saved <b>yellow</b> style', '0.8s', 'cap'], ['Follow CTA · last <b>2s</b> of each', '0.3s', 'cta'], ['Fitted to <b>Reels</b>, <b>Shorts</b> and <b>TikTok</b> safe zones', '0.7s', 'platforms'], ['Exported <b>3 shorts × 3 platforms</b> · 0:15 each', '2.6s', 'ready'], ['You: “swap the hook to the second idea” · <b>done</b>', '0.5s', 'tweak']] }
+      { name: 'Nature reel', src: 'horses_altai_drone.mp4 \u00b7 0:15', cls: '', meta: '0:15 \u00b7 3 versions', desc: 'wild, and completely free \u00b7 Altai in February #drone #horses #winter', tweak: 'a touch brighter',
+        prompt: 'Make a 15-second reel from this drone shot. Open on the herd, slow the gallop right down, give it a low, dim cinematic grade, big captions, a music swell when the lone horse breaks away.',
+        cap: 'wild, and completely free',
+        steps: [['Hook: the lone horse breaks away at <b>0:06</b>', '0.7s', 'hook'], ['Low-dim cinematic grade \u00b7 <b>\u221228% exposure</b>, lifted shadows', '0.5s', 'dim'], ['Slowed the gallop to <b>50%</b> \u00b7 optical flow', '1.2s', 'slow'], ['Captions \u00b7 bold, word by word', '0.8s', 'cap'], ['Music swell timed to <b>0:06</b> \u00b7 ducked under wind', '0.6s', 'music'], ['Fitted to <b>Reels</b>, <b>Shorts</b> and <b>TikTok</b> safe zones', '0.6s', 'platforms'], ['Exported <b>3 versions</b> \u00b7 0:15 \u00b7 1080\u00d71920', '2.1s', 'ready'], ['You, on the phone: \u201ca touch brighter\u201d \u00b7 <b>done</b>', '0.3s', 'tweak']] },
+      { name: 'Travel teaser', src: 'horses_altai_drone.mp4 \u00b7 0:15', cls: '', meta: '0:10 \u00b7 3 versions', desc: 'Altai, February. Part 1 of the winter series #travel #mongolia #drone', tweak: 'hold the title longer',
+        prompt: 'Cut a 10-second teaser. Three hard cuts on the beat, track the herd so they stay centred, speed-ramp into the moment the lone horse breaks away, cool grade, thin cinema bars, and a location title: Altai, February.',
+        cap: 'Altai \u00b7 February',
+        steps: [['Cut to <b>3 beats</b> \u00b7 0:00, 0:06, 0:11', '0.9s', 'cuts'], ['Tracked the herd \u00b7 smart-crop pan keeps them centred', '1.1s', 'track'], ['Speed ramp <b>100 \u2192 160%</b> into the break', '0.7s', 'ramp'], ['Cool grade \u00b7 teal shadows, <b>+8 contrast</b>, cinema bars', '0.5s', 'cool'], ['Location title \u00b7 \u201cAltai, February\u201d', '0.6s', 'title'], ['Fitted to <b>Reels</b>, <b>Shorts</b> and <b>TikTok</b> safe zones', '0.6s', 'platforms'], ['Exported <b>3 versions</b> \u00b7 0:10 \u00b7 1080\u00d71920', '1.9s', 'ready'], ['You: \u201chold the title longer\u201d \u00b7 <b>done</b>', '0.4s', 'tweak']] },
+      { name: 'Quote post', src: 'horses_altai_drone.mp4 \u00b7 0:15', cls: '', meta: '0:12 \u00b7 loop', desc: 'run your own race \u00b7 #quotes #mindset #wild', tweak: 'make the quote white',
+        prompt: 'Turn this into a quote post. Dim the footage so text reads, add film grain, slow it a little, put the quote \u201crun your own race\u201d in the centre in a serif, and make it loop cleanly with a follow at the end.',
+        cap: 'run your own race',
+        steps: [['Dimmed to <b>55%</b> so the type reads', '0.4s', 'dim2'], ['Film grain \u00b7 <b>12%</b>, 35mm', '0.5s', 'grain'], ['Slowed to <b>70%</b> \u00b7 seamless loop point at 0:12', '1.0s', 'slow70'], ['Quote card \u00b7 serif, centred', '0.6s', 'quote'], ['Follow CTA \u00b7 last <b>2s</b>', '0.3s', 'cta'], ['Fitted to <b>Reels</b>, <b>Shorts</b> and <b>TikTok</b> safe zones', '0.6s', 'platforms'], ['Exported <b>3 versions</b> \u00b7 0:12 \u00b7 loops', '1.8s', 'ready'], ['You: \u201cmake the quote white\u201d \u00b7 <b>done</b>', '0.3s', 'tweak']] }
     ];
     const sleep = ms => new Promise(r => setTimeout(r, reduce ? 0 : ms));
     let run = 0, cur = 0, hold = 0;
     function resetPhone(p) {
       clearInterval(pfTimer); phone.className = 'phone ' + p.cls; prog.style.width = '0';
       [hook, cuts, music, ready, cta, safe, voice].forEach(e => e.classList.remove('on')); capEl.innerHTML = ''; capEl.classList.remove('big'); meta.textContent = p.meta; desc.textContent = p.desc; voiceText.textContent = p.tweak;
+      ptitle.className = 'ph-title'; ptitle.innerHTML = ''; if (pvid) { pvid.playbackRate = 1; }
     }
     async function captions(words, my, loops) {
       capEl.innerHTML = ''; const els = words.split(' ').map(w => { const e = document.createElement('span'); e.className = 'w'; e.textContent = w; capEl.appendChild(e); return e; });
@@ -1964,15 +1993,29 @@
         const li = lis[k], kind = p.steps[k][2];
         li.classList.add('show', 'run'); prog.style.width = ((k + 0.5) / lis.length * 100) + '%';
         await sleep(900 + Math.random() * 500); if (my !== run) return;
-        if (kind === 'hook') { hook.classList.add('on'); }
-        if (kind === 'cuts') { cuts.textContent = ''; cuts.classList.add('on'); const n = p.name === 'Product demo' ? 9 : p.name === 'Talking head' ? 31 : 14; for (let f = 1; f <= 5; f++) { flash.classList.remove('go'); void flash.offsetWidth; flash.classList.add('go'); cuts.textContent = Math.round(n * f / 5) + (p.name === 'Product demo' ? ' zooms' : ' cuts'); await sleep(230); } }
-        if (kind === 'frame') { phone.classList.add('framed'); }
+        if (kind === 'hook') { hook.classList.add('on'); if (pvid && pvid.readyState >= 1) { try { pvid.currentTime = 6; } catch (e) {} } }
+        if (kind === 'cuts') { cuts.textContent = ''; cuts.classList.add('on'); const pts = [0, 6, 11]; for (let f = 0; f < 3; f++) { flash.classList.remove('go'); void flash.offsetWidth; flash.classList.add('go'); cuts.textContent = (f + 1) + ' cuts'; if (pvid && pvid.readyState >= 1) { try { pvid.currentTime = pts[f]; } catch (e) {} } await sleep(420); } }
+        if (kind === 'dim') { phone.classList.add('dim'); }
+        if (kind === 'dim2') { phone.classList.add('dim2'); }
+        if (kind === 'slow') { if (pvid) pvid.playbackRate = 0.5; cuts.textContent = '50% speed'; cuts.classList.add('on'); }
+        if (kind === 'slow70') { if (pvid) pvid.playbackRate = 0.7; cuts.textContent = '70% \u00b7 loop'; cuts.classList.add('on'); }
+        if (kind === 'ramp') { if (pvid) { for (const r of [1, 1.15, 1.3, 1.45, 1.6]) { pvid.playbackRate = r; cuts.textContent = Math.round(r * 100) + '% speed'; cuts.classList.add('on'); await sleep(260); } } }
+        if (kind === 'track') { phone.classList.add('pan'); }
+        if (kind === 'cool') { phone.classList.add('cool', 'letter'); }
+        if (kind === 'grain') { phone.classList.add('grain'); }
+        if (kind === 'title') { ptitle.textContent = 'Altai, February'; ptitle.classList.add('on'); }
+        if (kind === 'quote') { ptitle.className = 'ph-title quote'; ptitle.innerHTML = '\u201crun your own race\u201d<small>Altai \u00b7 winter</small>'; requestAnimationFrame(() => ptitle.classList.add('on')); }
         if (kind === 'cap') { capTask = captions(p.cap, my, 40); }
         if (kind === 'music') { music.classList.add('on'); }
         if (kind === 'cta') { cta.classList.add('on'); }
         if (kind === 'platforms') { safe.classList.add('on'); for (let q = 0; q < PF.length; q++) { setPf(q); await sleep(1300); if (my !== run) return; } safe.classList.remove('on'); let q = 0; pfTimer = setInterval(() => { q = (q + 1) % PF.length; setPf(q); }, 2600); }
         if (kind === 'ready') { ready.classList.add('on'); prog.style.width = '100%'; note.textContent = 'Three versions, one edit. Still yours to change by voice.'; }
-        if (kind === 'tweak') { voice.classList.add('on'); await sleep(900); if (p.name === 'Podcast clip') capEl.classList.add('big'); note.textContent = 'Changed on the phone, synced back to the project.'; setTimeout(() => voice.classList.remove('on'), 2600); }
+        if (kind === 'tweak') {
+          voice.classList.add('on'); await sleep(900); if (my !== run) return;
+          if (p.name === 'Nature reel') { phone.classList.remove('dim'); phone.classList.add('dimless'); }
+          if (p.name === 'Quote post') { phone.classList.add('bright'); }
+          note.textContent = 'Changed on the phone, synced back to the project.'; setTimeout(() => voice.classList.remove('on'), 2600);
+        }
         li.classList.remove('run'); li.classList.add('done');
       }
       await sleep(reduce ? 6000 : 5200); if (my !== run) return;
