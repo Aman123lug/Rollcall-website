@@ -113,13 +113,18 @@
 
   /* ---------- Demo ---------- */
   .demo { padding: 40px 0 0; }
+  .demo .wrap { max-width: 1240px; }
+  .demo-stage { perspective: 1400px; }
   .editor {
     border: 1px solid var(--line);
     border-radius: 18px;
     background: #1b1d21;
     color: #d7dae0;
     overflow: hidden;
-    box-shadow: 0 30px 80px -40px rgba(20, 20, 60, .35);
+    box-shadow: 0 30px 80px -40px rgba(20, 20, 60, calc(.2 + .25 * var(--p, 1)));
+    transform-origin: 50% 40%;
+    transform: translateY(var(--dy, 0px)) rotateX(var(--rx, 0deg)) scale(var(--sc, 1));
+    will-change: transform;
   }
   .editor-bar {
     height: 40px; display: flex; align-items: center; gap: 8px; padding: 0 16px;
@@ -208,6 +213,24 @@
     margin-left: 2px; animation: blink 1s steps(1) infinite;
   }
   @keyframes blink { 50% { opacity: 0 } }
+  .transcript .wd { display: inline-block; white-space: pre; animation: wdin .32s cubic-bezier(.2,.8,.2,1) both; }
+  @keyframes wdin { from { opacity: 0; transform: translateY(6px); filter: blur(3px); } to { opacity: 1; transform: none; filter: none; } }
+  .transcript .fl, .transcript .old { transition: color .35s; }
+  .transcript .fl.cut, .transcript .old.cut { color: #6f757e; }
+  .transcript .fl.cut .wd, .transcript .old.cut .wd {
+    text-decoration: line-through; text-decoration-color: rgba(255, 128, 128, .85); text-decoration-thickness: 1.5px;
+  }
+  .transcript .gone { display: none; }
+  .transcript .new { display: none; }
+  .transcript .new.in { display: inline; animation: newin 1.4s ease-out forwards; border-radius: 4px; }
+  @keyframes newin { from { color: #c3beff; background: rgba(91,76,255,.3); } to { color: #fff; background: transparent; } }
+  .cleanups { display: flex; flex-wrap: wrap; gap: 6px; min-height: 24px; }
+  .chip {
+    font-size: 11.5px; line-height: 1; padding: 5px 9px; border-radius: 999px;
+    background: rgba(91,76,255,.16); color: #c3beff; border: 1px solid rgba(91,76,255,.38);
+    opacity: 0; transform: translateY(4px); transition: opacity .25s, transform .25s;
+  }
+  .chip.show { opacity: 1; transform: none; }
   .calls { display: flex; flex-direction: column; gap: 8px; font-size: 13px; }
   .call {
     display: flex; gap: 10px; align-items: flex-start; padding: 10px 12px; border-radius: 8px;
@@ -388,7 +411,8 @@
 
   <div class="demo">
     <div class="wrap">
-      <div class="editor" role="img" aria-label="Animated demo: spoken commands add a bold title, a slow punch-in, a warm grade with letterbox bars and a slow-motion ramp to a forest-walk shot.">
+      <div class="demo-stage" id="demoStage">
+      <div class="editor" id="editor" role="img" aria-label="Animated demo: spoken commands, with filler words cleaned up, add a bold title, a slow punch-in, a warm grade with letterbox bars and a slow-motion ramp to a forest-walk shot.">
         <div class="editor-bar">
           <span class="dot"></span><span class="dot"></span><span class="dot"></span>
         </div>
@@ -407,6 +431,7 @@
               <span class="state" id="state">Listening…</span>
             </div>
             <div class="transcript" id="transcript"><span class="cursor"></span></div>
+            <div class="cleanups" id="cleanups" aria-hidden="true"></div>
             <div class="calls" id="calls"></div>
           </aside>
           <div class="timeline">
@@ -425,7 +450,8 @@
           </div>
         </div>
       </div>
-      <p class="demo-caption">A looping demo. Each sentence becomes editor actions on the shot, and the agent confirms what changed.</p>
+      </div>
+      <p class="demo-caption">A looping demo. Say it the way you’d say it out loud. Rollcall drops the fillers, then turns each sentence into editor actions.</p>
     </div>
   </div>
 
@@ -619,6 +645,46 @@
   const transcript = $('transcript'), calls = $('calls'), state = $('state'), wave = $('wave');
   const title = $('title'), v2clip = $('v2clip'), playhead = $('playhead'), tc = $('tc');
   const badge = $('badge'), v1a = $('v1a'), footage = $('footage'), bars = $('bars'), lowerThird = $('lowerThird');
+  const cleanups = $('cleanups'), editor = $('editor'), stage = $('demoStage');
+
+  // Scroll-driven zoom: the editor sits smaller and tilted back, then flattens and grows to full size as it scrolls in.
+  if (!reduce && stage) {
+    const ease = t => 1 - Math.pow(1 - t, 3);
+    let queued = false;
+    function zoom() {
+      queued = false;
+      const r = stage.getBoundingClientRect(), vh = window.innerHeight;
+      const small = window.innerWidth < 700;
+      const start = vh * 0.98, end = vh * 0.16;
+      let p = (start - r.top) / (start - end);
+      p = Math.min(1, Math.max(0, p));
+      const e = ease(p);
+      const sc = (small ? 0.94 : 0.86) + (small ? 0.06 : 0.14) * e;
+      const rx = small ? 0 : 10 * (1 - e);
+      const dy = (small ? 16 : 44) * (1 - e);
+      editor.style.setProperty('--sc', sc.toFixed(4));
+      editor.style.setProperty('--rx', rx.toFixed(2) + 'deg');
+      editor.style.setProperty('--dy', dy.toFixed(1) + 'px');
+      editor.style.setProperty('--p', e.toFixed(3));
+    }
+    const onScroll = () => { if (!queued) { queued = true; requestAnimationFrame(zoom); } };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    zoom();
+  }
+
+  // Raw speech markup: [ um,] is a filler that gets removed; {said this|meant this} is a spoken correction.
+  function parseRaw(raw) {
+    const out = []; const re = /\[([^\]]*)\]|\{([^|}]*)\|([^}]*)\}/g; let last = 0, m;
+    while ((m = re.exec(raw))) {
+      if (m.index > last) out.push({ k: 'keep', t: raw.slice(last, m.index) });
+      if (m[1] !== undefined) out.push({ k: 'fl', t: m[1] });
+      else { out.push({ k: 'old', t: m[2] }); out.push({ k: 'new', t: m[3] }); }
+      last = re.lastIndex;
+    }
+    if (last < raw.length) out.push({ k: 'keep', t: raw.slice(last) });
+    return out;
+  }
 
   function showTitle(words, hl) {
     title.innerHTML = '';
@@ -632,7 +698,7 @@
 
   const scenes = [
     {
-      say: 'Put a big bold title on this shot: start before you\u2019re ready. Centre it and highlight the word ready.',
+      say: 'Put a big bold title on this shot:[ um,] start before you\u2019re ready. Centre it and[, uh,] highlight the word ready.',
       ph: 23.3, tc: '00:00:14:00',
       calls: [
         'addTitle({ track: "V2", start: 14.0, dur: 4.0, text: "Start before you\u2019re ready", size: 96, weight: 700, align: "center", anim: "rise-by-word" })',
@@ -644,7 +710,7 @@
       }
     },
     {
-      say: 'Slow punch in, about twelve percent, across the whole shot.',
+      say: 'Slow punch in, {about ten, no,|about} twelve percent, across the whole shot.',
       ph: 23.3, tc: '00:00:14:00',
       calls: [
         'addKeyframe({ clip: "forest_walk_A.mov", prop: "scale", t: 14.0, value: 1.00 })',
@@ -656,7 +722,7 @@
       }
     },
     {
-      say: 'Give it a warm cinematic grade and add letterbox bars.',
+      say: 'Give it a warm[, like,] cinematic grade and[ um] add letterbox bars.',
       ph: 23.3, tc: '00:00:14:00',
       calls: [
         'adjustColor({ clip: "forest_walk_A.mov", temperature: +400, contrast: +8, saturation: +15, shadows: -6 })',
@@ -668,7 +734,7 @@
       }
     },
     {
-      say: 'Slow this down to sixty percent and drop in the episode lower third.',
+      say: 'Slow this down to{ fifty, actually|} sixty percent and drop in the episode lower third.',
       ph: 23.3, tc: '00:00:14:00',
       calls: [
         'setSpeed({ clip: "forest_walk_A.mov", rate: 0.6, retime: "optical-flow", ripple: true })',
@@ -690,20 +756,57 @@
     bars.classList.remove('show'); lowerThird.classList.remove('show');
     badge.classList.remove('show');
     v1a.textContent = 'forest_walk_A.mov';
-    calls.innerHTML = '';
+    calls.innerHTML = ''; cleanups.innerHTML = '';
   }
 
   const sleep = ms => new Promise(r => setTimeout(r, reduce ? 0 : ms));
 
-  async function type(text) {
+  // Words land one at a time as they are spoken, the way live dictation does.
+  async function type(raw) {
     transcript.innerHTML = '';
-    const span = document.createElement('span'); const cur = document.createElement('span'); cur.className = 'cursor';
-    transcript.append(span, cur);
-    if (reduce) { span.textContent = text; return; }
-    for (let i = 0; i < text.length; i++) {
-      span.textContent += text[i];
-      await sleep(text[i] === ' ' ? 60 : 28 + Math.random() * 30);
+    const toks = parseRaw(raw);
+    const cur = document.createElement('span'); cur.className = 'cursor';
+    const els = toks.map(t => { const el = document.createElement('span'); el.className = t.k; return el; });
+    transcript.append(...els, cur);
+    if (reduce) {
+      toks.forEach((t, i) => {
+        if (t.k === 'keep' || t.k === 'new') { els[i].textContent = t.t; if (t.k === 'new') els[i].classList.add('in'); }
+        else els[i].classList.add('gone');
+      });
+      return;
     }
+    for (let i = 0; i < toks.length; i++) {
+      if (toks[i].k === 'new') continue;
+      const words = toks[i].t.match(/\S+\s*|\s+/g) || [];
+      for (const w of words) {
+        const el = document.createElement('span'); el.className = 'wd'; el.textContent = w;
+        els[i].appendChild(el);
+        await sleep(/[.,:]\s*$/.test(w) ? 260 : 120 + Math.random() * 110);
+      }
+    }
+    cur.remove();
+  }
+
+  async function cleanup(raw) {
+    const toks = parseRaw(raw);
+    const fillers = toks.filter(t => t.k === 'fl').length, fixes = toks.filter(t => t.k === 'old').length;
+    if (!fillers && !fixes) return;
+    state.textContent = 'Cleaning up\u2026';
+    await sleep(350);
+    transcript.querySelectorAll('.fl, .old').forEach(el => el.classList.add('cut'));
+    const chips = [];
+    if (fillers) chips.push('Filler removed' + (fillers > 1 ? ' \u00d7' + fillers : ''));
+    if (fixes) chips.push('Correction applied');
+    for (const c of chips) {
+      const el = document.createElement('span'); el.className = 'chip'; el.textContent = c;
+      cleanups.appendChild(el); requestAnimationFrame(() => el.classList.add('show'));
+      await sleep(220);
+    }
+    await sleep(650);
+    transcript.querySelectorAll('.fl, .old').forEach(el => el.classList.add('gone'));
+    const news = toks.filter(t => t.k === 'new');
+    transcript.querySelectorAll('.new').forEach((el, i) => { el.textContent = news[i].t; el.classList.add('in'); });
+    await sleep(700);
   }
 
   async function addCall(txt, done) {
@@ -722,7 +825,9 @@
       playhead.style.setProperty('--ph', s.ph + '%'); tc.textContent = s.tc;
       state.textContent = 'Listening…'; wave.classList.add('live');
       await type(s.say);
-      wave.classList.remove('live'); state.textContent = 'Working…';
+      wave.classList.remove('live');
+      await cleanup(s.say);
+      state.textContent = 'Working…';
       await sleep(500);
       for (const c of s.calls) { await addCall(c, true); await sleep(650); }
       s.apply();
