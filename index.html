@@ -634,6 +634,125 @@
   .pg-play { position: absolute; top: 10px; bottom: 14px; width: 2px; background: var(--voice); left: calc(50px + var(--ph, 42%)); transition: left .5s cubic-bezier(.2,.8,.2,1); z-index: 2; }
   .pg-play::before { content: ""; position: absolute; top: -1px; left: -5px; border: 6px solid transparent; border-top: 8px solid var(--voice); }
 
+  /* ---------- Shorts: one prompt, a finished vertical short ---------- */
+  .shorts { background: var(--panel); }
+  .shorts .sec-head .eyebrow { display: block; font-size: 13px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--voice); margin-bottom: 14px; }
+  .shorts .sec-head h2 em { font-style: normal; color: var(--ink-3); }
+  .shorts .sec-head { max-width: 720px; }
+  .sh-grid { display: grid; grid-template-columns: 1.15fr .85fr; gap: 40px; align-items: start; }
+  @media (max-width: 860px) { .sh-grid { grid-template-columns: 1fr; } }
+  .sh-presets { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px; }
+  .sh-preset { font: inherit; font-size: 14px; font-weight: 600; padding: 8px 14px; border-radius: 999px; border: 1px solid var(--line); background: #fff; color: var(--ink-2); cursor: pointer; transition: background .2s, color .2s, border-color .2s; }
+  .sh-preset:hover { color: var(--ink); }
+  .sh-preset.is-on { background: var(--ink); color: #fff; border-color: var(--ink); }
+  .sh-prompt { background: #fff; border: 1px solid var(--line); border-radius: 18px; padding: 16px 18px 14px; display: flex; flex-direction: column; gap: 12px; box-shadow: 0 20px 50px -30px rgba(20,20,60,.25); }
+  .sh-prompthead { display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--ink-3); }
+  .sh-prompthead .mark { width: 22px; height: 22px; border-radius: 50%; background: var(--ink); display: grid; place-items: center; flex: none; }
+  .sh-prompthead .mark i { display: block; width: 2.5px; height: 10px; background: #fff; border-radius: 2px; box-shadow: -5px 0 0 0 #fff, 5px 0 0 0 #fff; transform: scaleY(.6); }
+  .sh-src { margin-left: auto; font-variant-numeric: tabular-nums; }
+  .sh-text { font-size: clamp(17px, 1.5vw, 20px); line-height: 1.45; letter-spacing: -0.01em; color: var(--ink); min-height: 4.3em; }
+  .sh-text .cur { display: inline-block; width: 2px; height: 1em; background: var(--voice); vertical-align: -2px; margin-left: 2px; animation: blink 1s steps(1) infinite; }
+  .sh-actions { display: flex; align-items: center; justify-content: space-between; gap: 10px; border-top: 1px solid var(--line); padding-top: 12px; font-size: 13px; color: var(--ink-3); }
+  .sh-go { font-size: 14px; font-weight: 600; color: #fff; background: var(--ink); padding: 8px 16px; border-radius: 999px; opacity: .35; transition: opacity .3s, transform .2s, background .3s; }
+  .sh-go.armed { opacity: 1; }
+  .sh-go.pressed { transform: scale(.94); background: var(--voice); }
+  .sh-steps { list-style: none; margin: 16px 0 0; padding: 0; display: grid; gap: 8px; }
+  .sh-steps li { display: grid; grid-template-columns: 22px 1fr auto; gap: 10px; align-items: start; font-size: 14.5px; color: var(--ink-3); padding: 10px 12px; border-radius: 12px; background: rgba(255,255,255,.6); border: 1px solid transparent; opacity: 0; transform: translateY(8px); transition: opacity .35s, transform .4s cubic-bezier(.2,.8,.2,1), color .3s, border-color .3s, background .3s; }
+  .sh-steps li.show { opacity: 1; transform: none; }
+  .sh-steps li.run { color: var(--ink); background: #fff; border-color: var(--line); }
+  .sh-steps li.done { color: var(--ink-2); }
+  .sh-steps li .ic { width: 18px; height: 18px; border-radius: 50%; border: 2px solid var(--line); display: grid; place-items: center; font-size: 11px; color: #fff; margin-top: 1px; }
+  .sh-steps li.run .ic { border-color: var(--voice); border-top-color: transparent; animation: spin 1s linear infinite; }
+  .sh-steps li.done .ic { background: var(--clip-audio); border-color: var(--clip-audio); }
+  .sh-steps li .t { font-size: 12px; font-variant-numeric: tabular-nums; color: var(--ink-3); margin-top: 2px; }
+  .sh-steps li b { font-weight: 600; color: var(--ink); }
+  .sh-right { display: flex; flex-direction: column; align-items: center; gap: 14px; position: sticky; top: 90px; }
+  .phone { position: relative; width: min(300px, 78vw); aspect-ratio: 9 / 17; border-radius: 34px; background: #0b0d10; border: 6px solid #15171b; overflow: hidden; box-shadow: 0 40px 90px -40px rgba(0,0,0,.6), 0 0 0 1px rgba(0,0,0,.15); }
+  .ph-bar { position: absolute; z-index: 6; left: 14px; right: 14px; top: 12px; height: 3px; border-radius: 2px; background: rgba(255,255,255,.25); }
+  .ph-bar i { display: block; height: 100%; width: 0; border-radius: 2px; background: #fff; transition: width .4s linear; }
+  .ph-scene { position: absolute; inset: 0; background:
+    radial-gradient(ellipse at 65% 35%, rgba(255,205,140,.55), transparent 45%),
+    radial-gradient(ellipse at 25% 70%, rgba(70,120,150,.65), transparent 55%),
+    linear-gradient(180deg, #2a3745 0%, #141d26 55%, #0a0f14 100%);
+    transform: scale(1); transition: transform 1.1s cubic-bezier(.2,.8,.2,1), filter .8s; }
+  .ph-scene::before { content: ""; position: absolute; left: 50%; bottom: 0; width: 46%; height: 58%; transform: translateX(-50%); border-radius: 46% 46% 10px 10px / 34% 34% 10px 10px; background: linear-gradient(180deg, #1b222b, #0a0d11); }
+  .ph-scene::after { content: ""; position: absolute; left: 50%; bottom: 46%; width: 22%; aspect-ratio: 1; transform: translateX(-50%); border-radius: 50%; background: linear-gradient(180deg, #3a2f2a, #1c1614); }
+  .ph-letter { position: absolute; left: 0; right: 0; height: 24%; background: #000; transition: height .9s cubic-bezier(.2,.8,.2,1); }
+  .ph-letter.t { top: 0; } .ph-letter.b { bottom: 0; }
+  .phone.framed .ph-letter { height: 0; }
+  .phone.framed .ph-scene { transform: scale(1.06); }
+  .phone.demo .ph-scene { background: linear-gradient(180deg, #f4f6f8, #e6e9ee); }
+  .phone.demo .ph-scene::before, .phone.demo .ph-scene::after { display: none; }
+  .phone.demo .ph-scene { background-image: linear-gradient(#fff 0 8%, transparent 8%), repeating-linear-gradient(180deg, transparent 0 26px, rgba(0,0,0,.06) 26px 27px), linear-gradient(90deg, #f6f7f9, #eceff3); }
+  .phone.demo.framed .ph-scene { transform: scale(1.6) translate(-8%, 6%); }
+  .ph-flash { position: absolute; inset: 0; background: #fff; opacity: 0; z-index: 4; pointer-events: none; }
+  .ph-flash.go { animation: phflash .28s ease-out; }
+  @keyframes phflash { 0% { opacity: .7; } 100% { opacity: 0; } }
+  .ph-hook { position: absolute; z-index: 5; left: 14px; top: 26px; font-size: 11px; font-weight: 700; letter-spacing: .1em; color: #000; background: var(--clip-text); padding: 4px 8px; border-radius: 6px; opacity: 0; transform: translateY(-6px); transition: opacity .3s, transform .3s; }
+  .ph-hook.on { opacity: 1; transform: none; }
+  .ph-cuts { position: absolute; z-index: 5; right: 14px; top: 26px; font-size: 11px; font-weight: 600; color: #fff; background: rgba(0,0,0,.55); padding: 4px 8px; border-radius: 6px; opacity: 0; transition: opacity .3s; font-variant-numeric: tabular-nums; }
+  .ph-cuts.on { opacity: 1; }
+  .ph-cap { position: absolute; z-index: 5; left: 8%; right: 8%; top: 58%; text-align: center; font-weight: 800; font-size: clamp(20px, 6.5vw, 28px); line-height: 1.05; letter-spacing: -0.02em; color: #fff; text-shadow: 0 3px 14px rgba(0,0,0,.7); text-transform: uppercase; }
+  .ph-cap .w { display: inline-block; margin: 0 .12em; opacity: .35; transform: translateY(4px); transition: opacity .12s, transform .12s, color .12s; }
+  .ph-cap .w.on { opacity: 1; transform: none; }
+  .ph-cap .w.now { color: var(--clip-text); transform: scale(1.08); }
+  .phone.demo .ph-cap { color: var(--ink); text-shadow: none; text-transform: none; font-weight: 700; background: rgba(255,255,255,.9); border-radius: 12px; padding: 8px 10px; top: 66%; font-size: clamp(15px, 4.6vw, 19px); }
+  .phone.demo .ph-cap .w.now { color: var(--voice); }
+  .ph-music { position: absolute; z-index: 5; left: 14px; bottom: 16px; display: flex; gap: 3px; align-items: flex-end; height: 16px; opacity: 0; transition: opacity .3s; }
+  .ph-music.on { opacity: 1; }
+  .ph-music i { display: block; width: 3px; height: 6px; background: #fff; border-radius: 2px; animation: wave .8s ease-in-out infinite; }
+  .ph-music i:nth-child(2) { animation-delay: .1s } .ph-music i:nth-child(3) { animation-delay: .25s } .ph-music i:nth-child(4) { animation-delay: .05s } .ph-music i:nth-child(5) { animation-delay: .18s }
+  .ph-ready { position: absolute; z-index: 6; left: 50%; bottom: 50px; transform: translate(-50%, 10px); display: flex; align-items: center; gap: 8px; background: #fff; color: var(--ink); border-radius: 999px; padding: 8px 14px; font-size: 13px; opacity: 0; transition: opacity .3s, transform .4s cubic-bezier(.2,.8,.2,1); white-space: nowrap; }
+  .ph-ready b { color: #2e7d32; } .ph-ready span { color: var(--ink-3); font-variant-numeric: tabular-nums; }
+  .ph-ready.on { opacity: 1; transform: translate(-50%, 0); }
+  .ph-cta { position: absolute; z-index: 5; right: 14px; bottom: 16px; font-size: 12px; font-weight: 600; color: #fff; background: var(--voice); padding: 6px 10px; border-radius: 999px; opacity: 0; transform: translateX(8px); transition: opacity .3s, transform .3s; }
+  .ph-cta.on { opacity: 1; transform: none; }
+  .ph-safe { position: absolute; z-index: 5; inset: 9% 6% 20% 6%; border: 1.5px dashed rgba(255,255,255,.55); border-radius: 12px; opacity: 0; transition: opacity .3s, inset .5s cubic-bezier(.2,.8,.2,1); pointer-events: none; }
+  .ph-safe span { position: absolute; left: 8px; top: -9px; font-size: 9px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #fff; background: rgba(0,0,0,.6); padding: 2px 6px; border-radius: 4px; }
+  .ph-safe.on { opacity: 1; }
+  .phone.pf-shorts .ph-safe { inset: 10% 14% 18% 5%; }
+  .phone.pf-tiktok .ph-safe { inset: 12% 14% 24% 5%; }
+  .phone.pf-reels .ph-safe { inset: 9% 13% 21% 5%; }
+  .ph-ui { position: absolute; inset: 0; z-index: 5; opacity: 0; transition: opacity .35s; pointer-events: none; font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif; color: #fff; }
+  .phone[class*="pf-"] .ph-ui { opacity: 1; }
+  .phone[class*="pf-"] .ph-music, .phone[class*="pf-"] .ph-cta, .phone[class*="pf-"] .ph-hook, .phone[class*="pf-"] .ph-cuts { opacity: 0; }
+  .phone[class*="pf-"] .ph-ready { bottom: auto; top: 22px; transform: translate(-50%, 0) scale(.9); }
+  .ph-tabs { position: absolute; top: 26px; left: 0; right: 0; display: flex; justify-content: center; gap: 16px; font-size: 12px; font-weight: 600; text-shadow: 0 1px 4px rgba(0,0,0,.6); opacity: .85; }
+  .ph-tabs .c { position: relative; opacity: 1; }
+  .ph-tabs .c::after { content: ""; position: absolute; left: 20%; right: 20%; bottom: -5px; height: 2px; background: #fff; border-radius: 1px; }
+  .phone.pf-shorts .ph-tabs .a, .phone.pf-shorts .ph-tabs .b { display: none; }
+  .phone.pf-shorts .ph-tabs { justify-content: flex-start; left: 14px; }
+  .phone.pf-shorts .ph-tabs .c::after { display: none; }
+  .ph-rail { position: absolute; right: 10px; bottom: 16%; display: flex; flex-direction: column; align-items: center; gap: 14px; transition: bottom .5s cubic-bezier(.2,.8,.2,1); }
+  .phone.pf-shorts .ph-rail { bottom: 13%; } .phone.pf-tiktok .ph-rail { bottom: 20%; }
+  .ph-av { width: 32px; height: 32px; border-radius: 50%; background: linear-gradient(135deg, var(--voice), #ff7a1a); border: 2px solid #fff; display: none; }
+  .phone.pf-tiktok .ph-av { display: block; }
+  .ph-ic { display: flex; flex-direction: column; align-items: center; gap: 3px; }
+  .ph-ic svg { width: 26px; height: 26px; fill: #fff; filter: drop-shadow(0 1px 3px rgba(0,0,0,.6)); }
+  .ph-ic small { font-size: 10px; font-weight: 600; text-shadow: 0 1px 3px rgba(0,0,0,.6); }
+  .ph-meta { position: absolute; left: 12px; right: 56px; bottom: 18px; display: flex; flex-direction: column; gap: 5px; font-size: 11.5px; text-shadow: 0 1px 4px rgba(0,0,0,.7); transition: bottom .5s; }
+  .ph-handle { font-weight: 700; font-size: 12.5px; display: flex; align-items: center; gap: 8px; }
+  .ph-handle i { font-style: normal; font-size: 10px; font-weight: 600; border: 1px solid rgba(255,255,255,.8); border-radius: 5px; padding: 1px 6px; }
+  .phone.pf-shorts .ph-handle i { background: #fff; color: #000; border-color: #fff; border-radius: 999px; padding: 2px 8px; }
+  .ph-desc { line-height: 1.3; opacity: .95; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .ph-audio { display: flex; gap: 6px; align-items: center; opacity: .9; }
+  .ph-audio span { display: inline-block; max-width: 140px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+  .phone.pf-shorts .ph-audio { display: none; }
+  .phone.pf-tiktok .ph-meta { bottom: 26px; }
+  .phone.pf-tiktok .ph-ui::after { content: ""; position: absolute; right: 12px; bottom: 22px; width: 36px; height: 36px; border-radius: 50%; background: radial-gradient(circle at center, #222 0 34%, #000 35% 60%, #444 61%); animation: spinslow 3s linear infinite; }
+  @keyframes spinslow { to { transform: rotate(360deg); } }
+  /* Captions get out of the way of each platform's UI. */
+  .ph-cap { transition: top .5s cubic-bezier(.2,.8,.2,1), transform .5s cubic-bezier(.2,.8,.2,1); }
+  .phone.pf-reels .ph-cap { top: 46%; right: 16%; }
+  .phone.pf-shorts .ph-cap { top: 50%; right: 18%; }
+  .phone.pf-tiktok .ph-cap { top: 40%; right: 18%; }
+  .ph-cap.big { transform: scale(1.18); }
+  .ph-voice { position: absolute; z-index: 7; left: 12px; bottom: 30%; display: flex; align-items: center; gap: 8px; background: rgba(255,255,255,.96); color: var(--ink); font-size: 12px; font-weight: 600; padding: 7px 11px 7px 9px; border-radius: 999px; box-shadow: 0 8px 24px -8px rgba(0,0,0,.5); opacity: 0; transform: translateY(8px) scale(.95); transition: opacity .3s, transform .4s cubic-bezier(.2,.8,.2,1); white-space: nowrap; }
+  .ph-voice .pg-wave { height: 14px; } .ph-voice .pg-wave i { height: 4px; }
+  .ph-voice.on { opacity: 1; transform: none; }
+  .sh-note { font-size: 13px; color: var(--ink-3); text-align: center; min-height: 20px; }
+  @media (max-width: 860px) { .sh-right { position: static; } }
+
   /* ---------- The race ---------- */
   .race { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
   @media (max-width: 860px) { .race { grid-template-columns: 1fr; } }
@@ -711,6 +830,7 @@
       <a href="#how">How it works</a>
       <a href="#editors">Editors</a>
       <a href="#commands">Commands</a>
+      <a href="#shorts">Shorts</a>
       <a href="#stories">Stories</a>
       <a href="#pricing">Pricing</a>
     </nav>
@@ -897,6 +1017,62 @@
           <div class="pg-track"><b>A1</b><div class="pg-lane" id="pgA1"></div></div>
           <div class="pg-track"><b>A2</b><div class="pg-lane" id="pgA2"></div></div>
           <div class="pg-play" id="pgPlay"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="shorts" class="shorts" aria-labelledby="shorts-h">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">Short-form</span>
+        <h2 id="shorts-h">Or describe the whole edit. <em>Get a short back.</em></h2>
+        <p>One prompt, not one command at a time. Rollcall finds the hook, cuts the dead air, reframes to 9:16, captions it and hands you a finished short you can still tweak by voice.</p>
+      </div>
+      <div class="sh-grid">
+        <div class="sh-left">
+          <div class="sh-presets" id="shPresets" role="tablist" aria-label="Example prompts">
+            <button class="sh-preset is-on" type="button" data-i="0">Podcast clip</button>
+            <button class="sh-preset" type="button" data-i="1">Product demo</button>
+            <button class="sh-preset" type="button" data-i="2">Talking head</button>
+          </div>
+          <div class="sh-prompt">
+            <div class="sh-prompthead"><span class="mark"><i></i></span><span>Describe the edit</span><span class="sh-src" id="shSrc">episode_12_full.mov · 41:20</span></div>
+            <p class="sh-text" id="shText"><span class="cur"></span></p>
+            <div class="sh-actions"><span class="sh-attach">▶ source clip attached</span><span class="sh-go" id="shGo">Make it</span></div>
+          </div>
+          <ol class="sh-steps" id="shSteps"></ol>
+        </div>
+        <div class="sh-right">
+          <div class="phone" id="phone">
+            <div class="ph-bar"><i id="phProg"></i></div>
+            <div class="ph-scene" id="phScene"><div class="ph-letter t"></div><div class="ph-letter b"></div></div>
+            <div class="ph-flash" id="phFlash"></div>
+            <span class="ph-hook" id="phHook">HOOK</span>
+            <span class="ph-cuts" id="phCuts"></span>
+            <div class="ph-cap" id="phCap"></div>
+            <div class="ph-music" id="phMusic"><i></i><i></i><i></i><i></i><i></i></div>
+            <div class="ph-ready" id="phReady"><b>Ready</b><span id="phMeta">0:29 · 1080×1920</span></div>
+            <div class="ph-cta" id="phCta">Follow for part 2 →</div>
+            <div class="ph-safe" id="phSafe"><span>safe zone</span></div>
+            <div class="ph-ui" id="phUi">
+              <div class="ph-tabs"><span class="a">Following</span><span class="b">For you</span><span class="c" id="phPf">Reels</span></div>
+              <div class="ph-rail">
+                <span class="ph-av"></span>
+                <span class="ph-ic"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.6-9.3-9A5.2 5.2 0 0 1 12 6.3 5.2 5.2 0 0 1 21.3 12C19 16.4 12 21 12 21z"/></svg><small>48.2K</small></span>
+                <span class="ph-ic"><svg viewBox="0 0 24 24"><path d="M4 4h16v11H8l-4 4z"/></svg><small>1,204</small></span>
+                <span class="ph-ic"><svg viewBox="0 0 24 24"><path d="M3 12l9-8v5c6 0 9 3 9 9-2-3-5-4-9-4v5z"/></svg><small>Share</small></span>
+                <span class="ph-ic more"><svg viewBox="0 0 24 24"><circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/></svg></span>
+              </div>
+              <div class="ph-meta">
+                <span class="ph-handle">@rollcall.edits <i>Follow</i></span>
+                <span class="ph-desc" id="phDesc">we almost shipped the wrong thing · full episode in bio #editing #podcast</span>
+                <span class="ph-audio">♪ <span>original audio · rollcall.edits</span></span>
+              </div>
+            </div>
+            <div class="ph-voice" id="phVoice"><span class="pg-wave live"><i></i><i></i><i></i><i></i><i></i></span><span id="phVoiceText">make the captions bigger</span></div>
+          </div>
+          <p class="sh-note" id="shNote">Waiting for a prompt…</p>
         </div>
       </div>
     </div>
@@ -1546,6 +1722,81 @@
         await sleep(reduce ? 5000 : 3200);
       }
     })();
+  })();
+
+  // ---- Shorts: one prompt is typed, then the phone assembles the short as each step completes.
+  (function () {
+    const text = $('shText'), steps = $('shSteps'), presets = $('shPresets'), phone = $('phone'), go = $('shGo');
+    if (!text || !phone) return;
+    const prog = $('phProg'), flash = $('phFlash'), hook = $('phHook'), cuts = $('phCuts'), capEl = $('phCap'), music = $('phMusic'), ready = $('phReady'), meta = $('phMeta'), cta = $('phCta'), note = $('shNote'), src = $('shSrc');
+    const safe = $('phSafe'), pfLabel = $('phPf'), desc = $('phDesc'), voice = $('phVoice'), voiceText = $('phVoiceText');
+    const PF = [['pf-reels', 'Reels'], ['pf-shorts', 'Shorts'], ['pf-tiktok', 'For You']];
+    let pfTimer = null;
+    function setPf(k) { PF.forEach(([c]) => phone.classList.remove(c)); if (k != null) { phone.classList.add(PF[k][0]); pfLabel.textContent = PF[k][1]; } }
+    const P = [
+      { name: 'Podcast clip', src: 'episode_12_full.mov · 41:20', cls: '', meta: '0:29 · 3 versions', desc: 'we almost shipped the wrong thing · full episode in bio #editing #podcast', tweak: 'make the captions bigger',
+        prompt: 'Cut a 30-second short from this episode. Open on the strongest line, jump-cut the pauses, bold word-by-word captions, keep it 9:16 and add a subtle music bed.',
+        cap: 'we almost shipped the wrong thing',
+        steps: [['Found the hook at <b>17:42</b> · “we almost shipped the wrong thing”', '0.8s', 'hook'], ['Cut <b>14 pauses</b> · 3:10 → 0:29', '1.1s', 'cuts'], ['Reframed to <b>9:16</b>, tracking the speaker', '0.6s', 'frame'], ['Captions · bold, word by word', '0.9s', 'cap'], ['Music bed · ducked <b>−14 dB</b> under voice', '0.4s', 'music'], ['Fitted captions to <b>Reels</b>, <b>Shorts</b> and <b>TikTok</b> safe zones', '0.7s', 'platforms'], ['Exported <b>3 versions</b> · 0:29 · 1080×1920', '2.3s', 'ready'], ['You, on the phone: “make the captions bigger” · <b>done</b>', '0.3s', 'tweak']] },
+      { name: 'Product demo', src: 'screen_rec_onboarding.mov · 4:06', cls: 'demo', meta: '0:20 · 3 versions', desc: 'Onboarding in 20 seconds · link in bio #saas #tutorial', tweak: 'slow the zooms down a bit',
+        prompt: 'Turn this 4-minute screen recording into a 20-second short. Zoom into the cursor on every click, captions that read like a tutorial, upbeat music, end on the pricing page.',
+        cap: 'Step 2: pick a plan that fits',
+        steps: [['Detected <b>9 clicks</b> · zoom keyframes added', '1.2s', 'cuts'], ['Trimmed idle time · 4:06 → 0:20', '0.7s', 'hook'], ['Reframed to <b>9:16</b>, following the cursor', '0.6s', 'frame'], ['Tutorial captions · <b>3 steps</b>', '0.8s', 'cap'], ['Upbeat bed · <b>124 bpm</b>, cuts on beat', '0.5s', 'music'], ['Fitted to <b>Reels</b>, <b>Shorts</b> and <b>TikTok</b> safe zones', '0.6s', 'platforms'], ['Ends on pricing · exported <b>3 versions</b>', '1.9s', 'ready'], ['You: “slow the zooms down a bit” · <b>done</b>', '0.4s', 'tweak']] },
+      { name: 'Talking head', src: 'take_03_talking_head.mov · 6:48', cls: '', meta: '3 × 0:15 · 3 platforms', desc: 'stop editing with your hands · part 1 of 3 #creator #editing', tweak: 'swap the hook to the second idea',
+        prompt: 'Make three 15-second shorts from this take. One idea each, hook first, remove every um, captions in my yellow style, and a follow CTA at the end.',
+        cap: 'stop editing with your hands',
+        steps: [['Split into <b>3 ideas</b> · 0:12, 2:40, 5:05', '1.0s', 'hook'], ['Removed <b>31 ums</b> and 22 pauses', '0.9s', 'cuts'], ['Reframed to <b>9:16</b>, centred on face', '0.5s', 'frame'], ['Captions · saved <b>yellow</b> style', '0.8s', 'cap'], ['Follow CTA · last <b>2s</b> of each', '0.3s', 'cta'], ['Fitted to <b>Reels</b>, <b>Shorts</b> and <b>TikTok</b> safe zones', '0.7s', 'platforms'], ['Exported <b>3 shorts × 3 platforms</b> · 0:15 each', '2.6s', 'ready'], ['You: “swap the hook to the second idea” · <b>done</b>', '0.5s', 'tweak']] }
+    ];
+    const sleep = ms => new Promise(r => setTimeout(r, reduce ? 0 : ms));
+    let run = 0, cur = 0, hold = 0;
+    function resetPhone(p) {
+      clearInterval(pfTimer); phone.className = 'phone ' + p.cls; prog.style.width = '0';
+      [hook, cuts, music, ready, cta, safe, voice].forEach(e => e.classList.remove('on')); capEl.innerHTML = ''; capEl.classList.remove('big'); meta.textContent = p.meta; desc.textContent = p.desc; voiceText.textContent = p.tweak;
+    }
+    async function captions(words, my, loops) {
+      capEl.innerHTML = ''; const els = words.split(' ').map(w => { const e = document.createElement('span'); e.className = 'w'; e.textContent = w; capEl.appendChild(e); return e; });
+      for (let k = 0; k < loops; k++) {
+        els.forEach(e => e.className = 'w');
+        for (const e of els) { if (my !== run) return; e.classList.add('on', 'now'); await sleep(170); e.classList.remove('now'); }
+        await sleep(700);
+      }
+    }
+    async function play(i) {
+      const my = ++run, p = P[i]; cur = i;
+      presets.querySelectorAll('.sh-preset').forEach(b => b.classList.toggle('is-on', +b.dataset.i === i));
+      src.textContent = p.src; resetPhone(p); steps.innerHTML = ''; go.className = 'sh-go'; note.textContent = 'Reading the prompt…';
+      text.innerHTML = ''; const span = document.createElement('span'), c = document.createElement('span'); c.className = 'cur'; text.append(span, c);
+      const words = p.prompt.split(' ');
+      for (let k = 0; k < words.length; k++) { if (my !== run) return; span.textContent += (k ? ' ' : '') + words[k]; await sleep(55 + Math.random() * 40); }
+      c.remove(); go.classList.add('armed'); await sleep(500); if (my !== run) return;
+      go.classList.add('pressed'); await sleep(220); go.classList.remove('pressed'); note.textContent = 'Working on ' + p.src.split(' ')[0];
+      const lis = p.steps.map(([html, t]) => { const li = document.createElement('li'); li.innerHTML = '<span class="ic">✓</span><span>' + html + '</span><span class="t">' + t + '</span>'; steps.appendChild(li); return li; });
+      let capTask = null;
+      for (let k = 0; k < lis.length; k++) {
+        if (my !== run) return;
+        const li = lis[k], kind = p.steps[k][2];
+        li.classList.add('show', 'run'); prog.style.width = ((k + 0.5) / lis.length * 100) + '%';
+        await sleep(900 + Math.random() * 500); if (my !== run) return;
+        if (kind === 'hook') { hook.classList.add('on'); }
+        if (kind === 'cuts') { cuts.textContent = ''; cuts.classList.add('on'); const n = p.name === 'Product demo' ? 9 : p.name === 'Talking head' ? 31 : 14; for (let f = 1; f <= 5; f++) { flash.classList.remove('go'); void flash.offsetWidth; flash.classList.add('go'); cuts.textContent = Math.round(n * f / 5) + (p.name === 'Product demo' ? ' zooms' : ' cuts'); await sleep(230); } }
+        if (kind === 'frame') { phone.classList.add('framed'); }
+        if (kind === 'cap') { capTask = captions(p.cap, my, 40); }
+        if (kind === 'music') { music.classList.add('on'); }
+        if (kind === 'cta') { cta.classList.add('on'); }
+        if (kind === 'platforms') { safe.classList.add('on'); for (let q = 0; q < PF.length; q++) { setPf(q); await sleep(1300); if (my !== run) return; } safe.classList.remove('on'); let q = 0; pfTimer = setInterval(() => { q = (q + 1) % PF.length; setPf(q); }, 2600); }
+        if (kind === 'ready') { ready.classList.add('on'); prog.style.width = '100%'; note.textContent = 'Three versions, one edit. Still yours to change by voice.'; }
+        if (kind === 'tweak') { voice.classList.add('on'); await sleep(900); if (p.name === 'Podcast clip') capEl.classList.add('big'); note.textContent = 'Changed on the phone, synced back to the project.'; setTimeout(() => voice.classList.remove('on'), 2600); }
+        li.classList.remove('run'); li.classList.add('done');
+      }
+      await sleep(reduce ? 6000 : 5200); if (my !== run) return;
+      if (Date.now() < hold) { while (Date.now() < hold) await sleep(300); }
+      play((i + 1) % P.length);
+    }
+    presets.addEventListener('click', e => { const b = e.target.closest('.sh-preset'); if (!b) return; hold = Date.now() + 15000; play(+b.dataset.i); });
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver(es => { if (es.some(e => e.isIntersecting)) { play(0); io.disconnect(); } }, { threshold: 0.25 });
+      io.observe(phone);
+    } else play(0);
   })();
 
   // ---- The race: ten menu steps by hand vs one spoken sentence, timed at 6x.
