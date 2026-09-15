@@ -579,17 +579,29 @@
     opacity: 1; transform: none; font: inherit; font-size: 15px; font-weight: 500; color: #d7dae0; background: #1f2226; border: 1px solid #30353c; border-radius: 999px; padding: 10px 16px 10px 14px;
     cursor: pointer; white-space: nowrap; display: inline-flex; align-items: center; gap: 8px; transition: background .25s, color .25s, transform .3s cubic-bezier(.2,.8,.2,1), border-color .25s;
   }
-  .chips .chip::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: #4a4f57; transition: background .25s, box-shadow .25s; }
+  .chips .chip::before { content: "\201C"; font-size: 20px; line-height: 0; color: var(--voice); font-weight: 700; transition: color .25s; }
   .chips .chip:hover { background: #2a2e34; color: #fff; }
   .chips .chip.hot { background: var(--voice); border-color: var(--voice); color: #fff; transform: scale(1.06); }
-  .chips .chip.hot::before { background: #fff; box-shadow: 0 0 0 4px rgba(255,255,255,.25); }
+  .chips .chip.hot::before { color: #fff; }
   .pg { border: 1px solid #2f333a; border-radius: 18px; background: #1b1d21; overflow: hidden; display: grid; grid-template-columns: 1fr 300px; }
   @media (max-width: 860px) { .pg { grid-template-columns: 1fr; } }
   .pg-preview { position: relative; aspect-ratio: 16/9; max-height: 400px; width: 100%; overflow: hidden; background: #0e1013; transition: filter .8s; }
-  .pg-scene { position: absolute; inset: 0; background:
-    radial-gradient(ellipse at 70% 30%, rgba(255,214,150,.55), transparent 45%),
-    radial-gradient(ellipse at 25% 65%, rgba(60,120,140,.6), transparent 55%),
-    linear-gradient(180deg, #2b3a48 0%, #16222c 55%, #0b1116 100%); }
+  .pg-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s cubic-bezier(.2,.7,.2,1); }
+  .pg-preview.zoom .pg-video { transform: scale(1.15); }
+  .pg-preview.fading .pg-video { animation: pgfade 2.2s ease-in forwards; }
+  @keyframes pgfade { to { filter: brightness(0); } }
+  .pg-preview.cutflash::after { content: ""; position: absolute; inset: 0; background: #fff; z-index: 4; animation: phflash .25s ease-out forwards; pointer-events: none; }
+  .pg-form { display: flex; gap: 8px; align-items: center; margin-top: auto; }
+  .pg-mic { flex: none; width: 40px; height: 40px; border-radius: 50%; border: 0; background: var(--voice); color: #fff; display: grid; place-items: center; cursor: pointer; transition: transform .15s, box-shadow .2s, background .2s; }
+  .pg-mic:hover { transform: scale(1.05); }
+  .pg-mic.rec { background: #e0557a; box-shadow: 0 0 0 6px rgba(224,85,122,.25); animation: micpulse 1s ease-in-out infinite; }
+  @keyframes micpulse { 50% { box-shadow: 0 0 0 12px rgba(224,85,122,.12); } }
+  .pg-input { flex: 1; min-width: 0; height: 40px; border-radius: 999px; border: 1px solid #353a41; background: #14161a; color: #fff; font: inherit; font-size: 14px; padding: 0 14px; }
+  .pg-input::placeholder { color: #6f757e; }
+  .pg-input:focus { outline: 2px solid var(--voice); outline-offset: 1px; border-color: transparent; }
+  .pg-send { flex: none; width: 40px; height: 40px; border-radius: 50%; border: 1px solid #353a41; background: #24282d; color: #fff; font: inherit; font-size: 16px; cursor: pointer; }
+  .pg-send:hover { background: #2e333a; }
+  .pg-hint { font-size: 12px; color: #6f757e; line-height: 1.4; }
   .pg-preview.warm { filter: sepia(.25) saturate(1.2) contrast(1.05); }
   .pg-preview.match { filter: hue-rotate(-12deg) saturate(1.1) brightness(1.04); }
   .pg-preview.lut { filter: contrast(1.18) saturate(.85) sepia(.12); }
@@ -989,14 +1001,14 @@
     <div class="wrap">
       <div class="sec-head light">
         <h2 id="commands-h">Things you can just say.</h2>
-        <p>No fixed phrases to memorise. Click any line, or just wait, and watch the timeline do it.</p>
+        <p>No fixed phrases to memorise. Click a line, tap the mic and say your own, or type it. The edit lands on the footage below.</p>
       </div>
     </div>
     <div class="chips" id="chips" aria-label="Example commands"><div class="chiprow" data-dir="l"><div class="chiptrack"><button class="chip" type="button" data-act="cut">Cut here and delete the pause before it.</button><button class="chip" type="button" data-act="trim">Trim the last two seconds off this clip.</button><button class="chip" type="button" data-act="move">Move the B-roll to start at 0:38.</button><button class="chip" type="button" data-act="speed">Speed up everything between 1:10 and 1:30 by 1.5x.</button><button class="chip" type="button" data-act="lower">Add a lower third with my name, white on dark.</button><button class="chip" type="button" data-act="caps">Auto-caption this section in the yellow style I used earlier.</button></div></div><div class="chiprow" data-dir="r"><div class="chiptrack"><button class="chip" type="button" data-act="bigger">Make that title bigger and move it up a bit.</button><button class="chip" type="button" data-act="font">Change every caption to the brand font.</button><button class="chip" type="button" data-act="warm">Warm this shot up slightly.</button><button class="chip" type="button" data-act="match">Match the colour of this clip to the previous one.</button><button class="chip" type="button" data-act="lut">Apply the LUT from the intro to the whole V1 track.</button></div></div><div class="chiprow" data-dir="l"><div class="chiptrack"><button class="chip" type="button" data-act="vig">Add a soft vignette from 0:20 to 0:45.</button><button class="chip" type="button" data-act="duck">Duck the music under the voiceover.</button><button class="chip" type="button" data-act="mute">Mute the music from 0:14 until the next cut.</button><button class="chip" type="button" data-act="noise">Remove background noise on A1.</button><button class="chip" type="button" data-act="fade">Fade the last clip out over two seconds.</button></div></div></div>
     <div class="wrap">
       <div class="pg" id="pg" aria-live="polite">
         <div class="pg-preview" id="pgPreview">
-          <div class="pg-scene"></div>
+          <video class="pg-video" id="pgVideo" muted loop playsinline preload="metadata" poster="videos/347325-poster.jpg" src="videos/347325.mp4" aria-hidden="true"></video>
           <div class="pg-vig" id="pgVig"></div>
           <div class="pg-title" id="pgTitle">Welcome back</div>
           <div class="pg-lower" id="pgLower"><b>Aman Kumar</b><span>Rollcall · Founder</span></div>
@@ -1006,8 +1018,14 @@
         </div>
         <aside class="pg-side">
           <div class="pg-listen"><span class="pg-wave" id="pgWave"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><span id="pgState">Listening…</span></div>
-          <div class="pg-said" id="pgSaid">Click a command above, or wait.</div>
+          <div class="pg-said" id="pgSaid">Click a line above, or say your own.</div>
           <div class="pg-result" id="pgResult"></div>
+          <form class="pg-form" id="pgForm" autocomplete="off">
+            <button class="pg-mic" type="button" id="pgMic" aria-label="Tap to speak" title="Tap to speak"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3" fill="currentColor"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+            <input class="pg-input" id="pgInput" type="text" placeholder="or type what you’d say…" aria-label="Type a command">
+            <button class="pg-send" type="submit" aria-label="Do it">→</button>
+          </form>
+          <p class="pg-hint" id="pgHint">Try: “add captions”, “warm it up”, “mute the music”, “undo”.</p>
         </aside>
         <div class="pg-tl">
           <div class="pg-ruler"><span>0:00</span><span>0:20</span><span>0:40</span><span>1:00</span><span>1:20</span></div>
@@ -1659,6 +1677,12 @@
   (function () {
     const chips = $('chips'), pv = $('pgPreview'), tl = { V3: $('pgV3'), V2: $('pgV2'), V1: $('pgV1'), A1: $('pgA1'), A2: $('pgA2') };
     if (!chips || !pv) return;
+    const video = $('pgVideo'), input = $('pgInput'), form = $('pgForm'), mic = $('pgMic'), hint = $('pgHint');
+    // Only pull the footage when the section is near the screen.
+    if (video && 'IntersectionObserver' in window) {
+      const vio = new IntersectionObserver(es => { es.forEach(e => { if (e.isIntersecting) { video.play().catch(() => {}); } else { video.pause(); } }); }, { rootMargin: '200px' });
+      vio.observe(video);
+    } else if (video) { video.play().catch(() => {}); }
     chips.querySelectorAll('.chiptrack').forEach(t => { t.innerHTML += t.innerHTML; });
     const title = $('pgTitle'), lower = $('pgLower'), cap = $('pgCap'), vig = $('pgVig'), badge = $('pgBadge'), play = $('pgPlay'), tc = $('pgTc');
     const said = $('pgSaid'), result = $('pgResult'), state = $('pgState'), wave = $('pgWave');
@@ -1673,16 +1697,19 @@
       C.intro = clip('V1', 0, 22, '', 'intro.mov'); C.a = clip('V1', 22, 38, '', 'interview_A.mov'); C.b = clip('V1', 60, 40, '', 'interview_B.mov');
       C.broll = clip('V2', 30, 16, 'b', 'broll_city.mov'); C.vo = clip('A1', 0, 100, 'a', 'voiceover.wav'); C.music = clip('A2', 0, 100, 'a', 'music_bed.mp3');
       pv.className = 'pg-preview'; [title, lower, cap, vig, badge].forEach(e => e.className = e.className.split(' ')[0]);
+      if (video) video.playbackRate = 1;
       ph(42);
     }
     const ACT = {
-      cut()   { C.a.style.setProperty('--w', '18%'); const a2 = clip('V1', 42, 18, '', 'interview_A.mov'); ph(42); return 'Cut at 0:42 · removed 2.0s of silence before it'; },
+      cut()   { C.a.style.setProperty('--w', '18%'); const a2 = clip('V1', 42, 18, '', 'interview_A.mov'); ph(42); pv.classList.add('cutflash'); return 'Cut at 0:42 · removed 2.0s of silence before it'; },
       trim()  { ph(98); C.b.style.setProperty('--w', '38%'); C.b.textContent = 'interview_B.mov · −2s'; return 'Trimmed 2.0s from the end of interview_B.mov'; },
       move()  { C.broll.style.setProperty('--l', '38%'); ph(38); return 'Moved broll_city.mov to start at 0:38'; },
-      speed() { ph(70); clip('V1', 70, 20, 'fx', '1.5×'); badgeOn('Speed 150% · 1:10–1:30'); return 'Retimed 1:10–1:30 at 1.5×, ripple on'; },
+      speed() { ph(70); clip('V1', 70, 20, 'fx', '1.5×'); badgeOn('Speed 150% · 1:10–1:30'); if (video) video.playbackRate = 1.5; return 'Retimed 1:10–1:30 at 1.5×, ripple on'; },
       lower() { lower.classList.add('on'); clip('V3', 42, 8, 't', 'Lower third'); return 'Added lower third on V3 at 0:42, white on dark'; },
       caps()  { cap.classList.add('on'); [42, 47, 52, 56].forEach((l, i) => clip('V3', l, 4, 't', i === 0 ? 'Captions' : '')); return 'Auto-captioned 0:42–1:00 in the saved yellow style'; },
       bigger(){ title.classList.add('on'); clip('V3', 42, 7, 't', 'Title'); setTimeout(() => title.classList.add('big'), 350); badgeOn('Size 64 → 84 · Y −38'); return 'Scaled the title to 130% and nudged it up 38px'; },
+      zoom()  { pv.classList.add('zoom'); badgeOn('Scale 100% → 115%'); return 'Punched in 15% on this shot'; },
+      undo()  { return 'Reverted the last change'; },
       font()  { cap.classList.add('on'); [42, 47, 52, 56].forEach((l, i) => clip('V3', l, 4, 't', i === 0 ? 'Captions' : '')); setTimeout(() => cap.classList.add('brand'), 400); return 'Changed 4 captions to Bricolage Grotesque'; },
       warm()  { pv.classList.add('warm'); badgeOn('Temp +400K · Sat +12'); return 'Warmed interview_A.mov: temperature +400, saturation +12'; },
       match() { pv.classList.add('match'); badgeOn('Matched → intro.mov'); return 'Matched colour of interview_A.mov to intro.mov'; },
@@ -1691,26 +1718,67 @@
       duck()  { C.music.style.setProperty('--w', '22%'); const d = clip('A2', 22, 78, 'a ducked', 'music_bed.mp3 · −12 dB'); return 'Ducked music −12 dB under the voiceover, 0:22 onward'; },
       mute()  { C.music.style.setProperty('--w', '14%'); clip('A2', 14, 8, 'a muted', 'muted'); clip('A2', 22, 78, 'a', 'music_bed.mp3'); ph(14); return 'Muted music_bed.mp3 from 0:14 to the next cut at 0:22'; },
       noise() { C.vo.textContent = 'voiceover.wav · denoised'; C.vo.classList.add('fx'); badgeOn('Voice isolation on A1'); return 'Applied noise reduction to A1'; },
-      fade()  { C.b.classList.add('fadeout'); C.vo.classList.add('fadeout'); C.music.classList.add('fadeout'); ph(98); return 'Faded interview_B.mov and both audio tracks out over 2.0s'; }
+      fade()  { C.b.classList.add('fadeout'); C.vo.classList.add('fadeout'); C.music.classList.add('fadeout'); ph(98); pv.classList.add('fading'); return 'Faded interview_B.mov and both audio tracks out over 2.0s'; }
     };
+    // Map free speech to an edit by keyword. First match wins.
+    const RULES = [
+      [/undo|revert|go back/, 'undo'], [/caption|subtitle/, 'caps'], [/font|brand/, 'font'], [/lower.?third|my name|name plate/, 'lower'],
+      [/title|bigger|larger/, 'bigger'], [/punch|zoom|closer|push in/, 'zoom'], [/warm/, 'warm'], [/match/, 'match'], [/lut|grade|look/, 'lut'], [/vignette/, 'vig'],
+      [/duck|under the voice|quieter|turn.*down/, 'duck'], [/mute|silence/, 'mute'], [/noise|denoise|clean.*audio|hiss/, 'noise'], [/fade/, 'fade'],
+      [/speed|faster|slow|1\.5|retime/, 'speed'], [/trim|shorten|last .* seconds/, 'trim'], [/move|b.?roll|shift/, 'move'], [/cut|split|delete|pause|gap/, 'cut']
+    ];
+    const match = text => { const t = text.toLowerCase(); for (const [re, act] of RULES) if (re.test(t)) return act; return null; };
     const sleep = ms => new Promise(r => setTimeout(r, reduce ? 0 : ms));
-    let busy = false, holdUntil = 0, order = Object.keys(ACT), idx = 0;
-    async function fire(act, text) {
-      if (busy) return; busy = true;
+    let token = 0, busy = false, holdUntil = 0, order = Object.keys(ACT).filter(k => k !== 'undo' && k !== 'zoom'), idx = 0;
+    // A new command interrupts whatever is running, like talking over an assistant.
+    async function fire(act, text, instant) {
+      const my = ++token; busy = true;
       chips.querySelectorAll('.chip.hot').forEach(c => c.classList.remove('hot'));
       chips.querySelectorAll('.chip[data-act="' + act + '"]').forEach(c => c.classList.add('hot'));
-      reset(); result.classList.remove('on'); said.classList.remove('dim'); said.textContent = ''; state.textContent = 'Listening…'; wave.classList.add('live');
-      const words = text.split(' ');
-      for (let i = 0; i < words.length; i++) { said.textContent += (i ? ' ' : '') + words[i]; await sleep(90); }
-      wave.classList.remove('live'); state.textContent = 'Working…'; await sleep(350);
+      reset(); result.classList.remove('on'); said.classList.remove('dim'); said.textContent = instant ? text : ''; state.textContent = 'Listening…'; wave.classList.add('live');
+      if (!instant) { const words = text.split(' '); for (let i = 0; i < words.length; i++) { said.textContent += (i ? ' ' : '') + words[i]; await sleep(90); if (my !== token) return; } }
+      else await sleep(250);
+      if (my !== token) return;
+      wave.classList.remove('live'); state.textContent = 'Working…'; await sleep(350); if (my !== token) return;
       const msg = ACT[act](); state.textContent = 'Done. Say “undo” to revert.';
       result.textContent = msg; result.classList.add('on');
       busy = false;
+    }
+    function miss(text) {
+      token++; busy = false; chips.querySelectorAll('.chip.hot').forEach(c => c.classList.remove('hot'));
+      said.textContent = text; wave.classList.remove('live'); state.textContent = 'Heard you, but that is not an edit this demo knows.';
+      result.textContent = ''; result.classList.remove('on');
+      hint.textContent = 'This demo knows: captions, lower third, title, font, warm, match, LUT, vignette, zoom, cut, trim, move, speed, duck, mute, noise, fade, undo.';
+    }
+    function say(text) {
+      text = (text || '').trim(); if (!text) return;
+      holdUntil = Date.now() + 12000;
+      const act = match(text); if (act) fire(act, text, true); else miss(text);
     }
     chips.addEventListener('click', e => {
       const c = e.target.closest('.chip'); if (!c) return;
       holdUntil = Date.now() + 9000; fire(c.dataset.act, c.textContent);
     });
+    form.addEventListener('submit', e => { e.preventDefault(); say(input.value); input.value = ''; });
+    // Real voice input where the browser offers it (Chrome, Edge, Safari); otherwise the mic plays an example.
+    const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (SR) {
+      let rec = null;
+      const stop = () => { if (rec) { try { rec.stop(); } catch (e) {} } mic.classList.remove('rec'); };
+      const start = () => {
+        if (rec) stop();
+        rec = new SR(); rec.lang = 'en-GB'; rec.interimResults = true; rec.maxAlternatives = 1;
+        mic.classList.add('rec'); token++; busy = false; wave.classList.add('live'); state.textContent = 'Listening…'; said.textContent = ''; result.classList.remove('on'); holdUntil = Date.now() + 15000;
+        rec.onresult = ev => { let t = ''; for (const r of ev.results) t += r[0].transcript; said.textContent = t; if (ev.results[ev.results.length - 1].isFinal) { stop(); say(t); } };
+        rec.onerror = () => { stop(); wave.classList.remove('live'); state.textContent = 'Mic blocked or unavailable. Type it instead.'; };
+        rec.onend = () => { mic.classList.remove('rec'); };
+        try { rec.start(); } catch (e) { rec.onerror(); }
+      };
+      mic.addEventListener('click', () => { if (mic.classList.contains('rec')) stop(); else start(); });
+    } else {
+      mic.addEventListener('click', () => { const c = chips.querySelectorAll('.chip'); const pick = c[Math.floor(Math.random() * c.length)]; holdUntil = Date.now() + 9000; fire(pick.dataset.act, pick.textContent); });
+      mic.title = 'Voice input needs Chrome, Edge or Safari; this plays an example instead.';
+    }
     reset();
     (async function loop() {
       await sleep(1500);
