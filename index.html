@@ -908,10 +908,10 @@
       Rollcall
     </a>
     <nav class="nav-links" aria-label="Primary">
+      <a href="#shorts">Shorts</a>
       <a href="#how">How it works</a>
       <a href="#editors">Editors</a>
       <a href="#commands">Commands</a>
-      <a href="#shorts">Shorts</a>
       <a href="#stories">Stories</a>
       <a href="#pricing">Pricing</a>
     </nav>
@@ -1000,6 +1000,62 @@
       <p class="demo-caption">A looping demo. Say it the way you’d say it out loud. Rollcall drops the fillers, then turns each sentence into editor actions.</p>
     </div>
   </div>
+
+  <section id="shorts" class="shorts" aria-labelledby="shorts-h">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">Short-form</span>
+        <h2 id="shorts-h">Describe the whole edit. <em>Get a short back.</em></h2>
+        <p>One prompt, not one command at a time. Rollcall finds the hook, cuts the dead air, reframes to 9:16, captions it and hands you a finished short you can still tweak by voice.</p>
+      </div>
+      <div class="sh-grid">
+        <div class="sh-left">
+          <div class="sh-presets" id="shPresets" role="tablist" aria-label="Example prompts">
+            <button class="sh-preset is-on" type="button" data-i="0">Podcast clip</button>
+            <button class="sh-preset" type="button" data-i="1">Product demo</button>
+            <button class="sh-preset" type="button" data-i="2">Talking head</button>
+          </div>
+          <div class="sh-prompt">
+            <div class="sh-prompthead"><span class="mark"><i></i></span><span>Describe the edit</span><span class="sh-src" id="shSrc">episode_12_full.mov · 41:20</span></div>
+            <p class="sh-text" id="shText"><span class="cur"></span></p>
+            <div class="sh-actions"><span class="sh-attach">▶ source clip attached</span><span class="sh-go" id="shGo">Make it</span></div>
+          </div>
+          <ol class="sh-steps" id="shSteps"></ol>
+        </div>
+        <div class="sh-right">
+          <div class="phone" id="phone">
+            <div class="ph-bar"><i id="phProg"></i></div>
+            <div class="ph-scene" id="phScene"><div class="ph-letter t"></div><div class="ph-letter b"></div></div>
+            <div class="ph-flash" id="phFlash"></div>
+            <span class="ph-hook" id="phHook">HOOK</span>
+            <span class="ph-cuts" id="phCuts"></span>
+            <div class="ph-cap" id="phCap"></div>
+            <div class="ph-music" id="phMusic"><i></i><i></i><i></i><i></i><i></i></div>
+            <div class="ph-ready" id="phReady"><b>Ready</b><span id="phMeta">0:29 · 1080×1920</span></div>
+            <div class="ph-cta" id="phCta">Follow for part 2 →</div>
+            <div class="ph-safe" id="phSafe"><span>safe zone</span></div>
+            <div class="ph-ui" id="phUi">
+              <div class="ph-tabs"><span class="a">Following</span><span class="b">For you</span><span class="c" id="phPf">Reels</span></div>
+              <div class="ph-rail">
+                <span class="ph-av"></span>
+                <span class="ph-ic"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.6-9.3-9A5.2 5.2 0 0 1 12 6.3 5.2 5.2 0 0 1 21.3 12C19 16.4 12 21 12 21z"/></svg><small>48.2K</small></span>
+                <span class="ph-ic"><svg viewBox="0 0 24 24"><path d="M4 4h16v11H8l-4 4z"/></svg><small>1,204</small></span>
+                <span class="ph-ic"><svg viewBox="0 0 24 24"><path d="M3 12l9-8v5c6 0 9 3 9 9-2-3-5-4-9-4v5z"/></svg><small>Share</small></span>
+                <span class="ph-ic more"><svg viewBox="0 0 24 24"><circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/></svg></span>
+              </div>
+              <div class="ph-meta">
+                <span class="ph-handle">@rollcall.edits <i>Follow</i></span>
+                <span class="ph-desc" id="phDesc">we almost shipped the wrong thing · full episode in bio #editing #podcast</span>
+                <span class="ph-audio">♪ <span>original audio · rollcall.edits</span></span>
+              </div>
+            </div>
+            <div class="ph-voice" id="phVoice"><span class="pg-wave live"><i></i><i></i><i></i><i></i><i></i></span><span id="phVoiceText">make the captions bigger</span></div>
+          </div>
+          <p class="sh-note" id="shNote">Waiting for a prompt…</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <section id="how" class="how" aria-labelledby="how-h">
     <div class="how-height" id="howHeight">
@@ -1123,62 +1179,6 @@
         </aside>
       </div>
       <p class="tw-foot">Click the bar to jump anywhere, then say or type a command. It sticks to that timecode and replays with the session.</p>
-    </div>
-  </section>
-
-  <section id="shorts" class="shorts" aria-labelledby="shorts-h">
-    <div class="wrap">
-      <div class="sec-head">
-        <span class="eyebrow">Short-form</span>
-        <h2 id="shorts-h">Or describe the whole edit. <em>Get a short back.</em></h2>
-        <p>One prompt, not one command at a time. Rollcall finds the hook, cuts the dead air, reframes to 9:16, captions it and hands you a finished short you can still tweak by voice.</p>
-      </div>
-      <div class="sh-grid">
-        <div class="sh-left">
-          <div class="sh-presets" id="shPresets" role="tablist" aria-label="Example prompts">
-            <button class="sh-preset is-on" type="button" data-i="0">Podcast clip</button>
-            <button class="sh-preset" type="button" data-i="1">Product demo</button>
-            <button class="sh-preset" type="button" data-i="2">Talking head</button>
-          </div>
-          <div class="sh-prompt">
-            <div class="sh-prompthead"><span class="mark"><i></i></span><span>Describe the edit</span><span class="sh-src" id="shSrc">episode_12_full.mov · 41:20</span></div>
-            <p class="sh-text" id="shText"><span class="cur"></span></p>
-            <div class="sh-actions"><span class="sh-attach">▶ source clip attached</span><span class="sh-go" id="shGo">Make it</span></div>
-          </div>
-          <ol class="sh-steps" id="shSteps"></ol>
-        </div>
-        <div class="sh-right">
-          <div class="phone" id="phone">
-            <div class="ph-bar"><i id="phProg"></i></div>
-            <div class="ph-scene" id="phScene"><div class="ph-letter t"></div><div class="ph-letter b"></div></div>
-            <div class="ph-flash" id="phFlash"></div>
-            <span class="ph-hook" id="phHook">HOOK</span>
-            <span class="ph-cuts" id="phCuts"></span>
-            <div class="ph-cap" id="phCap"></div>
-            <div class="ph-music" id="phMusic"><i></i><i></i><i></i><i></i><i></i></div>
-            <div class="ph-ready" id="phReady"><b>Ready</b><span id="phMeta">0:29 · 1080×1920</span></div>
-            <div class="ph-cta" id="phCta">Follow for part 2 →</div>
-            <div class="ph-safe" id="phSafe"><span>safe zone</span></div>
-            <div class="ph-ui" id="phUi">
-              <div class="ph-tabs"><span class="a">Following</span><span class="b">For you</span><span class="c" id="phPf">Reels</span></div>
-              <div class="ph-rail">
-                <span class="ph-av"></span>
-                <span class="ph-ic"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.6-9.3-9A5.2 5.2 0 0 1 12 6.3 5.2 5.2 0 0 1 21.3 12C19 16.4 12 21 12 21z"/></svg><small>48.2K</small></span>
-                <span class="ph-ic"><svg viewBox="0 0 24 24"><path d="M4 4h16v11H8l-4 4z"/></svg><small>1,204</small></span>
-                <span class="ph-ic"><svg viewBox="0 0 24 24"><path d="M3 12l9-8v5c6 0 9 3 9 9-2-3-5-4-9-4v5z"/></svg><small>Share</small></span>
-                <span class="ph-ic more"><svg viewBox="0 0 24 24"><circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/></svg></span>
-              </div>
-              <div class="ph-meta">
-                <span class="ph-handle">@rollcall.edits <i>Follow</i></span>
-                <span class="ph-desc" id="phDesc">we almost shipped the wrong thing · full episode in bio #editing #podcast</span>
-                <span class="ph-audio">♪ <span>original audio · rollcall.edits</span></span>
-              </div>
-            </div>
-            <div class="ph-voice" id="phVoice"><span class="pg-wave live"><i></i><i></i><i></i><i></i><i></i></span><span id="phVoiceText">make the captions bigger</span></div>
-          </div>
-          <p class="sh-note" id="shNote">Waiting for a prompt…</p>
-        </div>
-      </div>
     </div>
   </section>
 
