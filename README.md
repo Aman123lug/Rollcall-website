@@ -35,38 +35,12 @@ Rollcall    ✓ 00:14  Title "Start before you're ready." · centred · bold
             ↳ dropped: "um", repeated "centre it", "yellow"
 ```
 
-<p align="center">
-  <img src=".github/assets/demo.jpg" alt="Editor demo: the spoken correction is struck out, then applied as one clean edit" width="100%">
-</p>
-
 ## What it does
 
-<table>
-  <tr>
-    <td width="50%" valign="top">
-      <img src=".github/assets/race.jpg" alt="The same caption built by hand in 48 seconds vs one sentence in 7 seconds"><br>
-      <b>Faster than the menu</b><br>
-      The same styled caption: <b>48 s and 9 clicks</b> by hand, <b>7 s and 0 clicks</b> by voice.
-    </td>
-    <td width="50%" valign="top">
-      <img src=".github/assets/shorts.jpg" alt="One prompt becomes a finished short for Reels, Shorts and TikTok"><br>
-      <b>One prompt, a finished short</b><br>
-      Hook, grade, retime, captions and music. Exported for Reels, Shorts and TikTok, still editable by voice.
-    </td>
-  </tr>
-  <tr>
-    <td width="50%" valign="top">
-      <img src=".github/assets/commands.jpg" alt="Commands pinned to the timecode they were spoken at, with session notes"><br>
-      <b>Talk while it plays</b><br>
-      Each command lands at the timecode you said it. Session notes track edits, decisions and to-dos.
-    </td>
-    <td width="50%" valign="top">
-      <img src=".github/assets/privacy.jpg" alt="Footage pixels stop at the edge of the Mac while only text crosses to the model"><br>
-      <b>Your footage stays on your Mac</b><br>
-      Speech is transcribed on-device. Only command text and timeline metadata leave: <b>250 B</b> out of a 4.2 GB clip.
-    </td>
-  </tr>
-</table>
+- **Faster than the menu:** a styled caption takes 48 s and 9 clicks by hand, 7 s and one sentence by voice.
+- **One prompt, a finished short:** hook, grade, retime, captions and music, exported for Reels, Shorts and TikTok.
+- **Talk while it plays:** each command lands at the timecode you said it, with session notes.
+- **Your footage stays on your Mac:** speech is transcribed on-device; only command text and timeline metadata leave.
 
 ## How it works
 
@@ -89,23 +63,6 @@ flowchart LR
 | **Editor bridges** | Each editor's scripting API | Resolve (Python/Lua), Premiere (UXP), CapCut (to be confirmed) |
 
 No video or audio ever leaves the Mac.
-
-## Use cases
-
-| Say | Result |
-|---|---|
-| "Warm this shot, slow it to 60%." | Grade and retime the clip under the playhead |
-| "Lower third at twenty, episode twelve." | Styled lower third at 0:20 |
-| "Voice up a touch, music down under it." | VO +3 dB, music ducked −6 dB |
-| "Caption this… add a vignette… music later." *(while playing)* | Three pinned commands, one saved for later |
-| "Make a 15-second reel from this drone shot." | A finished short in three platform versions |
-| "What can you do with this vlog?" | *Planned:* reads the footage, suggests styles, builds a layered first cut ([001](docs/ideas/001-agent-edit-from-footage.md)) |
-
-## Roadmap
-
-| Now (on the website) | Next | Ideas |
-|---|---|---|
-| Voice commands · filler clean-up · edit plans · timecode-pinned commands · session notes · one-prompt shorts | Final Cut Pro · After Effects · Descript | [Agent edit from footage](docs/ideas/001-agent-edit-from-footage.md) · [Client notes → edits](docs/ideas/002-client-notes-to-edits.md) · [Check before export](docs/ideas/003-check-before-export.md) · [React while you watch](docs/ideas/009-react-while-you-watch.md) · [all 15 →](docs/README.md) |
 
 ## Run the website
 
