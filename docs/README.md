@@ -25,3 +25,4 @@
 - [013 · Accessibility: voice-first editing](ideas/013-accessibility-voice-first.md)
 - [014 · Hardware push-to-talk](ideas/014-hardware-push-to-talk.md)
 - [015 · Teach mode](ideas/015-teach-mode.md)
+- [016 · Understand the request, then answer from real knowledge](ideas/016-intent-and-editing-knowledge.md)

@@ -24,6 +24,7 @@ Status: `Idea` · `Next` · `Building` · `Shipped` · `On site` (shown on the w
 | Accessibility: voice-first editing | Idea | [013](../ideas/013-accessibility-voice-first.md) |
 | Hardware push-to-talk | Idea | [014](../ideas/014-hardware-push-to-talk.md) |
 | Teach mode | Idea | [015](../ideas/015-teach-mode.md) |
+| Intent routing and editing knowledge | Idea | [016](../ideas/016-intent-and-editing-knowledge.md) |
 
 ## Editors
 
