@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rollcall Reels — Aesthetic edits, said out loud</title>
+<meta name="description" content="Gen Z aesthetic edits made by voice. Scroll through six vibes and see what was said, the prompt Rollcall heard, and the reel that came out.">
+<meta name="theme-color" content="#5b4cff">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='16' fill='%23000'/%3E%3Crect x='8.5' y='12' width='3' height='8' rx='1.5' fill='%23fff'/%3E%3Crect x='14.5' y='9' width='3' height='14' rx='1.5' fill='%23fff'/%3E%3Crect x='20.5' y='12' width='3' height='8' rx='1.5' fill='%23fff'/%3E%3C/svg%3E">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Rollcall">
+<meta property="og:title" content="Rollcall Reels — Aesthetic edits, said out loud">
+<meta property="og:description" content="Voice in, prompt out, reel back. Six aesthetic edits made by talking.">
+<meta property="og:url" content="https://aman123lug.github.io/Rollcall-website/reels.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Instrument+Serif:ital@0;1&family=VT323&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #ffffff;
+    --panel: #f2f4f6;
+    --line: #e3e6ea;
+    --ink: #000000;
+    --ink-2: #4a4f57;
+    --ink-3: #8a9099;
+    --voice: #5b4cff;
+    --voice-soft: #ecebff;
+    --clip-video: #2fb7a0;
+    --clip-audio: #62b04a;
+    --clip-text: #f5b841;
+    --max: 1120px;
+    --font: "Bricolage Grotesque", "Helvetica Neue", Arial, sans-serif;
+    --serif: "Instrument Serif", Georgia, serif;
+    --vcr: "VT323", ui-monospace, monospace;
+    --mono: ui-monospace, "SF Mono", Menlo, monospace;
+    --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  :root[data-theme="dark"] { color-scheme: dark; --bg: #0e0f12; --panel: #17191d; --line: #2a2e34; --ink: #ffffff; --ink-2: #b9bec6; --ink-3: #8a9099; --voice-soft: #232052; }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; font-family: var(--font); font-size: 17px; line-height: 1.55; color: var(--ink); background: var(--bg); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+  a { color: inherit; text-decoration: none; }
+  a:focus-visible, button:focus-visible { outline: 3px solid var(--voice); outline-offset: 3px; border-radius: 6px; }
+  h1, h2, h3, p { margin: 0; }
+  ul, ol { margin: 0; padding: 0; list-style: none; }
+  .wrap { max-width: var(--max); margin: 0 auto; padding: 0 24px; }
+  @media (max-width: 520px) { .wrap { padding: 0 16px; } }
+
+  /* ---------- Nav (same as the home page) ---------- */
+  .nav { position: sticky; top: 0; z-index: 30; background: rgba(255,255,255,.86); backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
+  [data-theme="dark"] .nav { background: rgba(14,15,18,.86); }
+  .nav .wrap { height: 64px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+  .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 20px; letter-spacing: -0.01em; }
+  .brand-mark { width: 26px; height: 26px; border-radius: 50%; background: var(--ink); display: grid; place-items: center; }
+  .brand-mark span { display: block; width: 3px; height: 12px; background: var(--bg); border-radius: 2px; box-shadow: -6px 0 0 0 var(--bg), 6px 0 0 0 var(--bg); transform: scaleY(.6); }
+  .nav-links { display: flex; gap: 28px; font-size: 15px; color: var(--ink-2); }
+  .nav-links a:hover, .nav-links a[aria-current] { color: var(--ink); }
+  .nav-links a[aria-current] { font-weight: 600; }
+  .nav-actions { display: flex; align-items: center; gap: 10px; }
+  .btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 20px; border-radius: 999px; font: inherit; font-weight: 600; font-size: 15px; border: 1px solid transparent; cursor: pointer; transition: background .15s, transform .15s; }
+  .btn-dark { background: var(--ink); color: var(--bg); }
+  .btn-dark:hover { transform: translateY(-1px); }
+  .btn-light { background: transparent; color: var(--ink); border-color: var(--line); }
+  .btn-light:hover { background: var(--panel); }
+  .btn-sm { padding: 9px 16px; font-size: 14px; }
+  .theme-btn { width: 38px; height: 38px; border-radius: 50%; border: 1px solid var(--line); background: var(--bg); color: var(--ink); display: grid; place-items: center; cursor: pointer; padding: 0; transition: background .15s, transform .15s; }
+  .theme-btn:hover { background: var(--panel); transform: rotate(15deg); }
+  .theme-btn .moon { display: none; }
+  [data-theme="dark"] .theme-btn .sun { display: none; }
+  [data-theme="dark"] .theme-btn .moon { display: block; }
+  @media (max-width: 760px) { .nav-links { display: none; } }
+  @media (max-width: 420px) { .nav-actions .btn { display: none; } }
+
+  /* ---------- Hero ---------- */
+  .hero { padding: 88px 0 56px; text-align: center; position: relative; }
+  .eyebrow { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--voice); margin-bottom: 18px; }
+  .eyebrow .dot { width: 7px; height: 7px; border-radius: 50%; background: #e0557a; box-shadow: 0 0 0 3px rgba(224,85,122,.22); animation: pulse 1.4s ease-in-out infinite; }
+  @keyframes pulse { 50% { box-shadow: 0 0 0 7px rgba(224,85,122,.08); } }
+  .hero h1 { font-size: clamp(46px, 8vw, 104px); line-height: .95; letter-spacing: -0.045em; font-weight: 600; max-width: 12ch; margin: 0 auto 26px; font-variation-settings: "opsz" 96; }
+  .hero h1 em { font-family: var(--serif); font-style: italic; font-weight: 400; letter-spacing: -0.02em; color: var(--voice); padding-right: .05em; }
+  .hero p { font-size: clamp(18px, 2vw, 21px); color: var(--ink-2); max-width: 46ch; margin: 0 auto 30px; }
+  .vibe-index { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; max-width: 760px; margin: 0 auto; }
+  .vibe-index a { display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px 8px 8px; border-radius: 999px; border: 1px solid var(--line); font-size: 14px; font-weight: 600; color: var(--ink-2); transition: transform .2s, color .2s, border-color .2s; }
+  .vibe-index a:hover { transform: translateY(-2px); color: var(--ink); border-color: var(--ink-3); }
+  .vibe-index a i { width: 22px; height: 22px; border-radius: 50%; background: var(--sw); flex: none; }
+  .scroll-hint { margin-top: 44px; display: inline-flex; flex-direction: column; align-items: center; gap: 8px; font-size: 12px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); }
+  .scroll-hint span { width: 22px; height: 36px; border-radius: 12px; border: 2px solid var(--ink-3); position: relative; }
+  .scroll-hint span::after { content: ""; position: absolute; left: 50%; top: 6px; width: 4px; height: 7px; margin-left: -2px; border-radius: 2px; background: var(--ink-3); animation: wheel 1.6s ease-in-out infinite; }
+  @keyframes wheel { 60% { transform: translateY(10px); opacity: 0; } 61% { transform: none; opacity: 0; } }
+
+  .sticker { position: absolute; font-size: 13px; font-weight: 600; padding: 7px 13px; border-radius: 999px; white-space: nowrap; box-shadow: 0 14px 30px -16px rgba(20,20,60,.4); animation: bob 6s ease-in-out infinite; pointer-events: none; }
+  .sticker.s1 { top: 110px; left: 4%; background: var(--clip-text); color: #000; rotate: -8deg; }
+  .sticker.s2 { top: 190px; right: 3%; background: var(--voice); color: #fff; rotate: 6deg; animation-delay: -2s; }
+  .sticker.s3 { top: 330px; left: 8%; background: var(--clip-video); color: #fff; rotate: 4deg; animation-delay: -4s; }
+  .sticker.s4 { top: 360px; right: 7%; background: var(--ink); color: var(--bg); rotate: -5deg; animation-delay: -1s; font-family: var(--serif); font-style: italic; font-weight: 400; font-size: 16px; }
+  @keyframes bob { 50% { translate: 0 -10px; } }
+  @media (max-width: 980px) { .sticker { display: none; } }
+
+  /* ---------- Moving strips ---------- */
+  .strip { border-block: 1px solid var(--line); overflow: hidden; padding: 18px 0; background: var(--bg); }
+  .strip .track { display: flex; width: max-content; gap: 34px; animation: marquee 38s linear infinite; }
+  .strip.rev .track { animation-direction: reverse; animation-duration: 46s; }
+  .strip span { font-size: clamp(30px, 4.4vw, 54px); font-weight: 700; letter-spacing: -0.03em; line-height: 1; white-space: nowrap; }
+  .strip span.o { color: transparent; -webkit-text-stroke: 1.5px var(--ink); }
+  .strip span.s { font-family: var(--serif); font-style: italic; font-weight: 400; letter-spacing: -0.01em; color: var(--voice); }
+  .strip span.v { font-family: var(--vcr); font-weight: 400; letter-spacing: 0; }
+  .strip i { font-style: normal; color: var(--ink-3); font-size: clamp(20px, 2.6vw, 30px); align-self: center; }
+  @keyframes marquee { to { transform: translateX(-50%); } }
+  .strip.tags { padding: 14px 0; background: var(--panel); }
+  .strip.tags span { font-size: 16px; font-weight: 600; letter-spacing: 0; color: var(--ink-2); }
+  .strip.tags i { font-size: 14px; }
+
+  /* ---------- Progress rail ---------- */
+  .rail { position: fixed; z-index: 25; right: 22px; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; gap: 10px; opacity: 0; pointer-events: none; transition: opacity .4s; }
+  .rail.show { opacity: 1; pointer-events: auto; }
+  .rail a { display: flex; align-items: center; justify-content: flex-end; gap: 10px; font-size: 12px; font-weight: 600; color: rgba(255,255,255,.6); text-shadow: 0 1px 6px rgba(0,0,0,.6); }
+  .rail a b { box-shadow: 0 0 0 1px rgba(0,0,0,.25); }
+  .rail a span { opacity: 0; transform: translateX(6px); transition: opacity .25s, transform .25s; white-space: nowrap; }
+  .rail a:hover span, .rail a.on span { opacity: 1; transform: none; }
+  .rail a b { width: 8px; height: 8px; border-radius: 50%; background: currentColor; transition: height .3s, border-radius .3s; }
+  .rail a.on { color: #fff; }
+  .rail a.on b { height: 26px; border-radius: 4px; }
+  @media (max-width: 900px) { .rail { display: none; } }
+
+  /* ---------- One reel per screen ---------- */
+  .rl { position: relative; min-height: 100svh; display: grid; align-items: center; padding: 110px 0; overflow: hidden;
+    background: var(--r-bg); color: var(--r-fg); --r-fg2: color-mix(in srgb, var(--r-fg) 70%, transparent); --r-card: rgba(255,255,255,.06); --r-cardline: rgba(255,255,255,.12); --r-acc: #fff; }
+  .amb { position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+  .rl:not(.live) .amb, .rl:not(.live) .amb * { animation-play-state: paused !important; }
+  .rl-grid { display: grid; grid-template-columns: 340px minmax(0, 1fr); gap: clamp(40px, 7vw, 96px); align-items: center; }
+  .rl.flip .rl-grid { grid-template-columns: minmax(0, 1fr) 340px; }
+  .rl.flip .rl-media { order: 2; }
+  @media (max-width: 900px) {
+    .rl { min-height: 0; padding: 88px 0; }
+    .rl-grid, .rl.flip .rl-grid { grid-template-columns: 1fr; gap: 36px; }
+    .rl.flip .rl-media { order: 0; }
+  }
+  .rl-media { display: flex; justify-content: center; }
+  @supports (animation-timeline: view()) {
+    .rl-media { animation: drift-y linear both; animation-timeline: view(); animation-range: cover; }
+    @keyframes drift-y { from { transform: translateY(50px); } to { transform: translateY(-50px); } }
+  }
+
+  /* Reveal: the phone swings in, then the text follows. */
+  .phone-wrap { opacity: 0; transform: translateY(70px) rotate(var(--tilt, -7deg)) scale(.9); transition: opacity .8s, transform 1.1s cubic-bezier(.2,.8,.2,1); }
+  .rl.flip .phone-wrap { --tilt: 7deg; }
+  .rl.in .phone-wrap { opacity: 1; transform: rotate(calc(var(--tilt) * .3)); }
+  .rl-info > * { opacity: 0; transform: translateY(18px); transition: opacity .6s, transform .7s cubic-bezier(.2,.8,.2,1); transition-delay: calc(var(--i, 0) * 90ms + 250ms); }
+  .rl.in .rl-info > * { opacity: 1; transform: none; }
+
+  .phone { position: relative; width: min(320px, 78vw); aspect-ratio: 9 / 17; border-radius: 36px; background: #0b0d10; border: 6px solid #15171b; overflow: hidden; box-shadow: 0 50px 100px -40px rgba(0,0,0,.75), 0 0 0 1px rgba(255,255,255,.08), 0 0 90px -20px var(--r-glow, transparent); }
+  .phone .reel { position: absolute; inset: 0; }
+  .phone .chip { position: absolute; z-index: 9; left: 50%; bottom: 16px; translate: -50% 10px; display: flex; gap: 8px; align-items: center; font-size: 12px; padding: 6px 12px; border-radius: 999px; background: #fff; color: #000; opacity: 0; transition: opacity .4s, translate .4s; transition-delay: 1.6s; white-space: nowrap; }
+  .phone .chip b::before { content: "✓"; display: inline-grid; place-items: center; width: 15px; height: 15px; border-radius: 50%; background: var(--clip-audio); color: #fff; font-size: 9px; margin-right: 6px; vertical-align: 1px; }
+  .rl.in .phone .chip { opacity: 1; translate: -50% 0; }
+  .phone .snd { position: absolute; z-index: 9; top: 14px; right: 14px; width: 32px; height: 32px; border-radius: 50%; border: 0; background: rgba(0,0,0,.45); color: #fff; display: none; place-items: center; cursor: pointer; }
+  .phone.has-video .snd { display: grid; }
+  .phone .snd.on .x { display: none; }
+
+  .rl-idx { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; font-size: 13px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--r-fg2); }
+  .rl-idx b { font-size: 13px; color: var(--r-acc); }
+  .rl-idx .pill { letter-spacing: 0; text-transform: none; font-weight: 500; padding: 3px 10px; border-radius: 999px; border: 1px solid var(--r-cardline); }
+  .rl-title { margin: 14px 0 10px; font-size: clamp(48px, 7vw, 92px); line-height: .92; letter-spacing: -0.04em; font-weight: 700; }
+  .rl-sub { font-size: clamp(17px, 1.7vw, 20px); color: var(--r-fg2); max-width: 40ch; }
+  .kw { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 22px; }
+  .kw li { font-size: 13.5px; font-weight: 600; padding: 6px 12px; border-radius: 999px; background: var(--r-card); border: 1px solid var(--r-cardline); opacity: 0; transform: translateY(8px) scale(.94); transition: opacity .4s, transform .5s cubic-bezier(.2,.8,.2,1); transition-delay: calc(var(--k) * 70ms + 700ms); }
+  .rl.in .kw li { opacity: 1; transform: none; }
+
+  .flow { margin-top: 28px; display: grid; gap: 10px; max-width: 560px; }
+  .flow .box { border-radius: 16px; padding: 14px 16px; background: var(--r-card); border: 1px solid var(--r-cardline); }
+  .flow .lbl { display: flex; align-items: center; gap: 8px; font-size: 11.5px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--r-fg2); margin-bottom: 6px; }
+  .flow .lbl .mic { display: inline-flex; gap: 2px; align-items: center; height: 12px; }
+  .flow .lbl .mic i { width: 2px; border-radius: 1px; background: var(--r-acc); height: 4px; animation: mic .8s ease-in-out infinite; }
+  .flow .lbl .mic i:nth-child(2) { animation-delay: -.2s; } .flow .lbl .mic i:nth-child(3) { animation-delay: -.4s; } .flow .lbl .mic i:nth-child(4) { animation-delay: -.6s; }
+  @keyframes mic { 50% { height: 12px; } }
+  .flow .raw { font-size: 16px; line-height: 1.45; }
+  .flow .drop { position: relative; opacity: .55; }
+  .flow .drop::after { content: ""; position: absolute; left: -1px; right: -1px; top: 55%; height: 2px; border-radius: 2px; background: #ff5a8a; transform: scaleX(0); transform-origin: left; transition: transform .35s cubic-bezier(.2,.8,.2,1); transition-delay: calc(var(--d) * 160ms + 1100ms); }
+  .rl.in .flow .drop::after { transform: scaleX(1); }
+  .flow .heard { font-size: 16px; line-height: 1.45; }
+  .calls { display: grid; gap: 6px; margin-top: 10px; font-family: var(--mono); font-size: 12.5px; }
+  .calls li { display: grid; grid-template-columns: 16px 44px minmax(0, 1fr); gap: 8px; align-items: center; color: var(--r-fg2); opacity: 0; transform: translateX(-8px); transition: opacity .3s, transform .35s; transition-delay: calc(var(--c) * 220ms + 1700ms); }
+  .rl.in .calls li { opacity: 1; transform: none; }
+  .calls li::before { content: "✓"; display: grid; place-items: center; width: 16px; height: 16px; border-radius: 50%; background: var(--clip-audio); color: #fff; font: 700 9px var(--font); }
+  .calls .fn { color: var(--r-fg); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .calls .fn b { color: var(--r-acc); font-weight: 600; }
+  .rl-foot { margin-top: 22px; display: flex; align-items: center; gap: 16px; flex-wrap: wrap; font-size: 13px; color: var(--r-fg2); }
+  .palette { display: flex; }
+  .palette i { width: 26px; height: 26px; border-radius: 50%; background: var(--c); border: 2px solid var(--r-bg); margin-left: -8px; }
+  .palette i:first-child { margin-left: 0; }
+
+  /* ---------- Reel media placeholders (shared scene art) ---------- */
+  .reel { overflow: hidden; background: #0b0d10; isolation: isolate; }
+  .reel video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .reel .scene { position: absolute; inset: -12%; animation: drift 16s ease-in-out infinite alternate; will-change: transform; }
+  @keyframes drift { from { transform: scale(1) translate(0, 0); } to { transform: scale(1.12) translate(-3%, 2%); } }
+  .reel .grain { position: absolute; inset: -20%; z-index: 3; pointer-events: none; background-image: var(--grain); background-size: 180px; mix-blend-mode: overlay; opacity: .45; animation: jit .5s steps(3) infinite; will-change: transform; }
+  .amb .grain { position: absolute; inset: 0; pointer-events: none; background-image: var(--grain); background-size: 200px; opacity: .06; }
+  @keyframes jit { 33% { transform: translate(-3%, 2%); } 66% { transform: translate(2%, -3%); } }
+  .reel .ov { position: absolute; inset: 0; z-index: 4; pointer-events: none; color: #fff; }
+  .reel.has-video .scene, .reel.has-video .ov, .reel.has-video .grain { display: none; }
+  .reel .cap { position: absolute; left: 8%; right: 8%; text-align: center; }
+  @keyframes blink { 50% { opacity: 0; } }
+
+  /* =====================================================================
+     VIBES. Each block styles the section, its surroundings (.amb) and the
+     placeholder inside the phone. Copy one to make a new vibe.
+     ===================================================================== */
+
+  /* 01 · Y2K camcorder */
+  .v-y2k { --r-bg: #0b1238; --r-fg: #eef1ff; --r-acc: #ffb347; --r-glow: rgba(111,168,255,.55); }
+  .v-y2k .rl-title { font-family: var(--vcr); font-weight: 400; letter-spacing: 0; font-size: clamp(64px, 9vw, 120px); line-height: .85; text-transform: uppercase; }
+  .v-y2k.in .rl-title { animation: glitch 2.8s steps(1) infinite; }
+  @keyframes glitch { 0%, 88%, 100% { text-shadow: -3px 0 #ff3b6b, 3px 0 #3bd8ff; transform: none; } 90% { text-shadow: -9px 0 #ff3b6b, 7px 0 #3bd8ff; transform: translateX(4px) skewX(-6deg); } 93% { text-shadow: 6px 0 #ff3b6b, -6px 0 #3bd8ff; transform: translateX(-3px); } }
+  .v-y2k .amb::before { content: ""; position: absolute; inset: 0; background: repeating-linear-gradient(0deg, rgba(255,255,255,.035) 0 1px, transparent 1px 3px); }
+  .v-y2k .amb::after { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 90px; background: linear-gradient(transparent, rgba(160,190,255,.09), transparent); animation: track 5s linear infinite; will-change: transform; }
+  @keyframes track { from { transform: translateY(-100px); } to { transform: translateY(120svh); } }
+  .v-y2k .amb .glow { position: absolute; width: 70vw; height: 70vw; border-radius: 50%; opacity: .5; }
+  .v-y2k .amb .glow.a { background: radial-gradient(circle, #3b5bff, transparent 65%); left: -25vw; top: -15vw; } .v-y2k .amb .glow.b { background: radial-gradient(circle, #ff4f8b, transparent 65%); right: -30vw; bottom: -30vw; opacity: .35; }
+  .v-y2k .amb .osd { position: absolute; font-family: var(--vcr); font-size: clamp(20px, 2.2vw, 30px); color: rgba(255,255,255,.8); letter-spacing: .04em; }
+  .v-y2k .amb .osd.tl { top: 90px; left: 4%; } .v-y2k .amb .osd.tr { top: 90px; right: 5%; } .v-y2k .amb .osd.bl { bottom: 40px; left: 4%; } .v-y2k .amb .osd.br { bottom: 40px; right: 5%; color: #ffb347; text-shadow: 0 0 10px rgba(255,150,40,.7); }
+  .v-y2k .amb .osd.tl::before { content: "● "; color: #ff3b30; animation: blink 1s steps(1) infinite; }
+  @media (max-width: 900px) { .v-y2k .amb .osd.bl, .v-y2k .amb .osd.br, .v-vel .amb .bpm, .v-lofi .amb .sign { display: none; } }
+  .v-y2k .amb .px { position: absolute; width: 6px; height: 6px; background: #fff; box-shadow: 0 0 8px #9fc0ff; animation: blink 1.6s steps(1) infinite; }
+  .v-y2k .kw li { font-family: var(--vcr); font-size: 19px; font-weight: 400; border-radius: 4px; }
+  .v-y2k .scene { background: radial-gradient(ellipse at 30% 35%, #ffb38a 0 12%, transparent 40%), radial-gradient(ellipse at 70% 60%, #6fa8ff, transparent 50%), radial-gradient(ellipse at 40% 85%, #ff6f91, transparent 45%), linear-gradient(160deg, #2b3a67, #0f1630); filter: saturate(1.4) contrast(1.15); }
+  .v-y2k .reel .ov::before { content: ""; position: absolute; inset: 0; background: repeating-linear-gradient(0deg, rgba(0,0,0,.18) 0 1px, transparent 1px 3px); }
+  .v-y2k .reel .rec { position: absolute; top: 9%; left: 8%; font-family: var(--vcr); font-size: 22px; display: flex; align-items: center; gap: 6px; }
+  .v-y2k .reel .rec::before { content: ""; width: 9px; height: 9px; border-radius: 50%; background: #ff3b30; animation: blink 1s steps(1) infinite; }
+  .v-y2k .reel .date { position: absolute; right: 8%; bottom: 13%; font-family: var(--vcr); font-size: 22px; line-height: 1; text-align: right; color: #ffb347; text-shadow: 0 0 6px rgba(255,150,40,.8); }
+  .v-y2k .reel .cap { top: 44%; font-family: var(--vcr); font-size: 30px; }
+
+  /* 02 · Golden hour film */
+  .v-film { --r-bg: #160b05; --r-fg: #ffeccc; --r-acc: #ffb85c; --r-glow: rgba(255,170,80,.5); --r-card: rgba(255,200,140,.07); --r-cardline: rgba(255,200,140,.16); }
+  .v-film .rl-title { font-size: clamp(40px, 5.6vw, 72px); font-weight: 600; letter-spacing: .22em; text-transform: uppercase; line-height: 1.02; }
+  .v-film.in .rl-title { animation: breathe 1.8s cubic-bezier(.2,.7,.2,1) both .3s; }
+  @keyframes breathe { from { letter-spacing: .5em; opacity: 0; filter: blur(6px); } to { letter-spacing: .22em; opacity: 1; filter: none; } }
+  .v-film .amb .grain { opacity: .09; }
+  .v-film .amb .leak { position: absolute; border-radius: 50%; animation: leak 9s ease-in-out infinite alternate; will-change: transform; }
+  .v-film .amb .leak.a { width: 70vw; height: 60vw; background: radial-gradient(circle, #ff7a2a, transparent 62%); left: -25vw; top: -20vw; opacity: .5; }
+  .v-film .amb .leak.b { width: 55vw; height: 55vw; background: radial-gradient(circle, #ffcf6b, transparent 62%); right: -20vw; top: 20%; opacity: .32; animation-delay: -4s; }
+  .v-film .amb .leak.c { width: 45vw; height: 45vw; background: radial-gradient(circle, #ff3d2e, transparent 62%); left: 25%; bottom: -22vw; opacity: .28; animation-delay: -7s; }
+  @keyframes leak { to { transform: translate(8vw, 4vw) scale(1.2); } }
+  .v-film .amb .sprocket { position: absolute; top: -44px; bottom: 0; width: 46px; border-inline: 1px solid rgba(255,200,140,.15); animation: roll 1.8s linear infinite; will-change: transform;
+    background: linear-gradient(90deg, #0a0503 14px, transparent 14px 32px, #0a0503 32px), repeating-linear-gradient(#0a0503 0 18px, rgba(255,220,170,.22) 18px 44px); }
+  .v-film .amb .sprocket.l { left: 0; } .v-film .amb .sprocket.r { right: 0; }
+  @keyframes roll { to { transform: translateY(44px); } }
+  .v-film .amb .fcount { position: absolute; bottom: 36px; left: 64px; font-family: var(--mono); font-size: 12px; letter-spacing: .2em; color: rgba(255,200,140,.5); }
+  @media (max-width: 700px) { .v-film .amb .sprocket { display: none; } .v-film .amb .fcount { left: 16px; } }
+  .v-film .scene { background: radial-gradient(circle at 62% 30%, #ffe2a3 0 6%, #f7b24a 14%, transparent 42%), linear-gradient(180deg, #e9924a 0%, #9c4a22 46%, #3a1a0e 70%, #120806 100%); filter: contrast(1.15) saturate(1.1); }
+  .v-film .reel .grain { opacity: .7; }
+  .v-film .reel .ov::before, .v-film .reel .ov::after { content: ""; position: absolute; left: 0; right: 0; height: 11%; background: #000; }
+  .v-film .reel .ov::before { top: 0; } .v-film .reel .ov::after { bottom: 0; }
+  .v-film .reel .cap { bottom: 17%; font-size: 13px; font-weight: 500; letter-spacing: .38em; text-transform: uppercase; text-shadow: 0 2px 10px rgba(0,0,0,.6); }
+
+  /* 03 · Soft diary (coquette) */
+  .v-soft { --r-bg: #fbeef5; --r-fg: #4a2340; --r-fg2: #8c5a7e; --r-acc: #d9468f; --r-glow: rgba(255,150,210,.7); --r-card: rgba(255,255,255,.6); --r-cardline: rgba(217,70,143,.18); }
+  .v-soft .rl-title { font-family: var(--serif); font-style: italic; font-weight: 400; letter-spacing: -0.02em; color: #d9468f; font-size: clamp(60px, 9vw, 120px); }
+  .v-soft.in .rl-title { animation: dreamy 1.6s ease both .3s; }
+  @keyframes dreamy { from { filter: blur(14px); opacity: 0; transform: scale(1.06); } to { filter: none; opacity: 1; transform: none; } }
+  .v-soft .amb::before { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at 15% 20%, #ffd1e8, transparent 35%), radial-gradient(circle at 85% 30%, #e3d6ff, transparent 35%), radial-gradient(circle at 60% 90%, #ffe6cf, transparent 40%); }
+  .v-soft .amb .bokeh { position: absolute; bottom: -120px; left: var(--x); width: var(--s); height: var(--s); border-radius: 50%; background: radial-gradient(circle, rgba(255,255,255,.95), rgba(255,190,225,.5) 60%, transparent 70%); animation: rise var(--dur) linear infinite; animation-delay: var(--dl); will-change: transform; }
+  @keyframes rise { to { transform: translateY(calc(-100svh - 260px)) translateX(40px); } }
+  .v-soft .amb .spark { position: absolute; color: #fff; text-shadow: 0 0 12px #ff9fd2; font-size: var(--s); animation: twinkle 2.6s ease-in-out infinite; animation-delay: var(--dl); }
+  @keyframes twinkle { 50% { opacity: .15; transform: scale(.6) rotate(20deg); } }
+  .v-soft .amb .bow { position: absolute; font-size: 42px; top: 16%; right: 9%; rotate: 12deg; animation: bob 5s ease-in-out infinite; filter: drop-shadow(0 6px 14px rgba(217,70,143,.3)); }
+  .v-soft .kw li { color: #b0306f; }
+  .v-soft .palette i { border-color: #fff; }
+  .v-soft .scene { background: radial-gradient(circle at 28% 30%, #ffd1e8, transparent 38%), radial-gradient(circle at 75% 40%, #d9c8ff, transparent 40%), radial-gradient(circle at 50% 80%, #ffe3c7, transparent 45%), #f4e6f2; }
+  .v-soft .reel .grain { opacity: .25; }
+  .v-soft .reel .cap { top: 40%; font-family: var(--serif); font-style: italic; font-size: 36px; line-height: 1.05; color: #fff; text-shadow: 0 0 18px rgba(255,160,210,.9); }
+  .v-soft .reel .sp { position: absolute; font-size: 18px; color: #fff; text-shadow: 0 0 10px #ffb3dc; animation: twinkle 2.4s ease-in-out infinite; }
+  .v-soft .reel .sp.a { top: 22%; left: 18%; } .v-soft .reel .sp.b { top: 30%; right: 16%; animation-delay: -.8s; font-size: 13px; } .v-soft .reel .sp.c { bottom: 26%; left: 26%; animation-delay: -1.6s; }
+
+  /* 04 · Velocity */
+  .v-vel { --r-bg: #070707; --r-fg: #f4f4f4; --r-acc: #d7ff3a; --r-glow: rgba(215,255,58,.45); }
+  .v-vel .rl-title { font-weight: 800; font-style: italic; text-transform: uppercase; letter-spacing: -0.05em; color: #d7ff3a; font-size: clamp(64px, 10vw, 136px); line-height: .82; }
+  .v-vel.in .rl-title { animation: slam .6s cubic-bezier(.2,1.6,.4,1) both .25s, thump .9s cubic-bezier(.2,.8,.2,1) infinite 1.2s; }
+  @keyframes slam { from { transform: scale(1.8) skewX(-12deg); opacity: 0; filter: blur(8px); } to { transform: none; opacity: 1; filter: none; } }
+  @keyframes thump { 0% { transform: scale(1.05) skewX(-4deg); } 30%, 100% { transform: none; } }
+  .v-vel .amb .line { position: absolute; left: 0; top: var(--y); width: var(--w); height: var(--h, 2px); background: linear-gradient(90deg, transparent, rgba(255,255,255,.7)); animation: zip var(--dur) linear infinite; animation-delay: var(--dl); }
+  .v-vel .amb .line.acc { background: linear-gradient(90deg, transparent, #d7ff3a); }
+  @keyframes zip { from { transform: translateX(-100%); } to { transform: translateX(110vw); } }
+  .v-vel .amb .strobe { position: absolute; inset: 0; background: #fff; opacity: 0; animation: strobe 1.8s steps(1) infinite; }
+  @keyframes strobe { 0%, 3% { opacity: .08; } 4%, 49% { opacity: 0; } 50%, 52% { opacity: .06; } 53%, 100% { opacity: 0; } }
+  .v-vel .amb .big { position: absolute; top: 50%; left: 0; translate: 0 -50%; display: flex; width: max-content; animation: marquee 7s linear infinite; font-size: 26vw; font-weight: 800; font-style: italic; letter-spacing: -0.06em; line-height: 1; color: transparent; -webkit-text-stroke: 1px rgba(215,255,58,.12); white-space: nowrap; }
+  .v-vel .amb .bpm { position: absolute; top: 90px; right: 5%; font-family: var(--mono); font-size: 12px; letter-spacing: .15em; color: #d7ff3a; display: flex; align-items: center; gap: 8px; }
+  .v-vel .amb .bpm::before { content: ""; width: 8px; height: 8px; background: #d7ff3a; border-radius: 50%; animation: blink .45s steps(1) infinite; }
+  .v-vel .kw li { text-transform: uppercase; letter-spacing: .04em; font-style: italic; }
+  .v-vel .scene { background: repeating-linear-gradient(100deg, #111 0 18px, #1d1d1d 18px 22px), #111; animation: speed .35s linear infinite; inset: -30%; }
+  @keyframes speed { to { transform: translateX(-44px); } }
+  .v-vel .reel .ov::before { content: ""; position: absolute; inset: 0; background: #fff; opacity: 0; animation: flash 1.6s steps(1) infinite; }
+  @keyframes flash { 0%, 6% { opacity: .35; } 7%, 48% { opacity: 0; } 49%, 53% { opacity: .35; } 54%, 100% { opacity: 0; } }
+  .v-vel .reel .cap { top: 38%; font-size: 56px; font-weight: 800; line-height: .86; letter-spacing: -0.05em; text-transform: uppercase; color: #d7ff3a; animation: punch 1.6s cubic-bezier(.2,.8,.2,1) infinite; }
+  @keyframes punch { 0%, 48% { transform: scale(1); } 50% { transform: scale(1.18) rotate(-3deg); } 60%, 100% { transform: scale(1); } }
+
+  /* 05 · Lo-fi nights */
+  .v-lofi { --r-bg: #090818; --r-fg: #f1ecff; --r-acc: #ff5fb0; --r-glow: rgba(255,80,170,.5); --r-card: rgba(140,120,255,.08); --r-cardline: rgba(255,95,176,.2); }
+  .v-lofi .rl-title { font-weight: 500; text-transform: lowercase; letter-spacing: -0.03em; color: #ffe6f4; text-shadow: 0 0 18px rgba(255,80,170,.8), 0 0 42px rgba(255,80,170,.45); }
+  .v-lofi.in .rl-title { animation: neon 4s linear infinite 1s; }
+  @keyframes neon { 0%, 18%, 22%, 25%, 53%, 57%, 100% { opacity: 1; } 20%, 24%, 55% { opacity: .35; } }
+  .v-lofi .amb .glow { position: absolute; border-radius: 50%; animation: leak 11s ease-in-out infinite alternate; will-change: transform; }
+  .v-lofi .amb .glow.a { width: 60vw; height: 60vw; background: radial-gradient(circle, #ff3fa0, transparent 62%); left: -18vw; top: -5%; opacity: .4; }
+  .v-lofi .amb .glow.b { width: 55vw; height: 55vw; background: radial-gradient(circle, #1fd6cc, transparent 62%); right: -20vw; bottom: -15%; opacity: .32; animation-delay: -5s; }
+  .v-lofi .amb .rain { position: absolute; inset: -80px -40px 0; background: repeating-linear-gradient(100deg, transparent 0 26px, rgba(200,210,255,.09) 26px 27px); animation: rain .5s linear infinite; will-change: transform; }
+  .v-lofi .amb .rain.b { background: repeating-linear-gradient(98deg, transparent 0 48px, rgba(200,210,255,.06) 48px 49px); animation-duration: .8s; }
+  @keyframes rain { to { transform: translate(-10.6px, 60px); } }
+  .v-lofi .amb .sign { position: absolute; top: 96px; right: 6%; font-family: var(--serif); font-style: italic; font-size: clamp(22px, 2.4vw, 34px); color: #7ff3ea; text-shadow: 0 0 10px #1fd6cc, 0 0 30px #1fd6cc; rotate: -4deg; animation: neon 3.2s linear infinite; }
+  .v-lofi .amb .skyline { position: absolute; left: 0; right: 0; bottom: 0; height: 26%; opacity: .5;
+    background: linear-gradient(transparent 0 0) , repeating-linear-gradient(90deg, #120f2b 0 60px, #0d0b22 60px 96px, #16123a 96px 130px, #0f0d27 130px 190px);
+    -webkit-mask: linear-gradient(to top, #000 40%, transparent); mask: linear-gradient(to top, #000 40%, transparent);
+    clip-path: polygon(0 40%, 5% 40%, 5% 10%, 11% 10%, 11% 55%, 18% 55%, 18% 25%, 24% 25%, 24% 45%, 31% 45%, 31% 0, 36% 0, 36% 50%, 44% 50%, 44% 30%, 52% 30%, 52% 60%, 58% 60%, 58% 15%, 64% 15%, 64% 45%, 72% 45%, 72% 20%, 79% 20%, 79% 50%, 86% 50%, 86% 5%, 92% 5%, 92% 40%, 100% 40%, 100% 100%, 0 100%); }
+  .v-lofi .kw li { text-transform: lowercase; }
+  .v-lofi .scene { background: radial-gradient(circle at 25% 30%, rgba(255,80,170,.75), transparent 30%), radial-gradient(circle at 78% 55%, rgba(40,220,210,.6), transparent 32%), radial-gradient(circle at 45% 80%, rgba(255,170,60,.45), transparent 30%), #0b0a1e; }
+  .v-lofi .reel .ov::before { content: ""; position: absolute; inset: -70px -30px 0; background: repeating-linear-gradient(105deg, transparent 0 22px, rgba(255,255,255,.08) 22px 23px); animation: rain .6s linear infinite; }
+  .v-lofi .reel .cap { bottom: 14%; font-size: 17px; font-weight: 500; text-transform: lowercase; letter-spacing: .02em; text-shadow: 0 0 12px rgba(255,80,170,.9); }
+
+  /* 06 · Main character (cinematic) */
+  .v-cine { --r-bg: #041216; --r-fg: #f4e3c8; --r-acc: #ffae6b; --r-glow: rgba(255,174,107,.4); --r-card: rgba(15,90,99,.25); --r-cardline: rgba(255,174,107,.18); }
+  .v-cine .rl-title { font-family: var(--serif); font-weight: 400; letter-spacing: -0.01em; font-size: clamp(60px, 8.4vw, 116px); line-height: .9; }
+  .v-cine.in .rl-title { animation: rise-in 2s cubic-bezier(.2,.7,.2,1) both .3s; }
+  @keyframes rise-in { from { opacity: 0; transform: translateY(24px); letter-spacing: .06em; } to { opacity: 1; transform: none; } }
+  .v-cine .amb::before { content: ""; position: absolute; inset: 0; background: radial-gradient(ellipse at 80% 30%, rgba(255,150,80,.25), transparent 45%), radial-gradient(ellipse at 10% 80%, rgba(15,120,130,.4), transparent 50%); }
+  .v-cine .amb .bar { position: absolute; left: 0; right: 0; height: 0; background: #000; z-index: 3; transition: height 1.4s cubic-bezier(.7,0,.2,1) .2s; }
+  .v-cine .amb .bar.t { top: 0; } .v-cine .amb .bar.b { bottom: 0; }
+  .v-cine.in .amb .bar { height: 7vh; }
+  .v-cine .amb .flare { position: absolute; top: 34%; left: -40%; width: 80%; height: 3px; border-radius: 50%; background: linear-gradient(90deg, transparent, rgba(120,220,255,.0) 10%, rgba(140,225,255,.9) 50%, rgba(120,220,255,0) 90%, transparent); box-shadow: 0 0 30px 6px rgba(120,210,255,.35); animation: flare 9s ease-in-out infinite; }
+  @keyframes flare { 0%, 100% { transform: translateX(0); opacity: .3; } 50% { transform: translateX(110%); opacity: 1; } }
+  .v-cine .amb .dust { position: absolute; left: var(--x); top: var(--y); width: 3px; height: 3px; border-radius: 50%; background: rgba(255,230,200,.7); animation: float var(--dur) ease-in-out infinite alternate; animation-delay: var(--dl); }
+  @keyframes float { to { transform: translate(30px, -50px); opacity: .1; } }
+  .v-cine .amb .credits { position: absolute; bottom: calc(7vh + 18px); left: 0; right: 0; text-align: center; font-size: 11px; letter-spacing: .4em; text-transform: uppercase; color: rgba(244,227,200,.45); opacity: 0; transition: opacity 1s 1.6s; }
+  .v-cine.in .amb .credits { opacity: 1; }
+  .v-cine .scene { background: radial-gradient(ellipse at 70% 40%, #ffae6b, transparent 40%), linear-gradient(200deg, #0f5a63 0%, #0b3440 45%, #06161c 100%); filter: contrast(1.2) saturate(1.15); }
+  .v-cine .reel .ov::before, .v-cine .reel .ov::after { content: ""; position: absolute; left: 0; right: 0; height: 13%; background: #000; }
+  .v-cine .reel .ov::before { top: 0; } .v-cine .reel .ov::after { bottom: 0; }
+  .v-cine .reel .cap { top: 42%; font-family: var(--serif); font-size: 42px; line-height: 1; }
+  .v-cine .reel .cap small { display: block; font-family: var(--font); font-size: 10px; letter-spacing: .3em; text-transform: uppercase; margin-top: 10px; opacity: .8; }
+
+  /* 06 · New York minute */
+  .v-nyc { --r-bg: #0b0b10; --r-fg: #f6f3ea; --r-acc: #ffc72c; --r-glow: rgba(255,170,60,.45); --r-card: rgba(255,199,44,.06); --r-cardline: rgba(255,199,44,.18); }
+  .v-nyc .rl-title { font-weight: 800; text-transform: lowercase; letter-spacing: -0.05em; }
+  .v-nyc .rl-title::first-line { color: #ffc72c; }
+  .v-nyc.in .rl-title { animation: cab 1s cubic-bezier(.2,.9,.2,1) both .3s; }
+  @keyframes cab { from { transform: translateX(-60px); opacity: 0; filter: blur(10px); } to { transform: none; opacity: 1; filter: none; } }
+  .v-nyc .amb::before { content: ""; position: absolute; inset: 0; background: radial-gradient(ellipse at 20% 100%, rgba(255,140,60,.35), transparent 55%), radial-gradient(ellipse at 90% 10%, rgba(80,110,255,.2), transparent 45%); }
+  .v-nyc .amb .city { position: absolute; left: 0; right: 0; bottom: 0; height: 58%; background: #07070b;
+    clip-path: polygon(0 55%, 4% 55%, 4% 30%, 9% 30%, 9% 48%, 13% 48%, 13% 12%, 15% 12%, 15% 4%, 16% 4%, 16% 12%, 18% 12%, 18% 40%, 24% 40%, 24% 22%, 29% 22%, 29% 50%, 34% 50%, 34% 18%, 38% 18%, 38% 35%, 44% 35%, 44% 8%, 46% 8%, 46% 0, 47% 0, 47% 8%, 49% 8%, 49% 45%, 56% 45%, 56% 26%, 61% 26%, 61% 52%, 66% 52%, 66% 16%, 71% 16%, 71% 38%, 77% 38%, 77% 24%, 82% 24%, 82% 48%, 88% 48%, 88% 20%, 93% 20%, 93% 42%, 100% 42%, 100% 100%, 0 100%); }
+  .v-nyc .amb .win { position: absolute; width: 5px; height: 7px; background: #ffc86b; box-shadow: 0 0 6px rgba(255,190,90,.8); animation: blink var(--dur) steps(1) infinite; animation-delay: var(--dl); }
+  .v-nyc .amb .lane { position: absolute; left: 0; right: 0; bottom: 6%; height: 40px; }
+  .v-nyc .amb .car { position: absolute; top: var(--y); left: 0; width: var(--w); height: 3px; border-radius: 3px; background: linear-gradient(90deg, transparent, var(--c)); box-shadow: 0 0 10px var(--c); animation: zip var(--dur) linear infinite; animation-delay: var(--dl); }
+  .v-nyc .amb .car.back { animation-direction: reverse; background: linear-gradient(270deg, transparent, var(--c)); }
+  .v-nyc .amb .geo { position: absolute; top: 92px; left: 4%; font-family: var(--mono); font-size: 12px; letter-spacing: .14em; color: rgba(246,243,234,.5); }
+  .v-nyc .amb .walk { position: absolute; top: 88px; right: 6%; font-family: var(--mono); font-weight: 700; font-size: 15px; letter-spacing: .12em; padding: 6px 10px; border: 1px solid rgba(255,255,255,.15); border-radius: 6px; background: rgba(0,0,0,.4); }
+  .v-nyc .amb .walk::before { content: "WALK"; color: #eaf6ff; text-shadow: 0 0 10px #9fd8ff; animation: walk 4s steps(1) infinite; }
+  @keyframes walk { 0%, 49% { content: "WALK"; color: #eaf6ff; text-shadow: 0 0 10px #9fd8ff; } 50%, 100% { content: "DON’T WALK"; color: #ff7a3d; text-shadow: 0 0 10px #ff7a3d; } }
+  .v-nyc .amb .lines { position: absolute; bottom: 36px; right: 5%; display: flex; gap: 6px; }
+  .v-nyc .amb .lines b { width: 26px; height: 26px; border-radius: 50%; display: grid; place-items: center; font: 700 13px var(--font); color: #fff; background: var(--c); }
+  @media (max-width: 900px) { .v-nyc .amb .walk, .v-nyc .amb .lines { display: none; } }
+  .v-nyc .scene { background: linear-gradient(180deg, #1d2350 0%, #7a3e5c 40%, #ff8a3d 62%, #2a1410 63%, #0b0b10 100%); }
+  .v-nyc .reel .ov::before { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 46%; background: #0b0b10;
+    clip-path: polygon(0 30%, 10% 30%, 10% 8%, 22% 8%, 22% 40%, 32% 40%, 32% 0, 40% 0, 40% 25%, 52% 25%, 52% 12%, 62% 12%, 62% 35%, 74% 35%, 74% 5%, 84% 5%, 84% 28%, 100% 28%, 100% 100%, 0 100%); }
+  .v-nyc .reel .ov::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 40%; background-image: radial-gradient(#ffc86b 1px, transparent 1.5px); background-size: 9px 11px; opacity: .55; -webkit-mask: linear-gradient(to top, transparent 20%, #000); mask: linear-gradient(to top, transparent 20%, #000); }
+  .v-nyc .reel .cap { top: 18%; font-size: 40px; font-weight: 800; line-height: .9; letter-spacing: -0.05em; text-transform: lowercase; text-shadow: 0 4px 20px rgba(0,0,0,.5); }
+  .v-nyc .reel .cap small { display: block; font: 500 11px var(--mono); letter-spacing: .14em; text-transform: uppercase; margin-top: 12px; color: #ffc72c; }
+
+  /* ---------- The long reel: film ribbons threaded from phone to phone ----------
+     Each ribbon is a plain div rotated between two phone centres (both ends hide behind
+     the phones). Everything that moves is a transform, so it runs on the GPU. */
+  #reels { position: relative; z-index: 0; }
+  .rl-grid { position: relative; z-index: 2; }
+  .ribbons { position: absolute; inset: 0; z-index: 1; pointer-events: none; overflow: hidden; }
+  .rib { --w: 140px; --P: 120px; --acc: #ffb85c; --base: #15100b; position: absolute; width: var(--w); margin-left: calc(var(--w) / -2); transform-origin: 50% 0; }
+  .rib .clip { position: absolute; inset: 0; overflow: hidden; transform: scaleY(0); transform-origin: 50% 0; transition: transform 1.3s cubic-bezier(.6,0,.2,1); box-shadow: 0 30px 50px -24px rgba(0,0,0,.6); }
+  .rib.in .clip { transform: none; }
+  .rib .tape { position: absolute; left: 0; right: 0; top: calc(var(--P) * -1); bottom: 0; animation: tape 2s linear infinite; will-change: transform;
+    background:
+      linear-gradient(90deg, rgba(255,236,210,.22) 1px, transparent 1px calc(100% - 1px), rgba(255,236,210,.22) calc(100% - 1px)),
+      linear-gradient(90deg, rgba(255,255,255,.05), transparent 30% 70%, rgba(255,255,255,.04)) 25px 0 / calc(100% - 50px) 100% no-repeat,
+      repeating-linear-gradient(to bottom, color-mix(in srgb, var(--acc) 17%, var(--base)) 0 calc(var(--P) - 8px), var(--base) calc(var(--P) - 8px) var(--P)) 25px 0 / calc(100% - 50px) 100% no-repeat,
+      linear-gradient(to bottom, transparent 0 11px, var(--base) 11px) 9px 0 / 16px 30px repeat-y,
+      linear-gradient(to bottom, transparent 0 11px, var(--base) 11px) calc(100% - 9px) 0 / 16px 30px repeat-y,
+      linear-gradient(var(--base), var(--base)) 0 0 / 9px 100% no-repeat,
+      linear-gradient(var(--base), var(--base)) 100% 0 / 9px 100% no-repeat; }
+  @keyframes tape { to { transform: translateY(var(--P)); } }
+  .rib .txt, .rib .edge { position: absolute; top: 0; left: 50%; writing-mode: vertical-rl; white-space: nowrap; will-change: transform; animation: runtext var(--dur, 30s) linear infinite; }
+  .rib .txt { font: 700 13px var(--mono); letter-spacing: .12em; color: var(--acc); translate: -50% 0; }
+  .rib .edge { font: 600 8.5px var(--mono); letter-spacing: .24em; color: #ff9a3c; opacity: .8; translate: calc(-50% - 42px) 0; }
+  @keyframes runtext { from { transform: translateY(-50%); } to { transform: translateY(0); } }
+  @media (max-width: 900px) { .ribbons { display: none; } }
+
+  /* ---------- Aesthetic dictionary ---------- */  /* ---------- Aesthetic dictionary ---------- */
+  .dict { padding: 110px 0; }
+  .dict .sec-head { max-width: 720px; margin-bottom: 36px; }
+  .dict .sec-head .eyebrow { display: flex; }
+  .dict .sec-head h2 { font-size: clamp(32px, 4.6vw, 54px); line-height: 1.02; letter-spacing: -0.035em; font-weight: 600; margin-bottom: 14px; }
+  .dict .sec-head h2 em { font-family: var(--serif); font-style: italic; font-weight: 400; color: var(--voice); }
+  .dict .sec-head p { color: var(--ink-2); font-size: 18px; }
+  .fams { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 28px; }
+  .fams button { font: inherit; font-size: 14px; font-weight: 600; padding: 8px 14px; border-radius: 999px; border: 1px solid var(--line); background: var(--bg); color: var(--ink-2); cursor: pointer; transition: background .2s, color .2s, border-color .2s; }
+  .fams button:hover { color: var(--ink); }
+  .fams button[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+  .terms { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
+  .term { position: relative; border-radius: 20px; padding: 18px; border: 1px solid var(--line); background: var(--bg); display: flex; flex-direction: column; gap: 8px; overflow: hidden; transition: transform .25s, box-shadow .3s, border-color .3s; }
+  .term:hover { transform: translateY(-4px); border-color: transparent; box-shadow: 0 24px 50px -30px rgba(20,20,60,.45); }
+  .term::before { content: ""; position: absolute; inset: 0 0 auto; height: 86px; background: var(--g); opacity: .95; }
+  .term::after { content: ""; position: absolute; inset: 0 0 auto; height: 86px; background-image: var(--grain); background-size: 160px; opacity: .12; }
+  .term .top { position: relative; z-index: 1; height: 68px; display: flex; align-items: flex-start; justify-content: space-between; }
+  .term .fam { font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: rgba(0,0,0,.6); background: rgba(255,255,255,.7); padding: 3px 8px; border-radius: 999px; }
+  .term .emo { font-size: 22px; }
+  .term h3 { font-size: 19px; font-weight: 700; letter-spacing: -0.02em; margin-top: 6px; }
+  .term .look { font-size: 14px; color: var(--ink-2); line-height: 1.45; }
+  .term .say { margin-top: auto; padding-top: 10px; border-top: 1px dashed var(--line); font-family: var(--serif); font-style: italic; font-size: 17px; line-height: 1.3; color: var(--ink); display: flex; gap: 8px; }
+  .term .say::before { content: ""; flex: none; width: 8px; height: 8px; margin-top: 8px; border-radius: 50%; background: var(--voice); box-shadow: 0 0 0 4px var(--voice-soft); }
+  .term.hide { display: none; }
+  [data-theme="dark"] .term .fam { background: rgba(0,0,0,.45); color: rgba(255,255,255,.85); }
+  .dict .src { margin-top: 22px; font-size: 13px; color: var(--ink-3); }
+
+  /* ---------- CTA ---------- */
+  .cta { background: #000; color: #fff; text-align: center; position: relative; overflow: hidden; padding: 110px 0; }
+  .cta::before { content: ""; position: absolute; inset: -40%; background: radial-gradient(circle at 30% 40%, rgba(91,76,255,.45), transparent 35%), radial-gradient(circle at 70% 60%, rgba(224,85,122,.3), transparent 35%); animation: drift 14s ease-in-out infinite alternate; }
+  .cta .wrap { position: relative; }
+  .cta h2 { font-size: clamp(36px, 6vw, 72px); line-height: 1; letter-spacing: -0.04em; font-weight: 600; max-width: 14ch; margin: 0 auto 18px; }
+  .cta h2 em { font-family: var(--serif); font-style: italic; font-weight: 400; color: #c3beff; }
+  .cta p { color: #b9bec6; font-size: 18px; max-width: 44ch; margin: 0 auto 30px; }
+  .cta .btn { background: #fff; color: #000; }
+
+  footer { padding: 40px 0; font-size: 14px; color: var(--ink-3); }
+  footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+  footer a:hover { color: var(--ink); }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+    html { scroll-behavior: auto; }
+    .phone-wrap, .rl-info > *, .kw li, .calls li { opacity: 1 !important; transform: none !important; }
+  }
+</style>
+<script>(function(){try{var t=localStorage.getItem('theme');if(t!=='dark'&&t!=='light'){t=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}document.documentElement.setAttribute('data-theme',t);}catch(e){document.documentElement.setAttribute('data-theme','light');}})();</script>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="index.html" aria-label="Rollcall home">
+      <span class="brand-mark" aria-hidden="true"><span></span></span>
+      Rollcall
+    </a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="index.html#shorts">Shorts</a>
+      <a href="reels.html" aria-current="page">Reels</a>
+      <a href="index.html#commands">Commands</a>
+      <a href="index.html#how">How it works</a>
+      <a href="index.html#pricing">Pricing</a>
+    </nav>
+    <div class="nav-actions">
+      <button class="theme-btn" id="themeBtn" type="button" aria-label="Switch to dark theme" title="Switch theme">
+        <svg class="sun" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2" fill="currentColor"/><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3M5.3 5.3l2.1 2.1M16.6 16.6l2.1 2.1M5.3 18.7l2.1-2.1M16.6 7.4l2.1-2.1" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        <svg class="moon" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z" fill="currentColor"/></svg>
+      </button>
+      <a class="btn btn-dark btn-sm" href="index.html#waitlist">Join the waitlist</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="hero" aria-labelledby="hero-h">
+    <span class="sticker s1">pookie era ♡</span>
+    <span class="sticker s2">speed ramp on the drop</span>
+    <span class="sticker s3">nyc edit 🚕</span>
+    <span class="sticker s4">main character energy</span>
+    <div class="wrap">
+      <span class="eyebrow"><span class="dot"></span>Reels, made by voice</span>
+      <h1 id="hero-h">Aesthetic edits, <em>said out loud.</em></h1>
+      <p>Seven vibes, seven sentences. Scroll to see what was said, what Rollcall heard, and the reel it made.</p>
+      <nav class="vibe-index" id="vibeIndex" aria-label="Jump to a vibe"></nav>
+      <div class="scroll-hint" aria-hidden="true"><span></span>Scroll</div>
+    </div>
+  </section>
+
+  <div class="strip" aria-hidden="true"><div class="track" id="strip1"></div></div>
+
+  <div id="reels"></div>
+
+
+  <section class="dict" id="dictionary" aria-labelledby="dict-h">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">Aesthetic dictionary</span>
+        <h2 id="dict-h">Every vibe has a name. <em>Just say it.</em></h2>
+        <p>The looks people are editing toward right now, and how you’d ask Rollcall for each one.</p>
+      </div>
+      <div class="fams" id="fams" role="group" aria-label="Filter by family"></div>
+      <div class="terms" id="terms"></div>
+    </div>
+  </section>
+
+  <div class="strip rev" aria-hidden="true"><div class="track" id="strip2"></div></div>
+  <div class="strip tags" aria-hidden="true"><div class="track" id="strip3"></div></div>
+
+  <section class="cta" aria-labelledby="cta-h">
+    <div class="wrap">
+      <h2 id="cta-h">Your footage. <em>Your vibe.</em> One sentence.</h2>
+      <p>Rollcall works inside CapCut, DaVinci Resolve and Premiere Pro. Say the edit and it lands on your timeline.</p>
+      <a class="btn" href="index.html#waitlist">Join the waitlist</a>
+    </div>
+  </section>
+</main>
+
+<nav class="rail" id="rail" aria-label="Reels"></nav>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Rollcall. Editor names belong to their respective owners; Rollcall is not affiliated with them. Clips belong to their creators.</span>
+    <span><a href="index.html">Home</a> &nbsp;·&nbsp; <a href="#">Privacy</a> &nbsp;·&nbsp; <a href="mailto:hello@example.com">hello@example.com</a></span>
+  </div>
+</footer>
+
+<script>
+/*
+  ADD YOUR REELS HERE. One entry = one full-screen section, in this order.
+  Put each clip in videos/reels/ and set `src` (and optionally `poster`).
+  While `src` is empty the phone shows a styled placeholder for its vibe.
+
+  vibe:     y2k | film | soft | vel | lofi | nyc | cine   (sets the whole section's look)
+  raw:      what was said; wrap the parts Rollcall drops in [brackets]
+  prompt:   the clean instruction Rollcall heard
+  calls:    [timecode, tool, arguments], the edits it ran
+  keywords: aesthetic keywords shown as chips
+  palette:  the grade's colours
+  cap:      placeholder caption inside the phone (HTML allowed)
+  credit:   who made the original clip, e.g. "@handle"
+*/
+const REELS = [
+  {
+    vibe: 'y2k', title: '2007 camcorder', sub: 'Your mom’s old Handycam, found in a drawer. Date stamp, scanlines, a little shake.',
+    editor: 'CapCut', length: '0:14', src: '', poster: '', credit: '',
+    raw: '[okay so um] make it look like my mom’s old camcorder, [like] put the date, [no wait,] the date and time in the corner, and make it [kinda] shaky',
+    prompt: 'Camcorder look: VHS grade, scanlines, date and time stamp bottom right, light handheld shake.',
+    calls: [['00:00', 'applyLUT', 'vhs_camcorder'], ['00:00', 'addOverlay', 'scanlines · 18%'], ['00:00', 'addTitle', '"SEP 25 2026 · 9:41PM" · VCR'], ['00:00', 'addShake', 'handheld · 0.3']],
+    keywords: ['y2k', 'digicam', 'photo dump', 'camcorder core', 'date stamp', 'nostalgiacore'],
+    palette: ['#2b3a67', '#6fa8ff', '#ff6f91', '#ffb347'],
+    cap: 'best day ever',
+  },
+  {
+    vibe: 'film', title: 'Golden hour', sub: 'Shot on nothing, looks like 35mm. Warm, grainy, and slow at the end.',
+    editor: 'Resolve', length: '0:22', src: '', poster: '', credit: '',
+    raw: 'golden hour film look, [um,] heavy grain, crush the blacks [a bit, like more], and slow down the last shot',
+    prompt: 'Warm film grade, heavy grain, crushed blacks, 2.39 letterbox, last shot at 60% speed.',
+    calls: [['00:00', 'applyLUT', 'kodak_2383_warm'], ['00:00', 'setCDL', 'lift −0.06 · warm'], ['00:00', 'addGrain', '35mm · heavy'], ['00:00', 'addLetterbox', '2.39:1'], ['00:17', 'setSpeed', '60%']],
+    keywords: ['golden hour', 'filmtok', 'kodak portra', '35mm', 'cozy season', 'slow living'],
+    palette: ['#3a1a0e', '#9c4a22', '#e9924a', '#ffe2a3'],
+    cap: 'golden hour',
+  },
+  {
+    vibe: 'soft', title: 'Pookie blush', sub: 'Bunny blush, glowy skin, sparkles everywhere. A pookie glow-up in one sentence.',
+    editor: 'CapCut', length: '0:12', src: '', poster: '', credit: '',
+    raw: 'make it [like] super pookie, pink and glowy, [um] add blush on the cheeks, sparkles, and [a caption,] the text says pookie era with a little heart',
+    prompt: 'Pink pastel grade, soft skin glow, blush tint on cheeks, sparkles, serif caption “pookie era ♡”.',
+    calls: [['00:00', 'applyLUT', 'pastel_pink'], ['00:00', 'addGlow', 'skin · 35%'], ['00:00', 'addBlush', 'cheeks · rose · 25%'], ['00:01', 'addSticker', 'sparkles ✧'], ['00:02', 'addTitle', '"pookie era ♡" · serif']],
+    keywords: ['pookie', 'bunny blush', 'coquette', 'soft girl', 'glow up', 'pink pilates'],
+    palette: ['#ffd1e8', '#ffb3cf', '#e3d6ff', '#ffffff'],
+    cap: 'pookie era ♡',
+  },
+  {
+    vibe: 'vel', title: 'No brakes', sub: 'Every beat hits. Speed ramps, flash cuts, and a zoom punch on the drop.',
+    editor: 'CapCut', length: '0:09', src: '', poster: '', credit: '',
+    raw: 'speed ramp on every beat, flash cuts, [uh] zoom punch on the drop, and [the] text [should] say no brakes, [big,] huge, lime green',
+    prompt: 'Beat-synced speed ramps, flash transitions, zoom punch on the drop, huge lime “NO BRAKES” title.',
+    calls: [['00:00', 'detectBeats', 'music track'], ['00:00', 'speedRamp', 'on beats · 300% → 40%'], ['00:04', 'addFlash', 'on cuts · 2 frames'], ['00:05', 'zoomPunch', '1.18× on drop'], ['00:05', 'addTitle', '"NO BRAKES" · #D7FF3A · XL']],
+    keywords: ['velocity edit', 'beat sync', 'speed ramp', 'flash cuts', 'phonk', 'mini-film'],
+    palette: ['#070707', '#2a2a2a', '#d7ff3a', '#ffffff'],
+    cap: 'no<br>brakes',
+  },
+  {
+    vibe: 'lofi', title: 'Lo-fi nights', sub: 'Rain on the window, neon in the puddles, lyrics that type themselves.',
+    editor: 'Premiere', length: '0:18', src: '', poster: '', credit: '',
+    raw: 'grainy night city, pink and teal [colors], put the lyrics as captions [lowercase], and slow it [a little, like] to 0.9',
+    prompt: 'Pink and teal night grade, grain, lowercase lyric captions synced to the song, 90% speed.',
+    calls: [['00:00', 'applyLUT', 'neon_night'], ['00:00', 'addGrain', 'fine · 30%'], ['00:00', 'setSpeed', '90%'], ['00:01', 'addCaptions', 'lyrics · lowercase · pink glow']],
+    keywords: ['lo-fi', 'dreamcore', 'nightcore', 'neon noir', 'night drive', 'lyric video'],
+    palette: ['#0b0a1e', '#ff50aa', '#28dcd2', '#ffaa3c'],
+    cap: 'we were never on time',
+  },
+  {
+    vibe: 'nyc', title: 'New York minute', sub: 'Yellow cabs, golden windows, the walk sign blinking. City-girl diary, one take.',
+    editor: 'CapCut', length: '0:16', src: '', poster: '', credit: '',
+    raw: '[okay] give it that new york vlog vibe, [like] warm city lights, quick cuts to the beat, [um] a little motion blur, and a title that says new york minute',
+    prompt: 'Warm city grade, beat-synced quick cuts, motion blur on transitions, title “new york minute” with a time stamp.',
+    calls: [['00:00', 'applyLUT', 'city_warm'], ['00:00', 'detectBeats', 'music track'], ['00:00', 'cutOnBeats', 'every 2 beats'], ['00:00', 'addBlur', 'motion · on cuts'], ['00:01', 'addTitle', '"new york minute" · 7:42 PM']],
+    keywords: ['nyc edit', 'city girl', 'that girl', 'day in my life', 'city pop', 'elevated casual'],
+    palette: ['#0d0d12', '#ff8a3d', '#ffc72c', '#f6f3ea'],
+    cap: 'new york<br>minute<small>7:42 PM · SOHO</small>',
+  },
+  {
+    vibe: 'cine', title: 'Main character', sub: 'Teal and orange, bars on, lens flare. You’re the lead now.',
+    editor: 'Resolve', length: '0:20', src: '', poster: '', credit: '',
+    raw: 'make me the main character, [like a movie,] teal and orange, black bars, [um] a lens flare, and a big title that says main character',
+    prompt: 'Cinematic teal and orange grade, 2.39 bars, anamorphic flare, serif title “Main Character”.',
+    calls: [['00:00', 'applyLUT', 'teal_orange'], ['00:00', 'addLetterbox', '2.39:1'], ['00:03', 'addFlare', 'anamorphic · blue'], ['00:04', 'addTitle', '"Main Character" · serif · centre']],
+    keywords: ['main character', 'cinematic vertical', 'teal & orange', 'anamorphic', 'letterbox', 'quiet flex'],
+    palette: ['#06161c', '#0f5a63', '#ffae6b', '#f4e3c8'],
+    cap: 'Main Character<small>a film by you</small>',
+  },
+];
+
+/*
+  AESTHETIC DICTIONARY. Edit freely: fam groups the filter chips, g is the card's colour band.
+*/
+const TERMS = [
+  { name: 'Pookie', fam: 'Soft & cute', emo: '🧸', g: 'linear-gradient(135deg,#ffd1e8,#ffb3cf,#e3d6ff)', look: 'Cute glow-up edits: pink tint, sparkles, soft zooms, a heart or two.', say: 'make it pookie, pink and glowy with sparkles' },
+  { name: 'Bunny blush', fam: 'Soft & cute', emo: '🐰', g: 'linear-gradient(135deg,#ffc2d4,#ff9fbf,#ffe3ec)', look: 'Babydoll makeup look: flushed cheeks, dewy skin, gentle bloom on highlights.', say: 'add a soft blush on the cheeks and a dewy glow' },
+  { name: 'Coquette', fam: 'Soft & cute', emo: '🎀', g: 'linear-gradient(135deg,#fde2e4,#f7c6d0,#fff5f7)', look: 'Bows, lace, pearls and pastels. Soft focus, serif captions, slow fades.', say: 'coquette vibe, pastel, bows, soft focus' },
+  { name: 'Clean girl', fam: 'Soft & cute', emo: '🤍', g: 'linear-gradient(135deg,#f4ede4,#e6d8c6,#fbf8f3)', look: 'Neutral, bright, minimal. Slicked bun, gold hoops, airy whites.', say: 'clean girl look, bright neutrals, minimal text' },
+  { name: 'That girl', fam: 'Soft & cute', emo: '🍵', g: 'linear-gradient(135deg,#e8f1e4,#cfe3c8,#f6faf3)', look: 'Morning routine energy: matcha, pilates, sunlit kitchen, timestamped cuts.', say: 'that girl morning routine, timestamps on each clip' },
+  { name: 'Old money', fam: 'Luxe', emo: '🐎', g: 'linear-gradient(135deg,#1f3b2d,#6b5b3e,#d8c8a4)', look: 'Quiet luxury: deep greens, cream, navy. Slow pans, classical score.', say: 'old money feel, muted greens, slow pans' },
+  { name: 'Quiet flex', fam: 'Luxe', emo: '⌚', g: 'linear-gradient(135deg,#2b2b2e,#6d6a64,#cfc9bd)', look: 'Understated wealth. Close-ups of details, no logos, calm cuts.', say: 'quiet flex edit, close-ups, no big text' },
+  { name: 'Mob wife', fam: 'Luxe', emo: '🐆', g: 'linear-gradient(135deg,#2a0d0d,#7a1f1f,#c9a15a)', look: 'Fur, gold, red lips, leopard. Warm contrast, dramatic slow-mo.', say: 'mob wife energy, rich reds and gold, slow-mo' },
+  { name: 'Office siren', fam: 'Luxe', emo: '👓', g: 'linear-gradient(135deg,#1b1b22,#3d3f4a,#b9b4ac)', look: 'Sleek and sharp. Cool greys, glasses, crisp cuts to a steady beat.', say: 'office siren, cool grey grade, sharp cuts' },
+  { name: 'Y2K photo dump', fam: 'Retro', emo: '📸', g: 'linear-gradient(135deg,#6fa8ff,#ff6f91,#ffe66d)', look: 'Camera-roll collage with flash, pixel stickers and parallax zooms.', say: 'y2k photo dump with flash and pixel stickers' },
+  { name: 'Digicam', fam: 'Retro', emo: '🔋', g: 'linear-gradient(135deg,#3a3f5c,#9aa7c7,#f0e3c2)', look: 'Early-2000s digital camera: harsh flash, date stamp, slightly soft.', say: 'digicam look with a date stamp and flash' },
+  { name: 'Filmtok', fam: 'Retro', emo: '🎞️', g: 'linear-gradient(135deg,#3a1a0e,#c46a2d,#ffd9a0)', look: 'Film emulation: grain, halation, warm highlights, gate weave.', say: 'make it look like kodak film, heavy grain' },
+  { name: 'NYC edit', fam: 'City & travel', emo: '🚕', g: 'linear-gradient(135deg,#0d0d12,#ff8a3d,#ffc72c)', look: 'Cabs, crosswalks, golden windows. Beat-cut city montage with motion blur.', say: 'new york vlog vibe, quick cuts to the beat' },
+  { name: 'Cinematic vertical', fam: 'City & travel', emo: '🎬', g: 'linear-gradient(135deg,#06161c,#0f5a63,#ffae6b)', look: 'Mini-movie in 9:16. Bars, a score, a title card, episode labels.', say: 'make it a cinematic mini-film with a title card' },
+  { name: 'Main character', fam: 'City & travel', emo: '🌟', g: 'linear-gradient(135deg,#0b3440,#1c6b73,#ffb070)', look: 'You’re the lead. Teal and orange, lens flare, slow walk-away shot.', say: 'main character energy, teal and orange, lens flare' },
+  { name: 'Dreamcore', fam: 'Mood', emo: '☁️', g: 'linear-gradient(135deg,#b9c6ff,#f3c4ff,#fff3c4)', look: 'Surreal and hazy. Glow, soft blur, floaty transitions, nostalgic audio.', say: 'dreamcore, hazy glow, floaty transitions' },
+  { name: 'Cozy season', fam: 'Mood', emo: '🍂', g: 'linear-gradient(135deg,#4a2c1a,#a0522d,#f2c894)', look: 'Rain on windows, candles, knits. Warm, slow, amber-toned.', say: 'cozy autumn vibe, warm and slow, rain sounds' },
+  { name: 'Dark academia', fam: 'Mood', emo: '📚', g: 'linear-gradient(135deg,#1c1510,#4a3a2a,#9c8566)', look: 'Libraries and candlelight. Desaturated browns, serif titles.', say: 'dark academia, brown tones, serif captions' },
+  { name: 'Cottagecore', fam: 'Mood', emo: '🌼', g: 'linear-gradient(135deg,#dfe8c8,#f4e1b5,#fff8e8)', look: 'Meadows, baking, linen. Soft greens and sunlight flares.', say: 'cottagecore, soft greens, sunlight flares' },
+  { name: 'Velocity', fam: 'Energy', emo: '⚡', g: 'linear-gradient(135deg,#070707,#2a2a2a,#d7ff3a)', look: 'Speed ramps on every beat, flash cuts, shake and zoom punches.', say: 'velocity edit, speed ramps on every beat' },
+  { name: 'Beat-synced mini-film', fam: 'Energy', emo: '🎧', g: 'linear-gradient(135deg,#1a1440,#5b4cff,#c3beff)', look: 'Photos and clips cut exactly to the music, with recurring labels.', say: 'cut every photo to the beat, label it album: recent' },
+];
+
+(function () {
+  const $ = id => document.getElementById(id);
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  const rnd = (a, b) => a + Math.random() * (b - a);
+  const pad = n => String(n).padStart(2, '0');
+
+  // ---- Theme toggle, same behaviour as the home page.
+  (function () {
+    const btn = $('themeBtn'), root = document.documentElement;
+    const label = () => btn.setAttribute('aria-label', root.getAttribute('data-theme') === 'dark' ? 'Switch to light theme' : 'Switch to dark theme');
+    label();
+    btn.addEventListener('click', () => {
+      const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', next); try { localStorage.setItem('theme', next); } catch (e) {} label();
+    });
+  })();
+
+  // ---- Moving strips (content doubled so the loop is seamless).
+  const strip = (id, items) => { const h = items.join(''); $(id).innerHTML = h + h; };
+  strip('strip1', [['Y2K camcorder', 'v'], ['golden hour', 's'], ['VELOCITY', 'o'], ['pookie ♡', ''], ['New York minute', 's'], ['LO-FI', 'o'], ['bunny blush', ''], ['main character', 's'], ['DREAMCORE', 'o'], ['old money', '']].map(([w, c]) => `<span class="${c}">${w}</span><i>✦</i>`));
+  strip('strip2', [['said out loud', 's'], ['NO TIMELINE', 'o'], ['one sentence', ''], ['your vibe', 's'], ['CapCut · Resolve · Premiere', ''], ['REC ●', 'v']].map(([w, c]) => `<span class="${c}">${w}</span><i>✦</i>`));
+  strip('strip3', [...new Set([...TERMS.map(t => t.name.toLowerCase()), ...REELS.flatMap(r => r.keywords)])].map(k => `<span>#${esc(k.replace(/[\s&:-]/g, ''))}</span><i>·</i>`));
+
+  // ---- Aesthetic dictionary
+  const fams = ['All', ...new Set(TERMS.map(t => t.fam))];
+  $('fams').innerHTML = fams.map((f, i) => `<button type="button" data-f="${esc(f)}" aria-pressed="${i === 0}">${esc(f)}</button>`).join('');
+  $('terms').innerHTML = TERMS.map(t => `<article class="term" data-f="${esc(t.fam)}" style="--g:${t.g}">
+      <div class="top"><span class="fam">${esc(t.fam)}</span><span class="emo" aria-hidden="true">${t.emo}</span></div>
+      <h3>${esc(t.name)}</h3><p class="look">${esc(t.look)}</p><p class="say">“${esc(t.say)}”</p></article>`).join('');
+  $('fams').addEventListener('click', e => {
+    const b = e.target.closest('button'); if (!b) return;
+    $('fams').querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', String(x === b)));
+    $('terms').querySelectorAll('.term').forEach(t => t.classList.toggle('hide', b.dataset.f !== 'All' && t.dataset.f !== b.dataset.f));
+  });
+
+  // ---- Ambient surroundings, one recipe per vibe.
+  const AMB = {
+    y2k: () => `<span class="glow a"></span><span class="glow b"></span>
+      <span class="osd tl">REC</span><span class="osd tr">SP ▶ 0:14:22</span><span class="osd bl">CH 03</span><span class="osd br">SEP 25 2026<br>9:41 PM</span>
+      ${Array.from({ length: 10 }, () => `<span class="px" style="left:${rnd(3, 97)}%;top:${rnd(12, 92)}%;animation-delay:${rnd(-2, 0)}s"></span>`).join('')}`,
+    film: () => `<span class="leak a"></span><span class="leak b"></span><span class="leak c"></span><div class="grain"></div>
+      <span class="sprocket l"></span><span class="sprocket r"></span><span class="fcount">KODAK 5219 · 24 FPS · ▶ 00:22</span>`,
+    soft: () => `${Array.from({ length: 16 }, () => { const s = rnd(14, 70); return `<span class="bokeh" style="--x:${rnd(0, 100)}%;--s:${s}px;--b:${s > 45 ? 6 : 1}px;--dur:${rnd(10, 22)}s;--dl:${rnd(-22, 0)}s"></span>`; }).join('')}
+      ${Array.from({ length: 12 }, () => `<span class="spark" style="left:${rnd(2, 98)}%;top:${rnd(10, 92)}%;--s:${rnd(10, 26)}px;--dl:${rnd(-3, 0)}s">${Math.random() > .5 ? '✦' : '✧'}</span>`).join('')}
+      <span class="bow">🎀</span>`,
+    vel: () => `<div class="big">NO BRAKES · NO BRAKES · NO BRAKES · NO BRAKES · </div><span class="strobe"></span><span class="bpm">142 BPM</span>
+      ${Array.from({ length: 22 }, (_, i) => `<span class="line${i % 5 === 0 ? ' acc' : ''}" style="--y:${rnd(4, 96)}%;--w:${rnd(12, 40)}vw;--h:${Math.random() > .8 ? 3 : 1}px;--dur:${rnd(.5, 1.4)}s;--dl:${rnd(-1.4, 0)}s"></span>`).join('')}`,
+    nyc: () => `<span class="city"></span>
+      ${Array.from({ length: 40 }, () => `<span class="win" style="left:${rnd(1, 99)}%;bottom:${rnd(8, 44)}%;--dur:${rnd(2, 7)}s;--dl:${rnd(-7, 0)}s"></span>`).join('')}
+      <span class="lane">${Array.from({ length: 12 }, (_, i) => `<span class="car${i % 3 === 0 ? ' back' : ''}" style="--y:${rnd(0, 36)}px;--w:${rnd(8, 22)}vw;--c:${i % 3 === 0 ? '#ff3b30' : '#ffd27a'};--dur:${rnd(1.6, 3.4)}s;--dl:${rnd(-3.4, 0)}s"></span>`).join('')}</span>
+      <span class="geo">40.7128° N · 74.0060° W</span><span class="walk"></span>
+      <span class="lines"><b style="--c:#2850ad">A</b><b style="--c:#ff6319">F</b><b style="--c:#fccc0a;color:#000">N</b><b style="--c:#6cbe45">G</b></span>`,
+    lofi: () => `<span class="glow a"></span><span class="glow b"></span><div class="rain"></div><div class="rain b"></div><span class="skyline"></span><span class="sign">open late</span>`,
+    cine: () => `<span class="bar t"></span><span class="bar b"></span><span class="flare"></span>
+      ${Array.from({ length: 26 }, () => `<span class="dust" style="--x:${rnd(0, 100)}%;--y:${rnd(10, 90)}%;--dur:${rnd(5, 12)}s;--dl:${rnd(-12, 0)}s"></span>`).join('')}
+      <span class="credits">a film by you · directed by your voice</span>`,
+  };
+
+  // ---- Phone content: the clip, or the vibe's placeholder.
+  function reelHTML(r) {
+    if (r.src) return `<video src="${esc(r.src)}"${r.poster ? ` poster="${esc(r.poster)}"` : ''} muted loop playsinline preload="metadata"></video>`;
+    const extra = {
+      y2k: `<span class="rec">REC</span><span class="date">SEP 25 2026<br>9:41 PM</span>`,
+      soft: `<span class="sp a">✦</span><span class="sp b">✧</span><span class="sp c">✦</span>`,
+    }[r.vibe] || '';
+    return `<div class="scene"></div><div class="grain"></div><div class="ov">${extra}<div class="cap">${r.cap || ''}</div></div>`;
+  }
+
+  function rawHTML(raw) {
+    let d = 0;
+    return raw.split(/(\[[^\]]*\])/).filter(Boolean)
+      .map(p => p.startsWith('[') ? `<span class="drop" style="--d:${d++}">${esc(p.slice(1, -1))}</span>` : esc(p)).join('');
+  }
+
+  // ---- Build sections
+  const host = $('reels'), total = REELS.length;
+  REELS.forEach((r, i) => {
+    const s = document.createElement('section');
+    s.className = `rl v-${r.vibe}${i % 2 ? ' flip' : ''}`;
+    s.id = `reel-${i + 1}`;
+    s.setAttribute('aria-label', `Reel ${i + 1}: ${r.title}`);
+    s.innerHTML = `
+      <div class="amb" aria-hidden="true">${(AMB[r.vibe] || (() => ''))()}</div>
+      <div class="wrap rl-grid">
+        <div class="rl-media">
+          <div class="phone-wrap">
+            <div class="phone${r.src ? ' has-video' : ''}">
+              <div class="reel${r.src ? ' has-video' : ''}">${reelHTML(r)}</div>
+              <button class="snd" type="button" aria-label="Unmute"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9z" fill="currentColor"/><path class="x" d="M16 9l5 6M21 9l-5 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+              <div class="chip"><b>Ready</b><span>${esc(r.length)} · 1080×1920</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="rl-info">
+          <div class="rl-idx" style="--i:0"><b>${pad(i + 1)} / ${pad(total)}</b><span class="pill">${esc(r.editor)}</span><span class="pill">${esc(r.length)}</span></div>
+          <h2 class="rl-title" style="--i:1">${esc(r.title)}</h2>
+          <p class="rl-sub" style="--i:2">${esc(r.sub)}</p>
+          <ul class="kw" style="--i:3">${r.keywords.map((k, j) => `<li style="--k:${j}">#${esc(k)}</li>`).join('')}</ul>
+          <div class="flow" style="--i:4">
+            <div class="box"><span class="lbl"><span class="mic"><i></i><i></i><i></i><i></i></span>You said</span><p class="raw">“${rawHTML(r.raw)}”</p></div>
+            <div class="box"><span class="lbl">Rollcall heard</span><p class="heard">${esc(r.prompt)}</p>
+              <ol class="calls">${r.calls.map(([t, fn, a], c) => `<li style="--c:${c}"><span>${esc(t)}</span><span class="fn"><b>${esc(fn)}</b>(${esc(a)})</span></li>`).join('')}</ol>
+            </div>
+          </div>
+          <div class="rl-foot" style="--i:5"><span class="palette">${r.palette.map(c => `<i style="--c:${c}" title="${c}"></i>`).join('')}</span><span>Grade palette</span>${r.credit ? `<span>· Clip: ${esc(r.credit)}</span>` : ''}</div>
+        </div>
+      </div>`;
+    host.appendChild(s);
+
+    const v = s.querySelector('video'), snd = s.querySelector('.snd');
+    if (v) snd.addEventListener('click', () => { v.muted = !v.muted; snd.classList.toggle('on', !v.muted); snd.setAttribute('aria-label', v.muted ? 'Unmute' : 'Mute'); });
+
+    $('vibeIndex').insertAdjacentHTML('beforeend', `<a href="#reel-${i + 1}"><i style="--sw:linear-gradient(135deg, ${r.palette[1]}, ${r.palette[2]})"></i>${esc(r.title)}</a>`);
+    $('rail').insertAdjacentHTML('beforeend', `<a href="#reel-${i + 1}" data-i="${i}"><span>${esc(r.title)}</span><b></b></a>`);
+  });
+
+  // ---- Scroll behaviour: reveal once, animate only while on screen, play clips in view,
+  // light the rail for the section in the middle, and drift phones a little.
+  const sections = [...host.querySelectorAll('.rl')];
+  const rail = $('rail'), railLinks = [...rail.querySelectorAll('a')];
+  let ticking = false;
+  function onScroll() {
+    ticking = false;
+    const vh = innerHeight;
+    sections.forEach((s, i) => {
+      const k = s.getBoundingClientRect();
+      const live = k.top < vh && k.bottom > 0;
+      if (live !== s.classList.contains('live')) {
+        s.classList.toggle('live', live);
+        const v = s.querySelector('video');
+        if (v) live ? v.play().catch(() => {}) : v.pause();
+      }
+      if (k.top < vh * .6) s.classList.add('in');   // reached or already passed
+      railLinks[i].classList.toggle('on', k.top <= vh / 2 && k.bottom > vh / 2);
+    });
+    const first = sections[0].getBoundingClientRect(), last = sections[sections.length - 1].getBoundingClientRect();
+    rail.classList.toggle('show', first.top < vh * .5 && last.bottom > vh * .5);
+  }
+  const queue = () => { if (!ticking) { ticking = true; requestAnimationFrame(onScroll); } };
+  addEventListener('scroll', queue, { passive: true });
+  addEventListener('resize', queue);
+  onScroll();
+
+
+  // ---- The long reel: straight film ribbons from phone centre to phone centre.
+  // Built once per layout; after that everything is CSS animation.
+  (function () {
+    const layer = document.createElement('div');
+    layer.className = 'ribbons'; layer.setAttribute('aria-hidden', 'true');
+    host.appendChild(layer);
+    const SPEED = 60;                                    // px per second, same for tape and text
+    let ribs = [];
+
+    function label(i) {
+      if (i < 0) return 'ROLLCALL REELS   ✦   SAID OUT LOUD   ✦   ' + REELS.map(r => r.title.toUpperCase()).join('   ✦   ') + '   ✦   ';
+      const r = REELS[i];
+      return [r.title.toUpperCase(), ...r.calls.map(c => `${c[1]}(${c[2]})`), ...r.keywords.map(k => '#' + k.replace(/\s/g, ''))].join('   ✦   ') + '   ✦   ';
+    }
+
+    function build() {
+      layer.innerHTML = ''; ribs = [];
+      if (innerWidth <= 900) return;
+      const hb = host.getBoundingClientRect(), W = host.clientWidth, H = host.offsetHeight;
+      const pts = sections.map(s => {
+        const m = s.querySelector('.phone').getBoundingClientRect();
+        return { x: m.left - hb.left + m.width / 2, y: m.top - hb.top + m.height / 2 };
+      });
+      const links = [[{ x: W / 2, y: -20 }, pts[0], -1, 0]];
+      for (let i = 0; i < pts.length - 1; i++) links.push([pts[i], pts[i + 1], i, i]);
+      links.push([pts[pts.length - 1], { x: W / 2, y: H + 20 }, pts.length - 1, pts.length - 1]);
+
+      links.forEach(([a, b, text, owner]) => {
+        const dx = b.x - a.x, dy = b.y - a.y, len = Math.hypot(dx, dy);
+        const el = document.createElement('div');
+        el.className = 'rib';
+        el.style.cssText = `left:${a.x}px;top:${a.y}px;height:${len}px;transform:rotate(${-Math.atan2(dx, dy)}rad)`;
+        el.style.setProperty('--acc', getComputedStyle(sections[text < 0 ? 0 : text]).getPropertyValue('--r-acc').trim() || '#ffb85c');
+        const words = label(text), reps = Math.ceil(len / (words.length * 9)) + 1;
+        const edge = Array.from({ length: Math.ceil(len / 110) + 2 }, (_, k) => `ROLLCALL 5219 ▸ ${k + 1}${k % 2 ? 'A' : ''}`).join('   ');
+        el.innerHTML = `<div class="clip"><div class="tape"></div><div class="txt">${esc(words.repeat(reps))}${esc(words.repeat(reps))}</div><div class="edge">${edge}   ${edge}   </div></div>`;
+        layer.appendChild(el);
+        // Text is doubled and loops over half its length; set its duration so it moves at SPEED.
+        el.querySelectorAll('.txt, .edge').forEach(t => t.style.setProperty('--dur', (t.offsetHeight / 2 / SPEED).toFixed(2) + 's'));
+        ribs.push({ el, owner });
+      });
+      reveal();
+    }
+
+    // A ribbon unrolls once the reel it comes out of has revealed.
+    function reveal() { ribs.forEach(r => r.el.classList.toggle('in', sections[r.owner].classList.contains('in'))); }
+    addEventListener('scroll', () => requestAnimationFrame(reveal), { passive: true });
+
+    let t; addEventListener('resize', () => { clearTimeout(t); t = setTimeout(build, 200); });
+    (document.fonts ? document.fonts.ready : Promise.resolve()).then(build);
+  })();
+})();
+</script>
+</body>
+</html>
